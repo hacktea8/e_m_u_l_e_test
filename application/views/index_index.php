@@ -25,6 +25,7 @@
 	<li class="link_item"><a href="http://www.verycd.com/"
 		onclick="VeryCD.TrackEvent('首页', 'toplink', '首页');" class="hover_red"><strong>首页</strong></a></li>
 	</ul>
+<?php if(0){ ?>
 <div id="header_login">
 <span class="link_box">
 <ul>
@@ -35,6 +36,7 @@
 		class="top_arrow"></span></a></li>
 </ul>
 </span></div>
+<?php } ?>
 </div>
 </div>
 </div>
@@ -46,6 +48,7 @@
 	class="png_image"></a></div>
 <div id="new_search_bar_div">
 <div class="clearfix">
+<?php if(0){ ?>
 <div id="top_add" class="top_add"><a
 	onclick="showTopAddOptions(this);return false;"
 	class="top_add_link" href="#">分享</a>
@@ -57,6 +60,7 @@
 </a> <a class="top_add_topic"
 	onclick="VeryCD.Track('/stat/topAddTopic/');VeryCD.goPublish();return false"
 	href="/topics/post"> 资源 </a></div>
+<?php } ?>
 </div>
 <div id="top-search">
 <form action="/search/entries/" onsubmit="VeryCD.search();return false;"

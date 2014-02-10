@@ -137,6 +137,174 @@ height: 35px;
 .clearfix {
 zoom: 1;
 }
+.header_link {
+font-size: 0;
+line-height: 0;
+position: absolute;
+left: 0;
+top: -1px;
+}
+.header_link li {
+float: left;
+}
+.header_link .link_item {
+padding: 0 8px;
+}
+.header_link a {
+font-size: 12px;
+line-height: 32px;
+vertical-align: middle;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+font-style: normal;
+font-weight: normal;
+}
+a {
+cursor: pointer;
+color: #333;
+text-decoration: none;
+}
+#header_div .app_info_item, #header_div .watching_item, #header_div .game_info_item {
+float: left;
+width: 72px;
+padding-left: 8px;
+height: 26px;
+margin-top: 2px;
+line-height: 26px;
+_height: 21px;
+_padding-top: 5px;
+_line-height: 22px;
+}
+#header_div .watching_item {
+margin-top: -4px;
+_margin-top: -2px;
+background: url(/public/images/icon_sprites.gif) no-repeat 0 -846px;
+}
+#header_login .user_name_div{
+float:left;
+position:relative;
+z-index:6;
+margin-right:5px
+}
+#header_login .user_name_div a.user_name{
+float:left;
+display:block;
+padding:0 5px;
+color:#333;
+border-radius:2px;
+border:1px solid #f4f4f4
+}
+#header_login .user_name_div a.user_name:hover,#header_login .user_name_div a.user_name:active{
+background:#d9d9d9;border-color:#d9d9d9
+}
+#header_login .user_name strong{
+float:left;
+display:block;
+padding-right:5px;
+font-weight:bold;
+height:1.6em;
+overflow:hidden
+}
+#header_login .user_name_div a.user_name:hover strong{
+color:#333
+}
+#header_login a.user_name span{
+float:left;
+display:block;
+margin-top:7px;
+width:10px;
+height:5px;
+line-height:0;
+font-size:0;
+background:url(/public/images/icon_sprites.gif) no-repeat 0 -350px
+}
+#header_login .user_name_div .user_more_info{
+display:none
+}
+#header_login .user_more_info{
+position:absolute;
+z-index:6;
+min-width:75px;
+width:100%;
+top:24px;
+left:0;
+_width:expression(this.parentNode.offsetWidth+"px")
+}
+#header_login .user_more_info ul{
+border:1px solid #ccc;
+border-radius:0 0 2px 2px;
+overflow:hidden;
+margin:0;
+padding:0;
+box-shadow:0 -1px 3px #d5d5d5
+}
+#header_login .user_more_info li{
+border-bottom:1px solid #f1f1f1;
+list-style:none
+}
+#header_login .user_more_info li.last{
+border-bottom:0;
+border-radius:0 0 2px 2px;
+overflow:hidden
+}
+#header_login .user_more_info a{
+display:block;
+height:30px;
+line-height:30px;
+padding:0 10px;
+background:#fff;
+white-space:nowrap;
+color:#333
+}
+#header_login .user_more_info a:hover{
+background:#fff9ed;
+color:#c00
+}
+#header_login .user_name_div_on{
+float:left;
+position:relative;
+z-index:6;
+margin-right:5px
+}
+#header_login .user_name_div_on a.user_name{
+_height:19px;
+_overflow:hidden;
+position:relative;
+z-index:7;
+float:left;
+display:block;
+margin-bottom:-2px;
+padding:0 5px 5px;
+border-radius:2px 2px 0 0;
+color:#333;
+border:1px solid #d9d9d9;
+background:#fff;
+border-bottom:0;
+box-shadow:0 -1px 3px #d5d5d5
+}
+#header_login .user_name_div_on .user_more_info{
+display:block
+}
+#header_login .red{
+color:#c00
+}
+#header_login a:hover .red{
+color:#fff!important
+}
+#header_login .uchome_link{
+font-size:12px
+}
+#header_login .uchome_link:hover{
+background:none!important;
+color:#333!important
+}
+#header_login .uchome_link:hover span.red{
+color:#c00!important
+}
+#header_login .uchome_link img{
+vertical-align:-5px;
+*vertical-align:-3px
+}
 .top_add {
 position: relative;
 width: 72px;
