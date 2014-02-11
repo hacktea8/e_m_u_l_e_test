@@ -512,4 +512,30 @@ overflow: hidden;
 .clear {
 clear: both;
 }
-
+.line_space {
+height: 10px;
+overflow: hidden;
+padding: 0;
+margin: 0;
+zoom: 1;
+}
+#bottom_div {
+margin-top: 25px;
+border-top: 1px #d2d2d2 solid;
+padding: 10px 0;
+line-height: 1.6em;
+text-align: center;
+color: #333;
+}
+.hot_search_keywords {
+width: auto!important;
+height: 18px;
+line-height: 18px;
+overflow: hidden;
+margin-top: 5px;
+padding-left: 10px;
+}
+.link_line a:link, .link_line a:visited {
+color: #333;
+text-decoration: underline;
+}

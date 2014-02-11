@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Webbase extends CI_Controller {
+  public $expirettl=array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
+  public $showimgapi = 'http://img.hacktea8.com/showpic.php?key=';
+  protected $mem = '';
+  protected $redis = '';
   public $viewData = array();
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0);
   public $adminList = array(3);
@@ -8,6 +12,10 @@ class Webbase extends CI_Controller {
   
   public function __construct(){
     parent::__construct();
+    $this->load->library('memcache');
+    $this->mem = &$this->memcache;
+    $this->load->library('rediscache');
+    $this->redis = &$this->rediscache;
     //解析UID
     $uid = getSynuserUid();
     $uinfo = getSynuserInfo($uid);
@@ -48,5 +56,10 @@ class Webbase extends CI_Controller {
     foreach($data as $key => $val){
       $this->viewData[$key] = $val;
     }
+  }
+  public function view($view_file){
+    $this->load->view('header', $this->viewData);
+    $this->load->view($view_file);
+    $this->load->view('footer');
   }
 }

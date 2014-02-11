@@ -12,7 +12,7 @@ class Index extends Usrbase {
   }
   public function index()
   {
-    $this->load->view('index_index',$this->viewData);
+    $this->view('index_index');
   }
   public function tpl(){
     $this->load->view('index_tpl',$this->viewData);
