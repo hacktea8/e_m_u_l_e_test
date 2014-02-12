@@ -1,6 +1,6 @@
 <?php
 require_once 'basemodel.php';
-class emuModel extends baseModel{
+class emuleModel extends baseModel{
   
   public function __construct(){
      parent::__construct();

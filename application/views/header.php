@@ -97,9 +97,12 @@
 <div class="mainDiv">
 <div id="nav_div">
 <ul id="header_ul_big" class="ul big">
-	<li><a onclick="VeryCD.Track('/stat/baseIndex/');" href="/">首页</a></li>
-	<li><a class="hover" onclick="VeryCD.Track('/stat/baseTv/');"
-		href="/base/tv/">剧集</a></li>
+	<li><a onclick="" href="/">首页</a></li>
+<?php foreach($rootCate as $row){
+?>
+                <li><a href="<?php echo $row['url'];?>" onclick=""><?php echo $row['name'];?></a></li>
+<?php
+} ?>
 </ul>
 
 </div>

@@ -9,21 +9,5 @@ class Usrbase extends Webbase {
    
   public function __construct(){
     parent::__construct();
-    $this->load->model('emulemodel');
-    $hotTopic = $this->mem->get('emu-hotTopic');
-    if(empty($hotTopic)){
-      $hotTopic = $this->emulemodel->gethotTopicinfo();
-      $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
-    }
-    $rootCate = $this->mem->get('emu-rootCate');
-    if(empty($rootCate)){
-      $rootCate = $this->emulemodel->getrootCateinfo();
-      $this->mem->set('emu-rootCate',$rootCate,$this->expirettl['1d']);
-    } 
-    $this->assign(array(
-    'seo_keywords'=>'','seo_description'=>'','seo_title'=>''
-    ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
-    'thumhost'=>'http://i.ed2kers.com'
-    ));
   }
 }

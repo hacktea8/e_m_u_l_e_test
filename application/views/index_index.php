@@ -1,15 +1,7 @@
 <!-- head -->
 <div class="mainDiv">
-<link type="text/css" href="{@theme:css}/index.css" rel="stylesheet">
 
 <div class="line_space"></div>
-<style type="text/css">
-.block:after {
-    clear: both;
-    content: " ";
-    display: block;
-}
-</style>
 <div class="folder_div box_7">
 <div style="margin: 4px 0 0;" id="folderlist">
 <div class="tab-nav-1 tab-nav-1_index block">
@@ -39,7 +31,7 @@
 foreach($emuleIndex['new'] as $row){
 ?>
 	<li class="list">
-	<div class="cover_3"><a href="<?php echo $row['id'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
+	<div class="cover_3"><a href="<?php echo $row['url'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
 	<div class="cv_title">
 	<ul>
 	<li class="strong"><a href="<?php echo $row['url'];?>" onclick="" target="_blank"><?php echo $row['name'];?></a></li>
@@ -58,7 +50,7 @@ foreach($emuleIndex['new'] as $row){
 foreach($emuleIndex['rand'] as $row){
 ?>
 	<li class="list">
-	<div class="cover_3"><a href="<?php echo $row['id'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
+	<div class="cover_3"><a href="<?php echo $row['url'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
 	<div class="cv_title">
 	<ul>
 		<li class="strong"><a href="<?php echo $row['url'];?>" onclick="" target="_blank"><?php echo $row['name'];?></a></li>
@@ -76,7 +68,7 @@ foreach($emuleIndex['rand'] as $row){
 foreach($emuleIndex['hot'] as $row){
 ?>
 	<li class="list">
-	<div class="cover_3"><a href="<?php echo $row['id'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
+	<div class="cover_3"><a href="<?php echo $row['url'];?>" target="_blank" onclick=""><img class="lazy"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /></noscript></a></div>
 	<div class="cv_title">
 	<ul>
 		<li class="strong"><a href="<?php echo $row['url'];?>" onclick="" target="_blank"><?php echo $row['name'];?></a></li>

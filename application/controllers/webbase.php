@@ -18,7 +18,9 @@ class Webbase extends CI_Controller {
     $this->redis = &$this->rediscache;
     //解析UID
     $uid = getSynuserUid();
-    $uinfo = getSynuserInfo($uid);
+    if($uid){
+      $uinfo = getSynuserInfo($uid);
+    }
     //var_dump($uinfo);exit;
     //$this->userInfo = $this->usermodel->getUserInfo($uinfo);
     $this->assign(array('domain'=>$this->config->item('domain'),
