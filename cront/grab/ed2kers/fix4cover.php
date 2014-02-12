@@ -11,8 +11,10 @@ foreach($list as $val){
 if(12357 < $val['id']){
    die('The task is OK!');
 }
-$val['thum'] = str_replace('/res','',$val['thum']);
-$thum = 'http://i.ed2kers.com/'.$val['thum'];
+if('http://' != substr($val['thum'],0,7)){
+  $val['thum'] = str_replace('/res','',$val['thum']);
+  $thum = 'http://i.ed2kers.com/'.$val['thum'];
+}
 echo $thum,"\n";
 $default_opts = array(
   'http'=>array(

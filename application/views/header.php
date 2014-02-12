@@ -11,6 +11,7 @@
 <link title="电驴资源" href="/api/opensearch" type="application/opensearchdescription+xml" rel="search">
 
 <link rel="stylesheet" href="<?php echo $css_url;?>global.css?v=<?php echo $version;?>" type="text/css">
+<link rel="stylesheet" href="<?php echo $css_url,$_c,'_',$_a;?>.css?v=<?php echo $version;?>" type="text/css">
 <script type="text/javascript" src="<?php echo $js_url;?>jquery-1.7.2.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="<?php echo $js_url;?>global.js?v=<?php echo $version;?>"></script>
 

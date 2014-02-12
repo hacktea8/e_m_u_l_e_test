@@ -9,6 +9,8 @@ class Webbase extends CI_Controller {
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0);
   public $adminList = array(3);
   protected $isadmin = 0; 
+  protected $_c = 'index'; 
+  protected $_a = 'index'; 
   
   public function __construct(){
     parent::__construct();
@@ -23,24 +25,26 @@ class Webbase extends CI_Controller {
     }
     //var_dump($uinfo);exit;
     //$this->userInfo = $this->usermodel->getUserInfo($uinfo);
+    $this->_c = $this->uri->segment(1,'index');
+    $this->_a = $this->uri->segment(2,'index');
     $this->assign(array('domain'=>$this->config->item('domain'),
                 'base_url'=>$this->config->item('base_url'),'css_url'=>$this->config->item('css_url'),
                 'admin_email'=>$this->config->item('admin_email'),'css_url'=>$this->config->item('css_url'),
                 'img_url'=>$this->config->item('img_url'),'js_url'=>$this->config->item('js_url'),
                 'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
                 ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
-
+                ,'_c'=>$this->_c,'_a'=>$this->_a
     ));
   }
   
-  public function checkLogin(){
+  protected function checkLogin(){
     if(isset($this->userInfo['uid']) &&$this->userInfo['uid']>0){
       return true;
     }else{
       return false;
     }
   }
-  public function checkIsadmin(){
+  protected function checkIsadmin(){
     if(!$this->checkLogin()){
       redirect($this->config->item('login_url').$this->config->item('base_url'));
     }
@@ -54,14 +58,27 @@ class Webbase extends CI_Controller {
     }
       return false;
   }
-  public function assign($data){
+  protected function assign($data){
     foreach($data as $key => $val){
       $this->viewData[$key] = $val;
     }
   }
-  public function view($view_file){
+  protected function view($view_file){
     $this->load->view('header', $this->viewData);
     $this->load->view($view_file);
     $this->load->view('footer');
+  }
+  public function _rewrite_list_url(&$list){
+    foreach($list as &$v){
+      $v['url'] = list_url($v['id'],0,1);
+      $v['purl'] = list_url($v['pid'],0,1);
+    }
+   
+  }
+  public function _rewrite_article_url(&$list){
+    foreach($list as &$v){
+      $v['curl'] = list_url($v['cid'],0,1);
+      $v['url'] = article_url($v['id']);
+    }
   }
 }

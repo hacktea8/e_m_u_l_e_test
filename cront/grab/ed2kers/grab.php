@@ -13,8 +13,10 @@ $task = 600;
 while($task){
 $list = getnocoverlist();
 foreach($list as $val){
-$val['thum'] = str_replace('/res','',$val['thum']);
-$thum = 'http://i.ed2kers.com/'.$val['thum'];
+if('http://' != substr($val['thum'],0,7)){
+  $val['thum'] = str_replace('/res','',$val['thum']);
+  $thum = 'http://i.ed2kers.com/'.$val['thum'];
+}
 $data['imgurl'] = $thum;
 $cover = getHtml($data);
 //去除字符串前3个字节

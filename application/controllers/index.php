@@ -9,17 +9,20 @@ class Index extends Usrbase {
   public function __construct(){
     parent::__construct();
 //    $this->load->model('indexmodel');
+    $this->load->helper('rewrite');
     $this->load->model('emulemodel');
     $hotTopic = $this->mem->get('emu-hotTopic');
 //var_dump($hotTopic);exit;
     if(empty($hotTopic)){
-//      $hotTopic = $this->emulemodel->gethotTopicinfo();
-//      $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
+      $hotTopic = $this->emulemodel->getHotTopic();
+      $this->_rewrite_article_url($hotTopic);
+      $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
     }
     $rootCate = $this->mem->get('emu-rootCate');
     if(empty($rootCate)){
-  //    $rootCate = $this->emulemodel->getrootCateinfo();
-  //    $this->mem->set('emu-rootCate',$rootCate,$this->expirettl['1d']);
+      $rootCate = $this->emulemodel->getCateByCid(0);
+      $this->_rewrite_list_url($rootCate);
+      $this->mem->set('emu-rootCate',$rootCate,$this->expirettl['1d']);
     } 
     $this->assign(array(
     'seo_keywords'=>'','seo_description'=>'','seo_title'=>''
@@ -39,6 +42,7 @@ class Index extends Usrbase {
     $view .= 'index.html';
     if( !file_exists($view) || (time() - filemtime($view)) > 24*3600 ){
       file_put_contents($view, $output);
+      @chmod($view, 0777);
     }
     
     echo $output;

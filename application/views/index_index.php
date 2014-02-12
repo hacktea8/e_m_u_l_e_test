@@ -92,7 +92,7 @@ foreach($emuleIndex['catehot'] as $key=>$row){
 	<li
 		onmouseout=""
 		onmouseover=""
-		id="hotnav_<?php echo $key;?>" class=""><a onclick="void(0);return false;"
+		id="hotnav_<?php echo $key;?>" class="<?php echo $key?'':'on';?>"><a onclick="void(0);return false;"
 		target="_blank" name="for_pad" href="<?php echo $row['url'];?>"><?php echo $row['name'];?></a></li>
 <?php
 }
@@ -248,6 +248,8 @@ $(document).ready(function(){
 var index=0;
   $('.side_hot_nav_index #hotnavs li').mouseover(function(){
      index=$(this).index();
+     $('.side_hot_nav_index #hotnavs li').removeClass('on');
+     $(this).addClass('on');
      $('.side_hot_list_index ul').hide();
      $('#hottab_index_'+index).show();
   });

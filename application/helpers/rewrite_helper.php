@@ -2,14 +2,14 @@
 defined('BASEPATH') || exit('Forbidden');
 
 if ( ! function_exists('article_url')){
-  function article_url($aid,$site_url = ''){
+  function article_url($aid = 0,$site_url = ''){
     $return = sprintf('%s/topic-index-%d.html',$site_url,$aid);
     return $return;
   }
 }
 
 if ( ! function_exists('list_url')){
-  function list_url($cid,$order,$page, $site_url = ''){
+  function list_url($cid = 0,$order = 0,$page = 1, $site_url = ''){
     $return = sprintf('%s/lists-%d-%d-%d.html', $site_url, $cid, $order, $page);
     return $return;
   }
