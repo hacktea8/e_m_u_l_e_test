@@ -113,7 +113,7 @@ foreach($infolist as $row){
         <a href="http://www.verycd.com/i/4489064/" onClick="VeryCD.Track('/stat/indexUserface/');"><img src="{@theme:css}/64_avatar_small.jpg" hoverstyle="2" hovertips="type=2&amp;id=4489064" class="fixsize"></a><p style="WORD-WRAP: break-word;TABLE-LAYOUT: fixed;word-break:break-all"><a hoverstyle="2" hovertips="type=2&amp;id=4489064" href="http://www.verycd.com/i/4489064/" onClick="VeryCD.Track('/stat/indexUsername/');">cctv098998</a></p></div>
 <?php } ?>
 <!--[if IE 6]><span style="text-indent:-24px;margin-left:-12px"></span><![endif]-->
-<?php echo $row['description'];?>
+<?php echo isset($row['intro'])? $row['intro']:'';;?>
 (<a href="<?php echo $row['url'];?>" class="fullarticle" onClick="">全文</a>)
                     <br>
     	<span style="color:green;">

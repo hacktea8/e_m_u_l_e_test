@@ -16,6 +16,7 @@ class Rediscache{
     try{
       $this->redis->setex($key, $ttl, $data);
     }catch(Exception $e){
+      return false;
     }
   }
   public function exists($key = ''){

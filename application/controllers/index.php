@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'usrbase.php';
 class Index extends Usrbase {
-   
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -9,26 +9,7 @@ class Index extends Usrbase {
   public function __construct(){
     parent::__construct();
 //    $this->load->model('indexmodel');
-    $this->load->helper('rewrite');
-    $this->load->model('emulemodel');
-    $hotTopic = $this->mem->get('emu-hotTopic');
-//var_dump($hotTopic);exit;
-    if(empty($hotTopic)){
-      $hotTopic = $this->emulemodel->getHotTopic();
-      $this->_rewrite_article_url($hotTopic);
-      $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
-    }
-    $rootCate = $this->mem->get('emu-rootCate');
-    if(empty($rootCate)){
-      $rootCate = $this->emulemodel->getCateByCid(0);
-      $this->_rewrite_list_url($rootCate);
-      $this->mem->set('emu-rootCate',$rootCate,$this->expirettl['1d']);
-    } 
-    $this->assign(array(
-    'seo_keywords'=>'','seo_description'=>'','seo_title'=>''
-    ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
-    'thumhost'=>'http://i.ed2kers.com'
-    ));
+//var_dump($this->viewData);exit;
   }
   public function index()
   {
@@ -47,16 +28,61 @@ class Index extends Usrbase {
     
     echo $output;
   }
-  public function lists(){
-    
+  public function lists($cid,$order = 0,$page = 1){
+    $page = intval($page);
+    $page = $page > 0 ? $page: 1;
+    if($page < 11){
+       $data = array();
+       $data['emulelist'] = $this->mem->get('emu-emulelist'.$cid.'-'.$page.$order);
+       $data['atotal'] = $this->mem->get('emu-listatotal'.$cid);
+       $data['subcatelist'] = $this->mem->get('emu-listsubcatelist'.$cid);
+       $data['postion'] = $this->mem->get('emu-listpostion'.$cid);
+       if( !empty($data['emulelist'])){
+//die($this->expirettl['12h'].'empty');
+         $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
+         $this->_rewrite_list_url($data['postion']);
+         $this->_rewrite_list_url($data['subcatelist']);
+         $this->_rewrite_article_url($data['emulelist']);
+//echo '<pre>';var_dump($data);exit;
+         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['7d']);
+         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['7d']);
+         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['7d']);
+         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['7d']);
+       }
+    }else{
+       $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
+    }
+    $page_string = '';
+    $this->assign(array('infolist'=>$data['emulelist'],'postion'=>$data['postion']
+    ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
     $this->view('index_lists');
   }
-  public function topic(){
-    
+  public function topic($aid){
+    $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin']);
+    $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
+    $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
+//var_dump($data['postion']);exit;
+    $this->_rewrite_list_url($data['postion']);
+    $this->assign(array('info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
+    $ip = $this->input->ip_address();
+    $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
+//var_dump($this->redis->exists($key));exit;
+    if(!$this->redis->exists($key)){
+       $this->redis->set($key, 1, $this->expirettl['6h']);
+    }
     $this->view('index_topic');
   }
   public function tpl(){
     $this->load->view('index_tpl',$this->viewData);
+  }
+  public function search($q,$order = 0,$page = 1){
+    
+    $this->load->view('index_search',$this->viewData);
+  }
+  public function show404($goto = ''){
+    $goto = '/';
+    $this->assign(array('goto'=>$goto,'seo_title' =>'找不到您需要的页面..现在为您返回首页..'));
+    $this->view('index_show404');
   }
 }
 

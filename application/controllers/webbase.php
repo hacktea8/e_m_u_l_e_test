@@ -6,9 +6,8 @@ class Webbase extends CI_Controller {
   protected $mem = '';
   protected $redis = '';
   public $viewData = array();
-  protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0);
+  protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isadmin'=>0);
   public $adminList = array(3);
-  protected $isadmin = 0; 
   protected $_c = 'index'; 
   protected $_a = 'index'; 
   
@@ -22,6 +21,7 @@ class Webbase extends CI_Controller {
     $uid = getSynuserUid();
     if($uid){
       $uinfo = getSynuserInfo($uid);
+      $this->userInfo['isadmin'] = $this->checkIsadmin();
     }
     //var_dump($uinfo);exit;
     //$this->userInfo = $this->usermodel->getUserInfo($uinfo);
@@ -71,7 +71,8 @@ class Webbase extends CI_Controller {
   public function _rewrite_list_url(&$list){
     foreach($list as &$v){
       $v['url'] = list_url($v['id'],0,1);
-      $v['purl'] = list_url($v['pid'],0,1);
+      if(isset($v['pid'])){
+        $v['purl'] = list_url($v['pid'],0,1);
     }
    
   }

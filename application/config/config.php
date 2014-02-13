@@ -15,7 +15,7 @@
 |
 */
 $config['base_url']	= '';
-$config['admin_email']	= 'emu@hacktea8.com';
+$config['admin_email']	= 'emu$hacktea8.com($ => @)';
 $config['js_url']	= '/public/js/';
 $config['css_url']	= '/public/css/';
 $config['img_url']	= '/public/images/';

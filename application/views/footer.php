@@ -18,22 +18,6 @@
 </div>
 </div>
 </div>
-<div id="ym-ml" class="ym-ml">
-<div class="ym-mr">
-<div class="ym-mc">
-</div>
-</div>
-</div>
-<div id="ym-btnl" class="ym-ml">
-<div class="ym-mr">
-<div class="ym-btn"></div>
-</div>
-</div>
-<div id="ym-bl" class="ym-bl">
-<div class="ym-br">
-<div class="ym-bc"></div>
-</div>
-</div>
 </div>
 </div>
 <div id="#show_msg_div_" ></div>

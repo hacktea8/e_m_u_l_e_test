@@ -138,7 +138,7 @@
                  <div>
 <?php echo $info['downurl'];?>
 </div>
-                 <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info[\'url\'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
+                 <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
 VIP通道:<?php echo $info['vipdwurl'];?>
 </div>
             </div>

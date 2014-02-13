@@ -2,12 +2,12 @@
 <html lang="zh-CN" xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta content="<?php $seo_keywords;?>" name="keywords">
-<meta content="<?php $seo_description;?>" name="description">
+<meta content="<?php echo $seo_keywords;?>" name="keywords">
+<meta content="<?php echo $seo_description;?>" name="description">
 <?php if(isset($cid)){?>
-<link href="/api/feed/<?php echo $cid;?>" title="<?php $seo_title;?> - <?php $web_title;?>" type="application/rss+xml" rel="alternate">
+<link href="/api/feed/<?php echo $cid;?>" title="<?php echo $seo_title;?> - <?php echo $web_title;?>" type="application/rss+xml" rel="alternate">
 <?php }?>
-<title><?php $seo_title;?> - <?php $web_title;?></title>
+<title><?php echo $seo_title;?> - <?php echo $web_title;?></title>
 <link title="电驴资源" href="/api/opensearch" type="application/opensearchdescription+xml" rel="search">
 
 <link rel="stylesheet" href="<?php echo $css_url;?>global.css?v=<?php echo $version;?>" type="text/css">
@@ -25,8 +25,8 @@
 	src="about:blank" class="topbar_iframe"></iframe>
 <div class="mainDiv" id="notice_wrapper">
 <ul class="header_link clearfix">
-	<li class="link_item"><a href="http://www.verycd.com/"
-		onclick="VeryCD.TrackEvent('首页', 'toplink', '首页');" class="hover_red"><strong>首页</strong></a></li>
+  <li class="link_item"><a href="/"
+onclick="" class="hover_red"><strong>首页</strong></a></li>
 	</ul>
 <?php if(0){ ?>
 <div id="header_login">
@@ -34,7 +34,7 @@
 <ul>
 	<li type="history" name="dropmenu" class="watching" status="hide"
 		original_class="watching"><a
-		onclick="VeryCD.TrackEvent('首页', 'toplink', '我正在看');"
+		onclick=""
 		class="watching_item" href="javascript: void(0);">我正在看<span
 		class="top_arrow"></span></a></li>
 </ul>
@@ -57,11 +57,11 @@
 	class="top_add_link" href="#">分享</a>
 <div style="display: none;" id="top_add_options"
 	class="top_add_options png"><a class="top_add_article"
-	onclick="VeryCD.Track('/stat/topAddArticle/');" href="/articles/add/">
+	onclick="" href="/articles/add/">
 文章 </a> <a class="top_add_entry"
-	onclick="VeryCD.Track('/stat/topAddEntry/');" href="/base/add"> 资料
+	onclick="" href="/base/add"> 资料
 </a> <a class="top_add_topic"
-	onclick="VeryCD.Track('/stat/topAddTopic/');VeryCD.goPublish();return false"
+	onclick=""
 	href="/topics/post"> 资源 </a></div>
 <?php } ?>
 </div>
@@ -80,9 +80,11 @@
 	id="search_keyword"> <input type="hidden" value="entries"
 	id="search_type">
 <button class="top-search-button" id="top-search-button" type="submit">搜索</button>
+<?php if(0){ ?>
 <button
-	onclick="location.href='http://www.verycd.com/search#advanced';return false;"
+	onclick="location.href='/search#advanced';return false;"
 	class="top-search-button" id="top-search-advance" type="button">高级搜索</button>
+<?php } ?>
 </form>
 </div>
 
@@ -112,9 +114,16 @@
 <div style="float: right; padding-right: 12px;" id="addfavorite_div">
 <a onclick="addfavorite('<?php echo $base_url;?>','<?php echo $web_title;?>');return false;"
 	style="color: #555" rel="sidebar" href="<?php echo $base_url;?>">+ 将本站加入收藏夹</a></div>
-<div id="location_div">您的位置：<a href="/">电驴大全</a> &gt; <a
-	href="/base/tv/">剧集</a> <a href="http://www.verycd.com/base/tv/feed"
+<div id="location_div">您的位置：<a href="/"><?php echo $web_title;?></a>
+<?php foreach($postion as $row){?>
+ &gt; <a
+	href="<?php echo $row['url'];?>"><?php echo $row['name'];?></a> 
+<?php } ?>
+<?php if(isset($cidd)){ ?>
+<a href="http://www.verycd.com/base/tv/feed"
 	title="使用RSS订阅本栏更新"><img align="absmiddle"
-	src="<?php echo $img_url;?>feeds.gif?v=<?php echo $version;?>" alt="feed" style="vertical-align: top;"></a></div>
+	src="<?php echo $img_url;?>feeds.gif?v=<?php echo $version;?>" alt="feed" style="vertical-align: top;"></a>
+<?php } ?>
+</div>
 </div>
 <div class="mainDiv">
