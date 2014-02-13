@@ -21,5 +21,18 @@
 </div>
 </div>
 <div id="#show_msg_div_" ></div>
+<script type="text/javascript">
+$(document).ready(function(){
+<?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
+$("img.lazy").show().lazyload({ 
+    effect : "fadeIn",
+    //placeholder : "img/grey.gif",
+    placeholder : "http://img.hacktea8.com/showpic.php?key=3958009_0000671092.jpg",
+    threshold : 60
+});
+
+<?php } ?>
+});
+</script>
 </body>
 </html>

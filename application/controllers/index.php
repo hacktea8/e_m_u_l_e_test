@@ -24,6 +24,7 @@ class Index extends Usrbase {
     if( !file_exists($view) || (time() - filemtime($view)) > 24*3600 ){
       file_put_contents($view, $output);
       @chmod($view, 0777);
+      exit;
     }
     
     echo $output;
@@ -37,7 +38,7 @@ class Index extends Usrbase {
        $data['atotal'] = $this->mem->get('emu-listatotal'.$cid);
        $data['subcatelist'] = $this->mem->get('emu-listsubcatelist'.$cid);
        $data['postion'] = $this->mem->get('emu-listpostion'.$cid);
-       if( !empty($data['emulelist'])){
+       if( empty($data['emulelist'])){
 //die($this->expirettl['12h'].'empty');
          $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
          $this->_rewrite_list_url($data['postion']);
@@ -52,7 +53,24 @@ class Index extends Usrbase {
     }else{
        $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
     }
-    $page_string = '';
+    $data['emulelist'] = is_array($data['emulelist']) ? $data['emulelist']: array();
+//var_dump($data);exit;
+    $this->load->library('pagination');
+    $config['base_url'] = sprintf('/index/lists/%d/%d/',$cid,$order);
+    $config['total_rows'] = $data['atotal'];
+    $config['per_page'] = 25; 
+    $config['first_link'] = '第一页'; 
+    $config['next_link'] = '下一页';
+    $config['prev_link'] = '上一页';
+    $config['last_link'] = '最后一页';
+    $config['cur_tag_open'] = '<span class="current">';
+    $config['cur_tag_close'] = '</span>';
+    $config['suffix'] = '.html';
+    $config['use_page_numbers'] = TRUE;
+    $config['num_links'] = 5;
+    $config['cur_page'] = $page;
+    $this->pagination->initialize($config); 
+    $page_string = $this->pagination->create_links();
     $this->assign(array('infolist'=>$data['emulelist'],'postion'=>$data['postion']
     ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
     $this->view('index_lists');

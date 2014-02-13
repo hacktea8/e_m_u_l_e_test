@@ -73,6 +73,7 @@ class Webbase extends CI_Controller {
       $v['url'] = list_url($v['id'],0,1);
       if(isset($v['pid'])){
         $v['purl'] = list_url($v['pid'],0,1);
+      }
     }
    
   }

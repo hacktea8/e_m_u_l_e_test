@@ -92,8 +92,6 @@ foreach($hotTopic as $row){
         <option value="rpost">发布时间从新到老</option>
         <option value="update">更新时间从老到新</option>
         <option value="rupdate" selected="selected">更新时间从新到老</option>
-        <option value="size">文件大小从小到大</option>
-        <option value="rsize">文件大小从大到小</option>
     </select>
     <span class="left_class_filter"><img src="<?php echo $img_url;?>line.gif?v=<?php echo $version;?>"></span>
         </div>

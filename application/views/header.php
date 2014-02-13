@@ -14,7 +14,9 @@
 <link rel="stylesheet" href="<?php echo $css_url,$_c,'_',$_a;?>.css?v=<?php echo $version;?>" type="text/css">
 <script type="text/javascript" src="<?php echo $js_url;?>jquery-1.7.2.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript" src="<?php echo $js_url;?>global.js?v=<?php echo $version;?>"></script>
-
+<?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
+<script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
+<?php } ?>
 </head>
 <body>
 <a style="display: none;" id="gotop" href="#" title="返回顶部"
