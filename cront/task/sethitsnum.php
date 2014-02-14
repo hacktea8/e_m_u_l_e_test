@@ -1,14 +1,14 @@
 <?php
 
-define('WEKIT_VERSION',1);
 $root=dirname(__FILE__).'/';
+define('BASEPATH',$root.'../../system/');
 require_once($root.'../grab/db.class.php');
-require_once($root.'../../src/library/base/PwBaseRediscache.php');
+require_once($root.'../../application/libraries/rediscache.php');
 
 
 $model = new model();
 
-$redis = new PwBaseRediscache();
+$redis = new Rediscache();
 $keys = $redis->keys('emuhitslog:*');
 
 //var_dump($keys);exit;

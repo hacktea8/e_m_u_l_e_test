@@ -1,11 +1,11 @@
 #!/usr/local/php/bin/php -q
 <?php
 
-define('WEKIT_VERSION',1);
 $root=dirname(__FILE__).'/';
+define('BASEPATH',$root.'../../system/');
 //echo $root;exit;
 require_once($root.'../grab/db.class.php');
-require_once($root.'../../src/library/base/PwBaseMemcache.php');
+require_once($root.'../../application/libraries/memcache.php');
 
 $expirettl['7d'] = 691200;
 
@@ -19,7 +19,7 @@ class model{
 
   function __construct(){
     $this->db=new DB_MYSQL();
-    $this->mem=new PwBaseMemcache();
+    $this->mem=new Memcache();
 
   }
   function getArticleListByCid($cid,$order,$page,$limit){
