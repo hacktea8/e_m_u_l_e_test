@@ -13,7 +13,7 @@
 <style type="text/css">
 em{color:red;}
 </style>
-<script type="text/javascript" src="<?php echo $js_url;?>jquery-2.0.2.min.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>jquery-1.7.2.js?v=<?php echo $version;?>"></script>
 </head>
 <body>
 <div class="container">
@@ -27,11 +27,11 @@ em{color:red;}
     <div class="header">
         <div class="row">
             <div class="logo fl"><a href="/" title="<?php echo $web_title;?>_软件下载,绿色软件,手机软件下载尽在绿色<?php echo $web_title;?>">
-            <img src="<?php echo $img_url;?>logo.png?v=<?php echo $version;?>" alt="<?php echo $web_title;?>">
+<?php echo $web_title;?>
 </a></div>
             <div class="search-form">
-                <form action="/index/search/" method="post" >
-                    <input type="text" id="keyword" autocomplete="off" class="search-wrod" name="q" placeholder="请输入需要搜索的关键词" x-webkit-speech="" speech="" value="{$q}"/>
+                <form action="/index/search/" method="get" >
+                    <input type="text" id="keyword" autocomplete="off" class="search-wrod" name="q" placeholder="请输入需要搜索的关键词" x-webkit-speech="" speech="" value="<?php echo $q;?>"/>
                     <button type="submit" id="search_submit" class="search-btn">立即搜索</button>
                 </form>
                 <div class="search-keys">
@@ -102,11 +102,11 @@ $row['update_timestamp']=date('Y-m-d',$row['update_timestamp']);
                       <p class="soft-ext ext">
                           <span class="size imp"><?php echo $row['focus_count'];?>次</span>
                           <span class="num"><?php echo $row['hit_num'];?>次</span>
-                          <span class="date"><?php echo $row['update_timestamp']:?> </span>
+                          <span class="date"><?php echo $row['update_timestamp'];?> </span>
                       </p>
                   </div>
                   <div class="li-contnet">
-                      <a href="<?php echo $row['url'];?>" class="pic"><img src="<?php echo $row['thumbnail'];?>" alt="<?php echo strip_tags($row['title']);?>" /></a>
+                      <a href="<?php echo $row['url'];?>" class="pic"><img onerror="javascript:this.src='<?php echo $img_url;?>show404.jpg';" src="<?php echo $row['thumbnail'];?>" alt="<?php echo strip_tags($row['title']);?>" /></a>
 <!--
                       <p class="soft-info ext">
                           <span class="item"><span class="til">语言：</span>简体中文</span>

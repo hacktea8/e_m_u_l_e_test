@@ -98,7 +98,7 @@ class CloudSearchApi {
             throw new Exception('$clientSecret is empty.');
         }
 
-        $this->_apiURL = rtrim(rtrim($tmpURL, "/"), "/v1/api");
+        $this->_apiURL = rtrim(rtrim($tmpURL, "/"), "/".self::API_VERSION."/api");
         $this->_clientId = $clientId;
         $this->_clientSecret = $tmpSecret;
     }

@@ -13,6 +13,15 @@ class Index extends Usrbase {
   }
   public function index()
   {
+    $c = isset($_GET['c'])?$_GET['c']:'';
+    if('topic' == $c){
+      $aid = isset($_GET['aid'])?$_GET['aid']:'';
+      $this->topic($aid);return true;
+    }
+    if('list' == $c){
+      $cid = isset($_GET['cid'])?$_GET['cid']:'';
+      $this->lists($cid);return true;
+    }
     $this->assign(array('emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
     $this->view('index_index');
     $output = $this->output->get_output();
@@ -81,6 +90,10 @@ class Index extends Usrbase {
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
 //var_dump($data['postion']);exit;
     $this->_rewrite_list_url($data['postion']);
+    $this->_rewrite_article_url($data['info']);
+    $data['info'] = $data['info'][0];
+    $data['info']['relatdata'] = is_array($data['info']['relatdata']) ? $data['info']['relatdata'] : array();
+    $data['info']['fav'] = 0;
     $this->assign(array('info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
@@ -93,8 +106,46 @@ class Index extends Usrbase {
   public function tpl(){
     $this->load->view('index_tpl',$this->viewData);
   }
-  public function search($q,$order = 0,$page = 1){
-    
+  public function search($q='',$type = 0,$order = 0,$page = 1){
+    $q = $q ? $q:$_GET['q'];
+    $q = urldecode($q);
+    $page = intval($page);
+    $page = $page < 1 ? 1: $page;
+    $list = array();
+    if($q){
+      $param = array('kw' => $q, 'page' => $page, 'page_size' => 20);
+      if(1 == $type){
+        $param[] = '';
+      }elseif(2 == $type){
+        $param[] = '';
+      }
+      $this->load->library('aliyunsearchapi');
+      $this->aliyunsearchapi->getsearch($list, $type, $param);
+    }
+    $hot_search = array();
+    $recommen_topic = array();
+    $recommen_topic[1] = array();
+    $recommen_topic[2] = array();
+    $hot_topic = array();
+    $hot_topic['hit'] = array();
+    $hot_topic['focus'] = array();
+    $this->load->library('pagination');
+    $config['base_url'] = sprintf('/index/search/%s/%d/%d/',urlencode($q),$type,$order);
+    $config['total_rows'] = $list['result']['viewtotal'];
+    $config['per_page'] = 25;
+    $config['first_link'] = '第一页';
+    $config['next_link'] = '下一页';
+    $config['prev_link'] = '上一页';
+    $config['last_link'] = '最后一页';
+    $config['cur_tag_open'] = '<span class="current">';
+    $config['cur_tag_close'] = '</span>';
+    $config['suffix'] = '.html';
+    $config['use_page_numbers'] = TRUE;
+    $config['num_links'] = 5;
+    $config['cur_page'] = $page;
+    $this->pagination->initialize($config);
+    $page_string = $this->pagination->create_links();
+    $this->assign(array('searchlist'=>$list['result'],'kw'=>$q,'q'=>$q,'page_string'=>$page_string,'hot_search'=>$hot_search,'recommen_topic'=>$recommen_topic,'hot_topic'=>$hot_topic)); 
     $this->load->view('index_search',$this->viewData);
   }
   public function show404($goto = ''){

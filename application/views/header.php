@@ -17,6 +17,10 @@
 <?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
 <?php } ?>
+<?php if(in_array($_a,array('topic'))){ ?>
+<script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>item.js?v=<?php echo $version;?>"></script>
+<?php } ?>
 </head>
 <body>
 <a style="display: none;" id="gotop" href="#" title="返回顶部"
@@ -68,18 +72,18 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 <?php } ?>
 </div>
 <div id="top-search">
-<form action="/search/entries/" onsubmit="VeryCD.search();return false;"
+<form action="/index/search/" onsubmit=""
 	class="block"><span id="search-module-toggle"> <img
-	onload="this.onload=''; if(this.style.filter) { this.src='http://v4.vcimg.com/images/0.gif'; this.width=18; this.height=18; }"
+	onload="this.onload=''; if(this.style.filter) { this.src='<?php echo $img_url;?>search0.gif'; this.width=18; this.height=18; }"
 	style=""
 	src="<?php echo $img_url;?>entries.png?v=<?php echo $version;?>"
 	alt="" id="current-search-module-img"> </span> <input type="text"
-	tabindex="1" onwebkitspeechchange="VeryCD.search();"
+	tabindex="1" 
 	x-webkit-grammar="builtin:translate" x-webkit-speech=""
 	onblur="if(this.value=='')this.value='搜索资料标题、内容...';this.style.color='#999';"
 	onfocus="if(this.value=='搜索资料标题、内容...'){this.value=''};this.style.color='#000';"
-	autocomplete="off" class="top-search-input" value="" name="kw"
-	id="search_keyword"> <input type="hidden" value="entries"
+	autocomplete="off" class="top-search-input" value="" name="q"
+	id="search_keyword"> <input type="hidden" value="<?php echo isset($cid)?$cid:0;?>"
 	id="search_type">
 <button class="top-search-button" id="top-search-button" type="submit">搜索</button>
 <?php if(0){ ?>

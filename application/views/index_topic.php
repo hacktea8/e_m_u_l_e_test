@@ -15,7 +15,7 @@
                                  <input value="" name="entryid" id="entryid" type="hidden">
                  <div class="topicImg">
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
-                <img class="cover" src="<?php echo $showimgapi,$info['cover'];?>">
+                <img class="cover" src="<?php echo $showimgapi,$info['cover'];?>" onerror="show404();">
               </a>
                 <div>
                     <div id="visitTimes" style="margin-top:5px; display:none">
@@ -25,7 +25,7 @@
                                             </div>
                </div>
         </div>
-        <div style="float:left;width:580px;overflow:hidden;">
+        <div style="float:left;width:500px;overflow:hidden;">
         <div class="block1">
             <div class="block11" id="block11">
                 <ul>
@@ -75,10 +75,10 @@
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
                     <a class="addFav addFavModule_a" title="收藏该资源" id="addFav"></a>
                     <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;" id="folderfavoritatips">
-                        <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(http://v4.vcimg.com/images/folder/tipsleft.gif) no-repeat scroll 0% 0% transparent;">
+                        <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
                         <div style="padding: 4px; color: rgb(104, 100, 89);">
-                            <span style="margin-left: 3px; padding-top: 4px; float: left;"><img src="{@theme:images}/emule/light.gif"></span>
+                            <span style="margin-left: 3px; padding-top: 4px; float: left;"><img src="<?php echo $img_url;?>light.gif"></span>
                             <div style="padding: 4px; color: rgb(104, 100, 89);">
                                 <div style="padding: 0px; margin: 0px 0px 0px 17px;text-align:left;">
                                     <span style="float: left;">收藏资源后，一旦有新更新（字幕、文件）我们</span>
@@ -97,7 +97,7 @@
                     <div id="shte_mainbox"></div>
 
                         <div id="folderfavoritatips" style="position:absolute;margin:-35px 0 0 -38px;*margin:-15px 0 0 -239px;border:1px solid #cdb47e;width:310px;background:#ffffcd;display:none;height:55px;">
-                        <div style="position:absolute;height:12px;width:23px;margin:-12px 0 0 18px;background:url(http://v4.vcimg.com/images/folder/tipstop.gif) no-repeat;"></div>
+                        <div style="position:absolute;height:12px;width:23px;margin:-12px 0 0 18px;background:url(<?php echo $img_url;?>tipstop.gif) no-repeat;"></div>
                         <div style="padding:4px;color:#686459;">
                             <span style="margin-left:3px;padding-top:4px;float:left;"><img src="<?php echo $img_url;?>light.gif?v=<?php echo $version;?>"></span>
                             <div style="padding:4px;color:#686459;">
@@ -215,7 +215,7 @@ if($key%5==0){
 	</div> <!-- end of userMore -->
 	</div> <!-- end of userres -->
 <div id="favriteuser">
-<h3>刚收藏了本资源的用户</h3><img id="closeRell" class="closebtn" alt="" src="/res/images/emule/toggle.gif">
+<h3>刚收藏了本资源的用户</h3><img id="closeRell" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif">
 	<div id="closeRellmore">
 <?php if(0){ ?>	
 <div style="width:252px;height:65px;margin-left:5px;">

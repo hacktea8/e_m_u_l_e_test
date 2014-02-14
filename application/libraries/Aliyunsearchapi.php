@@ -4,11 +4,12 @@ require_once($currentpath.'/CloudSearchApi.php');
 require_once($currentpath.'/CloudSearchIndex.php');
 require_once($currentpath.'/HelperError.php');
 define('APIROOT','http://css.aliyun.com');
+//define('APIROOT','http://opensearch.etao.com');
 define('CLIENT_ID','6100084360938795');
 define('CLIENT_SECRET','2abc67908c9c062d6da13ca10fa8ccef');
 define('INDEXNAME','emu_hacktea8');
 
-class AliyunSearchApi{
+class Aliyunsearchapi{
   public $api;
   protected $msg;
 

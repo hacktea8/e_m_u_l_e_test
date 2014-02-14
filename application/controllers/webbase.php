@@ -27,9 +27,13 @@ class Webbase extends CI_Controller {
     //$this->userInfo = $this->usermodel->getUserInfo($uinfo);
     $this->_c = $this->uri->segment(1,'index');
     $this->_a = $this->uri->segment(2,'index');
+    $c = isset($_GET['c'])?$_GET['c']:'';
+    if($c){
+       $this->_a = 'list' == $c ? 'lists' : 'topic';
+    }
     $this->assign(array('domain'=>$this->config->item('domain'),
                 'base_url'=>$this->config->item('base_url'),'css_url'=>$this->config->item('css_url'),
-                'admin_email'=>$this->config->item('admin_email'),'css_url'=>$this->config->item('css_url'),
+                'admin_email'=>$this->config->item('admin_email'),'errorimg'=>$this->showimgapi.'3958009_0000671092.jpg',
                 'img_url'=>$this->config->item('img_url'),'js_url'=>$this->config->item('js_url'),
                 'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
                 ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
@@ -78,6 +82,7 @@ class Webbase extends CI_Controller {
    
   }
   public function _rewrite_article_url(&$list){
+    $list = isset($list[0]['id']) ? $list : array($list);
     foreach($list as &$v){
       $v['curl'] = list_url($v['cid'],0,1);
       $v['url'] = article_url($v['id']);

@@ -27,10 +27,14 @@ $(document).ready(function(){
 $("img.lazy").show().lazyload({ 
     effect : "fadeIn",
     //placeholder : "img/grey.gif",
-    placeholder : "http://img.hacktea8.com/showpic.php?key=3958009_0000671092.jpg",
+    placeholder : '<?php echo $errorimg;?>',
     threshold : 60
 });
-
+function show404(){
+var img=event.srcElement;
+img.src='/public/images/show404.jpg';
+img.onerror=null; 控制不要一直跳动
+}
 <?php } ?>
 });
 </script>
