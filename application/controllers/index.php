@@ -22,9 +22,6 @@ class Index extends Usrbase {
       $cid = isset($_GET['cid'])?$_GET['cid']:'';
       $this->lists($cid);return true;
     }
-    $this->assign(array('emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
-    $this->view('index_index');
-    $output = $this->output->get_output();
     $view = BASEPATH.'../';
     if(!is_writeable($view)){
        die($view.' is not write!');
@@ -33,15 +30,19 @@ class Index extends Usrbase {
     $lock = $view . '.lock';
     if( !file_exists($view) || (time() - filemtime($view)) > 24*3600 ){
       if(!file_exists($lock)){
+        
+        $this->assign(array('emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
+        $this->view('index_index');
+        $output = $this->output->get_output();
         file_put_contents($lock, '');
         file_put_contents($view, $output);
         @unlink($lock);
         @chmod($view, 0777);
+        echo $output;
         return true;
       }
     }
-    
-    echo $output;
+    exit();
   }
   public function lists($cid,$order = 0,$page = 1){
     $page = intval($page);
@@ -118,6 +119,7 @@ class Index extends Usrbase {
     }
     $keywords = $data['info']['name'].','.$kw.$this->seo_keywords;
     $title = $data['info']['name'];
+    $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
     $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
