@@ -15,7 +15,7 @@
                                  <input value="" name="entryid" id="entryid" type="hidden">
                  <div class="topicImg">
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
-                <img class="cover" src="<?php echo $showimgapi,$info['cover'];?>" onerror="show404();">
+                <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" onerror="show404();">
               </a>
                 <div>
                     <div id="visitTimes" style="margin-top:5px; display:none">
@@ -78,11 +78,11 @@
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
                         <div style="padding: 4px; color: rgb(104, 100, 89);">
-                            <span style="margin-left: 3px; padding-top: 4px; float: left;"><img src="<?php echo $img_url;?>light.gif"></span>
+                            <span style="margin-left: 3px; padding-top: 4px; float: left;"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>light.gif"></span>
                             <div style="padding: 4px; color: rgb(104, 100, 89);">
                                 <div style="padding: 0px; margin: 0px 0px 0px 17px;text-align:left;">
                                     <span style="float: left;">收藏资源后，一旦有新更新（字幕、文件）我们</span>
-                                    <a onClick="$('#folderfavoritatips').hide();return false;" style="float:right;display:block;padding:3px 7px 0pt 3px;width: 5px;height: 30px;" href="#"><img src="<?php echo $img_url;?>canceltips.gif?v=<?php echo $version;?>"></a>
+                                    <a onClick="$('#folderfavoritatips').hide();return false;" style="float:right;display:block;padding:3px 7px 0pt 3px;width: 5px;height: 30px;" href="#"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>canceltips.gif?v=<?php echo $version;?>"></a>
                                     <div>将会用站内消息和电子邮件通知你。</div>
                                     <div style="clear: both;"></div>
                                 </div>
@@ -101,11 +101,11 @@
                         <div id="folderfavoritatips" style="position:absolute;margin:-35px 0 0 -38px;*margin:-15px 0 0 -239px;border:1px solid #cdb47e;width:310px;background:#ffffcd;display:none;height:55px;">
                         <div style="position:absolute;height:12px;width:23px;margin:-12px 0 0 18px;background:url(<?php echo $img_url;?>tipstop.gif) no-repeat;"></div>
                         <div style="padding:4px;color:#686459;">
-                            <span style="margin-left:3px;padding-top:4px;float:left;"><img src="<?php echo $img_url;?>light.gif?v=<?php echo $version;?>"></span>
+                            <span style="margin-left:3px;padding-top:4px;float:left;"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>light.gif?v=<?php echo $version;?>"></span>
                             <div style="padding:4px;color:#686459;">
                                 <div style="padding:0px;margin:0px;margin-left:17px;">
                                 <span style="float:left">收藏资源后，一旦有新更新（字幕、文件）我们</span>
-                                <a href="#" style="float:right;display:block;padding:3px 7px 0 3px;padding:3px 3px 0 0\9;width:5px;height:30px;" onClick="return hidden_favorite_tips();"><img src="<?php echo $img_url;?>canceltips.gif?v=<?php echo $version;?>"></a>
+                                <a href="#" style="float:right;display:block;padding:3px 7px 0 3px;padding:3px 3px 0 0\9;width:5px;height:30px;" onClick="return hidden_favorite_tips();"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>canceltips.gif?v=<?php echo $version;?>"></a>
                                 <div>将会用站内消息和电子邮件通知你。</div>
                                 <div style="clear:both"></div>
                                 </div>
@@ -165,7 +165,7 @@ if($key%5==0){
 }
 ?>	   	            			<td>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank">
-<img class="lazy folder-entry-thumb"  data-original="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
+<img class="lazy folder-entry-thumb"  data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </td>
 <?php
@@ -195,7 +195,7 @@ if($key%5==0){
  <div id="navside">
 		                            
  <div id="userres">
-   <h3>该用户的其它精华资源</h3> <img id="closeUser" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
+   <h3>该用户的其它精华资源</h3> <img title="<?php echo $info['name'];?>" alt="="<?php echo $info['name'];?>"" id="closeUser" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
 	            <div id="userMore">
 <?php if(0){ ?>
 	        		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -217,7 +217,7 @@ if($key%5==0){
 	</div> <!-- end of userMore -->
 	</div> <!-- end of userres -->
 <div id="favriteuser">
-<h3>刚收藏了本资源的用户</h3><img id="closeRell" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif">
+<h3>刚收藏了本资源的用户</h3><img title="<?php echo $info['name'];?>" alt="<?php echo $info['name'];?>" id="closeRell" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif">
 	<div id="closeRellmore">
 <?php if(0){ ?>	
 <div style="width:252px;height:65px;margin-left:5px;">
@@ -229,14 +229,14 @@ if($key%5==0){
 </div>
 </div>
 <div id="relativeres">
-  <h3>相关资源</h3> <img id="closeRel" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
+  <h3>相关资源</h3> <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" id="closeRel" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
   <div id="relMore">
 <?php
 foreach($info['relatdata'] as $row){
 ?>
   <p class="itshot">
    <a class="relatelink" href="<?php echo $row['id'];?>" onClick="" target="_blank">
-           <img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a>
+           <img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a>
 			 <a title="{$row['name']}" class="topic-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </p>
 <?php
@@ -248,7 +248,7 @@ foreach($info['relatdata'] as $row){
 foreach($hotTopic as $row){
 ?>
 <dd class="itshot">
-<a id="entry_link_<?php echo $row['id'];?>" title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank" style="text-decoration:none;"><img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px;display:inline;" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript>
+<a id="entry_link_<?php echo $row['id'];?>" title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank" style="text-decoration:none;"><img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px;display:inline;" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="hot_img" /></noscript>
   <div id="entry_<?php echo $row['id'];?>" style="display:none;" class="entry_score_small"></div>
 </a>
   <br>
