@@ -95,9 +95,9 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 </div>
 
 <div class="link_line hot_search_keywords">热门搜索：&nbsp;
-
+<?php if(0){ ?>
 <a target="_blank" href="/search/entries/%E7%88%B1%E6%83%85%E5%85%AC%E5%AF%934" style="text-decoration: none;">爱情公寓4</a>&nbsp;&nbsp;
-
+<?php } ?>
 </div>
 </div>
 </div>
@@ -106,10 +106,10 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 <div class="mainDiv">
 <div id="nav_div">
 <ul id="header_ul_big" class="ul big">
-	<li><a onclick="" href="/">首页</a></li>
+	<li><a onclick="" href="/" class="<?php echo $_a == 'index' ? 'hover':'';?>">首页</a></li>
 <?php foreach($rootCate as $row){
 ?>
-                <li><a href="<?php echo $row['url'];?>" onclick=""><?php echo $row['name'];?></a></li>
+                <li><a href="<?php echo $row['url'];?>" onclick="" class="<?php echo in_array($row['id'],array($cid,$cpid)) ? 'hover':'';?>"><?php echo $row['name'];?></a></li>
 <?php
 } ?>
 </ul>

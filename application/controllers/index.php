@@ -30,10 +30,15 @@ class Index extends Usrbase {
        die($view.' is not write!');
     }
     $view .= 'index.html';
+    $lock = $view . '.lock';
     if( !file_exists($view) || (time() - filemtime($view)) > 24*3600 ){
-      file_put_contents($view, $output);
-      @chmod($view, 0777);
-      exit;
+      if(!file_exists($lock)){
+        file_put_contents($lock, '');
+        file_put_contents($view, $output);
+        @unlink($lock);
+        @chmod($view, 0777);
+        return true;
+      }
     }
     
     echo $output;
@@ -63,7 +68,7 @@ class Index extends Usrbase {
        $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
     }
     $data['emulelist'] = is_array($data['emulelist']) ? $data['emulelist']: array();
-//var_dump($data);exit;
+    $cpid = isset($data['postion'][0]['id'])?$data['postion'][0]['id']:0;
     $this->load->library('pagination');
     $config['base_url'] = sprintf('/index/lists/%d/%d/',$cid,$order);
     $config['total_rows'] = $data['atotal'];
@@ -78,9 +83,10 @@ class Index extends Usrbase {
     $config['use_page_numbers'] = TRUE;
     $config['num_links'] = 5;
     $config['cur_page'] = $page;
+    
     $this->pagination->initialize($config); 
     $page_string = $this->pagination->create_links();
-    $this->assign(array('infolist'=>$data['emulelist'],'postion'=>$data['postion']
+    $this->assign(array('cpid'=>$cpid,'infolist'=>$data['emulelist'],'postion'=>$data['postion']
     ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
     $this->view('index_lists');
   }
@@ -121,6 +127,11 @@ class Index extends Usrbase {
       }
       $this->load->library('aliyunsearchapi');
       $this->aliyunsearchapi->getsearch($list, $type, $param);
+      $hotKeywords = $this->aliyunsearchapi->topQuery($params = array('num'=>8,'days'=>30));
+      //var_dump($hotKeywords);exit;
+      if('OK' == $hotKeywords['status']){
+         $hotKeywords = $hotKeywords['result']['items']['emu_hacktea8'];
+      }
     }
     $hot_search = array();
     $recommen_topic = array();

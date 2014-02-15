@@ -65,6 +65,9 @@ class Aliyunsearchapi{
     $index->addDocuments($_itemsArr);
     return "添加成功，系统需要几分钟来处理数据，请耐心等待！";
   }
+  public function topQuery($params = array('num'=>8,'days'=>30)){
+    return $this->api->topQuery(INDEXNAME,$params);
+  }
   public function deletedocument($indexName,$docId){
     $index = $this->api->getIndex($indexName);
     $index->deleteDocument($docId);

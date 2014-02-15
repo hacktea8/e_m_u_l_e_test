@@ -596,3 +596,17 @@ padding-left: 10px;
 color: #333;
 text-decoration: underline;
 }
+#nav_div .big li a {
+float: left;
+padding: 0 10px;
+font-size: 14px;
+background-image: url(/public/images/global_bg_1.gif);
+background-repeat: repeat-x;
+background-position: 0 100px;
+height: 32px;
+font-weight: bold;
+}
+#nav_div .big li a.hover, #nav_div .big li a.hover:link, #nav_div .big li a.hover:visited {
+background-position: 0 -37px;
+color: #fff;
+}

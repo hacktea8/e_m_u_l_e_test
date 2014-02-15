@@ -21,7 +21,7 @@ class Usrbase extends Webbase {
       $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
     }
     $rootCate = $this->mem->get('emu-rootCate');
-    if(empty($rootCate)){
+    if( empty($rootCate)){
       $rootCate = $this->emulemodel->getCateByCid(0);
       $this->_rewrite_list_url($rootCate);
       $this->mem->set('emu-rootCate',$rootCate,$this->expirettl['1d']);
@@ -29,7 +29,8 @@ class Usrbase extends Webbase {
     $this->assign(array(
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description,'seo_title'=>$this->seo_title
     ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
-    'thumhost'=>'http://i.ed2kers.com'
+    'thumhost'=>'http://i.ed2kers.com','cpid'=>0
+    
     ));
     $this->_get_postion();
 //var_dump($this->viewData);exit;

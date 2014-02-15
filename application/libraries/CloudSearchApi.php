@@ -287,6 +287,11 @@ class CloudSearchApi {
     public function topURL($indexName) {
         return $this->_apiURL . '/' . self::API_VERSION . '/api/top/query/' . $indexName;
     }
+
+    public function topQuery($indexName,$params = array('num'=>8,'days'=>30)){
+        $url = $this->topURL($indexName);
+        return $this->apiCall($url, $params);
+    }
     
     /**
      * 获取指定索引的状态访问URL。
