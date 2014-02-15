@@ -74,7 +74,7 @@
             <div style="float:left;">
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
                     <a class="addFav addFavModule_a" title="收藏该资源" id="addFav"></a>
-                    <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;" id="folderfavoritatips">
+                    <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;z-index:3;" id="folderfavoritatips">
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
                         <div style="padding: 4px; color: rgb(104, 100, 89);">
@@ -91,10 +91,12 @@
                     </div>
                 </div><!-- #addFavModule -->
             </div>
-            <div style="float:right;padding:5px 0px 5px 0px;">
+            <div style="padding:5px 0px 5px 0px;width:170px;position: absolute;right: 60px;top: 30px;">
                 <span>
                     <strong>相关：</strong>
-                    <div id="shte_mainbox"></div>
+                    <div id="shte_mainbox">
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+                    </div>
 
                         <div id="folderfavoritatips" style="position:absolute;margin:-35px 0 0 -38px;*margin:-15px 0 0 -239px;border:1px solid #cdb47e;width:310px;background:#ffffcd;display:none;height:55px;">
                         <div style="position:absolute;height:12px;width:23px;margin:-12px 0 0 18px;background:url(<?php echo $img_url;?>tipstop.gif) no-repeat;"></div>

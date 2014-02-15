@@ -3,9 +3,8 @@ require_once 'webbase.php';
 class Usrbase extends Webbase {
    
   public $seo_title = '首页'; 
-  public $seo_keywords = '电驴资源,电驴资源网站,电驴资源下载,电驴资源搜索,电驴资源网,电驴资源网站,电驴下载,电骡资源,ed2k,eMule,电骡下载,emule 资>源,电驴资源库,电驴共享';
-  public $seo_description = '是一个综合的电驴资源网站，提供包含电影、电视剧、音乐、游戏、动漫、综艺、软件、资料、图书、教育等栏目电驴资源搜索、电
-驴下载服务。';
+  public $seo_keywords = '电驴资源,电驴资源网站,电驴资源下载,电驴资源搜索,电驴资源网,电驴资源网站,电驴下载,电骡资源,ed2k,eMule,电骡下载,emule 资源,电驴资源库,电驴共享';
+  public $seo_description = '是一个综合的电驴资源网站，提供包含电影、电视剧、音乐、游戏、动漫、综艺、软件、资料、图书、教育等栏目电驴资源搜索、电驴下载服务。';
   public $imguploadapiurl = 'http://img.hacktea8.com/imgapi/upload/?seq=';
 
   public function __construct(){
@@ -29,7 +28,7 @@ class Usrbase extends Webbase {
     $this->assign(array(
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description,'seo_title'=>$this->seo_title
     ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
-    'thumhost'=>'http://i.ed2kers.com','cpid'=>0
+    'thumhost'=>'http://i.ed2kers.com','cpid'=>0,'cid'=>0
     
     ));
     $this->_get_postion();

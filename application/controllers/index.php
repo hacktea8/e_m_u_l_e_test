@@ -86,7 +86,16 @@ class Index extends Usrbase {
     
     $this->pagination->initialize($config); 
     $page_string = $this->pagination->create_links();
-    $this->assign(array('cpid'=>$cpid,'infolist'=>$data['emulelist'],'postion'=>$data['postion']
+// seo setting
+    $title = $kw = '';
+    foreach($data['postion'] as $row){
+       $title .= $title ? '_' : '';
+       $title .= $row['name'];
+       $kw .= $row['name'].',';
+    }
+    $keywords = $kw.$this->seo_keywords;
+   
+    $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cpid'=>$cpid,'infolist'=>$data['emulelist'],'postion'=>$data['postion']
     ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
     $this->view('index_lists');
   }
@@ -100,7 +109,16 @@ class Index extends Usrbase {
     $data['info'] = $data['info'][0];
     $data['info']['relatdata'] = is_array($data['info']['relatdata']) ? $data['info']['relatdata'] : array();
     $data['info']['fav'] = 0;
-    $this->assign(array('info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
+    $cid = $data['info']['cid'] ? $data['info']['cid'] : 0;
+    $cpid = isset($data['postion'][0]['id'])?$data['postion'][0]['id']:0;
+// seo setting
+    $kw = '';
+    foreach($data['postion'] as $row){
+       $kw .= $row['name'].',';
+    }
+    $keywords = $data['info']['name'].','.$kw.$this->seo_keywords;
+    $title = $data['info']['name'];
+    $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
 //var_dump($this->redis->exists($key));exit;

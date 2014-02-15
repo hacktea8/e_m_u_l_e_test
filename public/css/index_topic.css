@@ -99,6 +99,7 @@ display: block;
 #contentInfo .topicImg img.cover {
 padding: 3px;
 border: 1px solid #ccc;
+width:128px;
 }
 #contentInfo .block1 {
 float: left;
@@ -140,8 +141,10 @@ text-decoration: underline;
 div#shte_mainbox {
 position: absolute;
 cursor: move;
+/*
 margin-left: -20px;
 margin-top: -200px;
+*/
 }
 body:first-of-type #favWindow {
 margin-top: 200px;

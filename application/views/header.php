@@ -2,8 +2,8 @@
 <html lang="zh-CN" xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta content="<?php echo $seo_keywords;?>" name="keywords">
-<meta content="<?php echo $seo_description;?>" name="description">
+<meta content="<?php echo $seo_keywords,',',$web_title;?>" name="keywords">
+<meta content="<?php echo $seo_title,'-',$web_title,$seo_description;?>" name="description">
 <?php if(isset($cid)){?>
 <link href="/api/feed/<?php echo $cid;?>" title="<?php echo $seo_title;?> - <?php echo $web_title;?>" type="application/rss+xml" rel="alternate">
 <?php }?>
@@ -33,6 +33,12 @@
 <ul class="header_link clearfix">
   <li class="link_item"><a href="/"
 onclick="" class="hover_red"><strong>首页</strong></a></li>
+  <li class="link_item">
+<a target="_blank" href="http://goo.gl/UEybJt"><img border="0" style="margin-top:5px;" src="http://pub.idqqimg.com/wpa/images/group.png" alt="电驴BT资源分享" title="电驴BT资源分享"></a>
+  </li>
+  <li class="link_item">
+<a version="1.0" class="qzOpenerDiv" href="http://goo.gl/LwcZXa" target="_blank" alt="赞一个" title="赞一个">赞一个</a>
+  </li>
 	</ul>
 <?php if(0){ ?>
 <div id="header_login">
