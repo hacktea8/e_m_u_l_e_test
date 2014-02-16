@@ -23,7 +23,7 @@ class model{
     return $this->db->insert_id();
   }
   public function getIndexList($type){
-    $sql = sprintf('SELECT   `index` FROM `pw_emule_sitemap` WHERE `type`=%d',$type);
+    $sql = sprintf('SELECT   `index` FROM `pw_emule_sitemap` WHERE `type`=%d ORDER BY `id` DESC',$type);
     return $this->db->result_array($sql);
   }
   public function getMaxIndex($type){
@@ -35,7 +35,8 @@ class model{
     $sql = sprintf('SELECT   `aid` FROM `pw_emule_sitemap` WHERE `type`=%d ORDER BY `id` DESC  LIMIT 2',$type);
     $list = $this->db->result_array($sql);
     if(count($list) < 2){
-       $row = array_pop($list);
+       
+       $row = is_array($list)?array_pop($list):array();
        return isset($row['aid'])?$row['aid']:0;
      }
      $row1 = $list[0];
@@ -60,11 +61,12 @@ $index = $model->getMaxIndex($type) + $new_index;
 //var_dump($index.'|'.$aid);exit;
   $sitemap = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 $tmp = '';
+/**/
 for($p = 1;;$p++){
  $list = $model->getList($p,150,$aid);
  $list = $list ? $list: array();
  foreach($list as $val){
-   $tmp .= '<url><loc>'.$base_url.article_url($val['id']).'</loc><lastmod>'.date('Y-m-d H:i:s',$val['utime']).'</lastmod><changefreq>never</changefreq></url>';
+   $tmp .= '<url><loc>'.$base_url.article_url($val['id']).'</loc><lastmod>'.date('Y-m-d',$val['utime']).'</lastmod><changefreq>never</changefreq></url>';
    $count++;
   }
    if($count > $countLimit || (empty($list) && $tmp)){
@@ -85,12 +87,13 @@ sleep(5);
      break;
    }
 }
+/**/
 
 $sitemap_index = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
 $indexList = $model->getIndexList($type);
 foreach($indexList as $val){
-  $sitemap_index .= '<sitemap><loc>'.$base_url.'google_sitemap'.$val['index'].'.xml</loc><lastmod>'.date('Y-m-d H:i:s').'</lastmod></sitemap>';
+  $sitemap_index .= '<sitemap><loc>'.$base_url.'google_sitemap'.$val['index'].'.xml</loc><lastmod>'.date('Y-m-d').'</lastmod></sitemap>';
 }
 
 $sitemap_index .= '</sitemapindex>';
