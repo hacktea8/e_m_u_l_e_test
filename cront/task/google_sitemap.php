@@ -31,25 +31,38 @@ class model{
     $row = $this->db->row_array($sql);
     return isset($row['index'])?$row['index']:0;
   }
-  public function getMaxAid($type){
-    $sql = sprintf('SELECT   `aid` FROM `pw_emule_sitemap` WHERE `type`=%d ORDER BY `id` DESC  LIMIT 1',$type);
+  public function getMaxAid($type,$limit){
+    $sql = sprintf('SELECT   `aid` FROM `pw_emule_sitemap` WHERE `type`=%d ORDER BY `id` DESC  LIMIT 2',$type);
+    $list = $this->db->result_array($sql);
+    if(count($list) < 2){
+       $row = array_pop($list);
+       return isset($row['aid'])?$row['aid']:0;
+     }
+     $row1 = $list[0];
+     $row2 = $list[1];
+    return ($row1['aid'] - $row2['aid']) < $limit?$row2['aid']:$row1['aid'];
+  }
+  public function getListNum($aid){
+    $sql = sprintf('SELECT count(*) as total FROM `pw_emule_article` WHERE `id`>%d ',$aid);
     $row = $this->db->row_array($sql);
-    return isset($row['aid'])?$row['aid']:0;
+    return isset($row['total'])?$row['total']:0;
   }
 }
 
 $type = 1;
 $base_url = 'http://emu.hacktea8.com/';
-$model = new model();
-$index = $model->getMaxIndex($type) + 1;
-$aid = $model->getMaxAid($type);
-//var_dump($index.'|'.$aid);exit;
 $count = 1;
 $countLimit = 30000;
+$model = new model();
+$aid = $model->getMaxAid($type,$countLimit);
+$new_index = $model->getListNum($aid) >= $countLimit? 1: 0;
+$index = $model->getMaxIndex($type) + $new_index;
+//var_dump($index.'|'.$aid);exit;
   $sitemap = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 $tmp = '';
 for($p = 1;;$p++){
  $list = $model->getList($p,150,$aid);
+ $list = $list ? $list: array();
  foreach($list as $val){
    $tmp .= '<url><loc>'.$base_url.article_url($val['id']).'</loc><lastmod>'.date('Y-m-d H:i:s',$val['utime']).'</lastmod><changefreq>never</changefreq></url>';
    $count++;
@@ -58,11 +71,18 @@ for($p = 1;;$p++){
       $tmp = $sitemap.$tmp.'</urlset>';
       $index_file = BASEPATH.'google_sitemap'.$index.'.xml';
       file_put_contents($index_file,$tmp);
-      $model->addIndex(array('type'=>$type,'index'=>$index,'aid'=>$val['id'],'update'=>$val['utime']));
+      if($new_index || $index >1){
+        $model->addIndex(array('type'=>$type,'index'=>$index,'aid'=>$val['id'],'update'=>$val['utime']));
+        $new_index = 0;
+      }
       $index++;
       $count = 0;
       $tmp = '';
+     
 sleep(5);
+   }
+   if(empty($list)){
+     break;
    }
 }
 
