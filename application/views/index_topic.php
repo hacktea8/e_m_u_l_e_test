@@ -138,7 +138,44 @@
         <div class="blog_entry">
             <div class="iptcom" id="iptcomED2K">
                  <div>
-<?php echo $info['downurl'];?>
+<?php
+echo $info['downurl'];
+if($verifycode){
+  echo '<form id="verify_form">',$verifycode,'</form>';
+?>
+<button id="startcheck" title="输入验证码，展示下载地址!" style="width: 80px;height: 30px;background-color: green;cursor: pointer;margin-left: 100px;">开始校验</button>
+<script type="text/javascript">
+function clearcode(){
+var obj = $('.YXM-input .sub-wrap a');
+var href = obj.attr('href');
+  if(href.indexOf('www.yinxiangma.com')>=0){
+    obj.attr('title','验证码');
+    obj.html('验证码');
+    obj.attr('href','javascript:void(0);');
+    $('#clickable_img').attr('href','javascript:void(0);');
+    clearTimeout(t);
+  }
+  t = setTimeout("clearcode()",1500);
+}
+  var t = setTimeout("clearcode()",4000);
+$('#startcheck').click(function(){
+var aid=<?php echo $info['id'];?>;
+var code = $("input[name='YinXiangMa_response']").val();
+if(aid <0 || code.length <1){
+alert('验证码为空!');return false;
+}
+$.post("/verifys/check/"+aid,$('#verify_form').serialize(),function(result){
+if(1 == result){
+window.location.reload();
+return true;
+}
+alert('验证码输入有误!');
+});
+});
+</script>
+<?php
+}
+?>
 </div>
                  <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
 VIP通道:<?php echo $info['vipdwurl'];?>

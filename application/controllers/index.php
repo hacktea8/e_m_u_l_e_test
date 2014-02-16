@@ -120,7 +120,19 @@ class Index extends Usrbase {
     $keywords = $data['info']['name'].','.$kw.$this->seo_keywords;
     $title = $data['info']['name'];
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
-    $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
+    // not VIP Admin check verify
+    $emu_aid = isset($_COOKIE['hk8_verify_topic_dw'])?strcode($_COOKIE['hk8_verify_topic_dw'],false):'';
+    $emu_aid = explode("\t",$emu_aid);
+    $emu_aid = $emu_aid[0];
+    $verifycode = '';
+    if( !($emu_aid == $data['info']['id'] || $this->userInfo['isvip'] || $this->userInfo['isadmin'])){
+       $data['info']['downurl'] = '';
+       $data['info']['vipdwurl'] = '';
+       $this->load->library('verify');
+       $verifycode = $this->verify->show();
+    }
+    
+    $this->assign(array('verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
 //var_dump($this->redis->exists($key));exit;
