@@ -46,6 +46,8 @@ class Index extends Usrbase {
   }
   public function lists($cid,$order = 0,$page = 1){
     $page = intval($page);
+    $cid = intval($cid);
+    $order = intval($order);
     $page = $page > 0 ? $page: 1;
     if($page < 11){
        $data = array();
@@ -101,6 +103,7 @@ class Index extends Usrbase {
     $this->view('index_lists');
   }
   public function topic($aid){
+    $aid = intval($aid);
     $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin']);
     $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
