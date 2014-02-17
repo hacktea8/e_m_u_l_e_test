@@ -13,13 +13,13 @@ class Index extends Usrbase {
   }
   public function index()
   {
-    $c = isset($_GET['c'])?$_GET['c']:'';
+    $c = $this->input->get('c');
     if('topic' == $c){
-      $aid = isset($_GET['aid'])?$_GET['aid']:'';
+      $aid = $this->input->get('aid');
       $this->topic($aid);return true;
     }
     if('list' == $c){
-      $cid = isset($_GET['cid'])?$_GET['cid']:'';
+      $cid = $this->input->get('cid');
       $this->lists($cid);return true;
     }
     $view = BASEPATH.'../';
@@ -145,7 +145,7 @@ class Index extends Usrbase {
     $this->load->view('index_tpl',$this->viewData);
   }
   public function search($q='',$type = 0,$order = 0,$page = 1){
-    $q = $q ? $q:$_GET['q'];
+    $q = $q ? $q:$this->input->get('q');
     $q = urldecode($q);
     $page = intval($page);
     $page = $page < 1 ? 1: $page;
