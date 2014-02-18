@@ -31,7 +31,7 @@ class Index extends Usrbase {
     if( !file_exists($view) || (time() - filemtime($view)) > 24*3600 ){
       if(!file_exists($lock)){
         
-        $this->assign(array('emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
+        $this->assign(array('_a'=>'index','emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
         $this->view('index_index');
         $output = $this->output->get_output();
         file_put_contents($lock, '');
