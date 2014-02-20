@@ -66,7 +66,7 @@ for($p = 1;;$p++){
  $list = $model->getList($p,150,$aid);
  $list = $list ? $list: array();
  foreach($list as $val){
-   $tmp .= '<url><loc>'.$base_url.article_url($val['id']).'</loc><lastmod>'.date('Y-m-d',$val['utime']).'</lastmod><changefreq>never</changefreq></url>';
+   $tmp .= '<url><loc>'.$base_url.article_url($val['id']).'</loc><lastmod>'.date('Y-m-d',$val['utime']).'</lastmod><changefreq>weekly</changefreq><priority>1</priority></url>';
    $count++;
   }
    if($count > $countLimit || (empty($list) && $tmp)){

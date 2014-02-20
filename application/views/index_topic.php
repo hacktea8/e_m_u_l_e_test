@@ -15,7 +15,7 @@
                                  <input value="" name="entryid" id="entryid" type="hidden">
                  <div class="topicImg">
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
-                <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" onerror="show404();">
+                <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" >
               </a>
                 <div>
                     <div id="visitTimes" style="margin-top:5px; display:none">
@@ -202,7 +202,7 @@ if($key%5==0){
 }
 ?>	   	            			<td>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank">
-<img class="lazy folder-entry-thumb"  data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
+<img class="lazy folder-entry-thumb" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </td>
 <?php

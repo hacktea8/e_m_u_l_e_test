@@ -23,7 +23,6 @@
 <div id="#show_msg_div_" ></div>
 <div style="display:none;">
 <script type="text/javascript">
-$(document).ready(function(){
 <?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
 $("img.lazy").show().lazyload({ 
     effect : "fadeIn",
@@ -31,12 +30,13 @@ $("img.lazy").show().lazyload({
     placeholder : '<?php echo $errorimg;?>',
     threshold : 60
 });
-function show404(){
-var img=event.srcElement;
+function show404(img){
+//var img=this;//event.srcElement;
 img.src='/public/images/show404.jpg';
-img.onerror=null; 控制不要一直跳动
+//img.onerror=null; 控制不要一直跳动
 }
 <?php } ?>
+$(document).ready(function(){
 <?php if('index' == $_a){ ?>
 function _loadIndex(){$.get("/index/index");}
 window.setTimeout(_loadIndex,5000);

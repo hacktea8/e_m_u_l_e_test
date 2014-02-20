@@ -23,7 +23,7 @@ $config['adm_js_url']	= '/public/js/admin/';
 $config['adm_css_url']	= '/public/css/admin/';
 $config['adm_img_url']	= '/public/images/admin/';
 $config['domain']	= 'emu.hacktea8.com';
-$config['web_title']	= '电驴BT资源分享|电影下载_BT种子下载|电驴资源|eD2k|磁力链接|龙BT发布|BT之家';
+$config['web_title']	= '电驴BT资源分享';
 $config['login_url']	= 'http://www.hacktea8.com/login.php?jumpurl=';
 
 
