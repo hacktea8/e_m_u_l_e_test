@@ -58,4 +58,15 @@ margin: 0;
 padding: 2px 10px;
 background: #efefef;
 }
+input.button {
+background: none repeat scroll 0 0 #c00000;
+white-space: nowrap;
+border-color: #d66666 #BB0000 #b00 #D66666;
+border-width: 1px;
+color: #fff;
+font-size: 12px;
+height: 22px;
+padding: 0 4px;
+text-align: center;
+}
 

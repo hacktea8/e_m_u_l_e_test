@@ -1,14 +1,14 @@
-<script type="text/javascript" src="{@theme:site.js}/swfupload/swfupload.js?v={@NEXT_RELEASE}"></script>
-<script type="text/javascript" src="{@theme:site.js}/swfupload/swfupload.queue.js?v={@NEXT_RELEASE}"></script>
-<script type="text/javascript" src="{@theme:site.js}/swfupload/fileprogress.js?v={@NEXT_RELEASE}"></script>
-<script type="text/javascript" src="{@theme:site.js}/swfupload/handlers.js?v={@NEXT_RELEASE}"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>swfupload/swfupload.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>swfupload/swfupload.queue.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>swfupload/fileprogress.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>swfupload/handlers.js?v=<?php echo $version;?>"></script>
 <script type="text/javascript">
 var swfu;
-var showimgapi = '{$showimgapi}';
+var showimgapi = '<?php echo $showimgapi;?>';
 window.onload = function() {
 var settings = {
-flash_url : "{@theme:site.js}/swfupload/swfupload.swf",
-upload_url: "{$imguploadapiurl}",
+flash_url : "<?php echo $js_url;?>swfupload/swfupload.swf",
+upload_url: "<?php echo $imguploadapiurl;?>",
 post_params: {},
 file_size_limit : "2 MB",
 file_types : "*.jpg;*.gif;*.png;*.jpeg",
@@ -21,9 +21,9 @@ cancelButtonId : "btnCancel"
 },
 debug: false,
 // Button settings
-button_image_url: "images/TestImageNoText_65x29.png",
-button_width: "65",
-button_height: "29",
+button_image_url: "<?php echo $img_url;?>upload_btn.jpg",
+button_width: "96",
+button_height: "48",
 button_placeholder_id: "spanButtonPlaceHolder",
 button_text: '<span class="theFont">Hello</span>',
 button_text_style: ".theFont { font-size: 16; }",

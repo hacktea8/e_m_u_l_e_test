@@ -24,7 +24,7 @@ class Edite extends Usrbase {
   protected function emuleTopicAdd($id = 0){
     $row = $this->input->post('row');
     if(isset($row['title'])){
-       $this->emulemodel->setEmuleTopicByAid($this->userInfo['uid'],$row,$this->userInfo['isadmin']);
+//       $this->emulemodel->setEmuleTopicByAid($this->userInfo['uid'],$row,$this->userInfo['isadmin']);
     }
     $info = array();
     if($id){

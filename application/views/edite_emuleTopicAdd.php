@@ -2,7 +2,7 @@
     <div class="leftDiv">
         <div class="box_7">
             <div style="height:25px" class="titleDiv">
-                <h1>资料</h1>
+                <h1>更新资料</h1>
             </div>
             <div class="main" style="padding:10px;">
                 <div style="margin-top:10px;padding:3px;background: #ffffd8">请以<span class="red">第三人称</span>撰写，保持中立观点，并遵守我们的规定，帮助保持页面清洁。</div>
@@ -14,109 +14,60 @@
 #myform td{ padding: 3px; }
 </style>
 
-<form method="post" name="myform" id="myform" onsubmit="post_entry();return false;" onkeydown="VeryCD.check_hotkey(event, 'submit_button')" action="/base/ajax/entry/do_add_history">
-    <input type="hidden" name="Action" value="">
-    <input type="hidden" name="body[catalog_id]" id="catalog_id" value="14">
-    <input type="hidden" name="id" value="0">
+<form method="post" name="myform" id="myform" onsubmit="post_entry();return false;" onkeydown="" action="/edite/index/<?php echo $_a;?>">
+    <input type="hidden" name="header[id]" value="<?php echo @$info['id'];?>">
+    <input type="hidden" name="header[uid]" value="<?php echo @$uinfo['uid'];?>">
     <table border="0" cellpadding="3" cellspacing="0">
     <tbody><tr>
         <td style="width:70px;font-size:14px;">分类:</td>
-        <td style="font-weight:bold;">电影        </td>
+        <td style="font-weight:bold;">
+<select>
+<option value = "0">--请选择分类--</option>
+<?php foreach($parentCate as $val){ ?>
+<option value = "<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+<?php } ?>
+</select>
+<select name="header[cid]">
+
+</select></td>
     </tr>
 	<tr>
         <td style="width:70px;font-size:14px;">中文名称:</td>
-        <td><input type="text" id="cname" name="body[cname]" value="" class="input_1" style="width:200px"></td>
+        <td><input type="text" id="cname" name="header[name]" value="<?php echo @$info['name'];?>" class="input_1" style="width:200px"></td>
     </tr>
     <tr>
-        <td style="font-size:14px;">英文名称:</td>
-        <td><input type="text" id="ename" name="body[ename]" value="" class="input_1" style="width:200px"></td>
-    </tr>
-    <tr>
-        <td style="font-size:14px;">别名:</td>
-        <td><input type="text" id="alias" name="body[alias]" value="" class="input_1" style="width:200px"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td valign="top"><span style="color:#999;">如有其它名字可在这里填写，以“,”分隔。</span></td>
+        <td style="font-size:14px;">资料封面:</td>
+        <td><input type="text" id="ename" name="header[cover]" value="<?php echo @$info['cover'];?>" class="input_1" style="width:200px"><img src="<?php echo $imguploadapiurl,@$info['cover'];?>" id="showcover"></td>
     </tr>
     <tr valign="top">
-        <td style="font-size:14px;">类型:</td>
-        <td>
-        <select name="body[kind][]" size="6" class="input_1" style="width:208px;" multiple="multiple">
-<option value="movie.Action">动作</option>
-</select>        </td>
+        <td style="font-size:14px;">封面上传:</td>
+        <td><button id="uploadbtn">点我上传</button></td>
+        <?php require 'upload_post.php';?>
     </tr>
     <tr>
-        <td style="font-size:14px;">IMDb号:</td>
-        <td>12390875<input type="hidden" name="body[imdb_id]" value="12390875"></td>
-    </tr>
-     <tr>
-        <td style="font-size:14px;">上映日期:</td>
-        <td><input type="text" id="release_date" name="body[release_date]" value="" class="input_1" style="width:200px"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td valign="top"><span style="color:#999;">该电影上映日期，格式为:年-月-日(如：2007-04-19)</span></td>
-    </tr>
-    <tr>
-        <td style="font-size:14px;"></td>
-        <td><input type="text" id="release_date_china" name="body[release_date_china]" value="" class="input_1" style="width:200px"> (中国)</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td valign="top"><span style="color:#999;">该电影中国大陆上映日期，国内未上映则无需填写</span></td>
-    </tr>
-    <tr>
-        <td style="font-size:14px;"></td>
-        <td><input type="text" id="release_date_reproduction" name="body[release_date_reproduction]" value="" class="input_1" style="width:200px"> (重制版)</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td valign="top"><span style="color:#999;">该电影重制版上映日期，无重制版本计划则无需填写</span></td>
-    </tr>
-    <tr valign="top">
-        <td style="font-size:14px;">导演:</td>
-        <td><textarea id="director" name="body[director]" cols="80" rows="16" class="input_1" style="width:520px;height:8em;"></textarea></td>
-    </tr>
-    <tr valign="top">
-        <td style="font-size:14px;">编剧:</td>
-        <td><textarea id="writer" name="body[writer]" cols="80" rows="16" class="input_1" style="width:520px;height:8em;"></textarea></td>
-    </tr>
-    <tr valign="top">
-        <td style="font-size:14px;">演员:</td>
-        <td><textarea id="actor" name="body[actor]" cols="80" rows="16" class="input_1" style="width:520px;height:8em;"></textarea></td>
-    </tr>    <tr>
-        <td style="font-size:14px;">官网:</td>
-        <td><input type="text" id="homepage" name="body[homepage]" value="" class="input_1" style="width:400px"></td>
-    </tr>
-    <tr>
-        <td style="font-size:14px;" valign="top">地区:</td>
-        <td><select name="body[country][]" size="6" class="input_1" style="width:208px;" multiple="multiple">
-<option value="germany">德国</option>
-</select></td>
-    </tr>
-    <tr>
-        <td style="font-size:14px;" valign="top">语言:</td>
-        <td><select name="body[language][]" size="6" class="input_1" style="width:208px;" multiple="multiple">
-<option value="chinese_simplified">简体中文</option>
-<option value="chinese_traditional">繁体中文</option>
-</select></td>
+        <td style="font-size:14px;">标签:</td>
+        <td><input type="text" id="alias" name="body[tags]" value="<?php echo @$info['keyword'];?>" class="input_1" style="width:200px"><span class="red">(以英文逗号分隔,长度6个汉字以内)</span></td>
     </tr>
     <tr>
         <td style="font-size:14px;" valign="top">简介:</td>
-        <td><textarea id="contents" name="body[contents]" cols="80" rows="16" class="input_1" style="width:520px;height:16em;"></textarea></td>
+        <td><?php $key_name = 'intro';$editor_name = 'body[intro]';require 'wind_editor.php';?></td>
     </tr>
     <tr>
-        <td style="font-size:14px;" valign="top">来源:</td>
-        <td><input type="text" id="references" name="body[references]" value="" class="input_1" style="width:400px"></td>
+        <td style="font-size:14px;" valign="top">普通下载地址:</td>
+        <td><?php $key_name = 'downurl';$editor_name = 'body[downurl]';require 'wind_editor.php';?></td>
+    </tr>
+    <tr>
+        <td style="font-size:14px;" valign="top">VIP下载地址:</td>
+        <td><?php $key_name = 'vipdwurl';$editor_name = 'body[vipdwurl]';require 'wind_editor.php';?></td>
     </tr>
     <tr>
         <td style="font-size:14px;" valign="top"></td>
         <td height="50">
-        <!-- <input type="submit" class="button2" id="submit-button" value="预览"> -->
         <input type="submit" class="button" id="submit_button" value="保存">
+<?php if(0){ ?>
         <input type="checkbox" value="1" checked="true" id="smartgbk" name="smartgbk">
         <label for="smartgbk">自动转换繁体字为简体</label>
+<?php } ?>
         </td>
     </tr>
     </tbody></table>
