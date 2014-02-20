@@ -123,8 +123,7 @@ function uploadSuccess(file, serverData) {
 		progress.setStatus("Complete.");
 		progress.toggleCancel(false);
 serverData=eval(serverData);var showimg=showimgapi+serverData;
-$('#showthum').attr('src',showimg);$('#J_atc_thum').val(serverData);
-
+$('#showcover').attr('src',showimg);$('#cover').val(serverData);
 	} catch (ex) {
 		this.debug(ex);
 	}

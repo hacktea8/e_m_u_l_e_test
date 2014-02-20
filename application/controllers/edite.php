@@ -2,6 +2,8 @@
 require_once 'usrbase.php';
 class Edite extends Usrbase {
   public $_action = array('emuleTopicAdd');
+  public $imguploadapiurl = 'http://img.hacktea8.com/imgapi/upload/?seq=';
+
   
         /**
          * Index Page for this controller.
