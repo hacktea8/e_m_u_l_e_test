@@ -13,22 +13,26 @@ class Edite extends Usrbase {
     // check login 
   }
   public function index($type, $id = 0){
-     $this->_action[$type]($id);
+     if( !in_array($type, $this->_action)){
+         die('1');
+     }
+     $this->$type($id);
   }
   public function deletes($type, $id){
     
   }
   protected function emuleTopicAdd($id = 0){
-    
     $row = $this->input->post('row');
     if(isset($row['title'])){
        $this->emulemodel->setEmuleTopicByAid($this->userInfo['uid'],$row,$this->userInfo['isadmin']);
     }
+    $info = array();
     if($id){
        $info = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin']);
     }
-    $this->assign(array('info'=>$info,'imguploadapiurl'=>$this->imguploadapiurl
-    ,'postion'=>array(array('url'=>'#','name'=>'编辑')));
+    $this->assign(array('_a'=>'emuleTopicAdd','info'=>$info,'imguploadapiurl'=>$this->imguploadapiurl
+    ,'postion'=>array(array('url'=>'#','name'=>'编辑'))
+    ));
     $this->view('edite_emuleTopicAdd');
   }
 }
