@@ -18,13 +18,14 @@ class Webbase extends CI_Controller {
     $this->load->library('rediscache');
     $this->redis = &$this->rediscache;
     //解析UID
-    $uid = getSynuserUid();
-    if($uid){
+    $uinfo = getSynuserUid();
+    if($uinfo){
+      $this->userInfo['uname'] = $uinfo['uname'];
       $uinfo = getSynuserInfo($uid);
-      $this->userInfo['isadmin'] = $this->checkIsadmin();
+      $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
+    //$this->userInfo += $this->usermodel->getUserInfo($uinfo);
     }
     //var_dump($uinfo);exit;
-    //$this->userInfo = $this->usermodel->getUserInfo($uinfo);
     $this->_c = $this->uri->segment(1,'index');
     $this->_a = $this->uri->segment(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';
@@ -48,8 +49,8 @@ class Webbase extends CI_Controller {
       return false;
     }
   }
-  protected function checkIsadmin(){
-    if(!$this->checkLogin()){
+  protected function checkIsadmin($return = 0){
+    if( !($return || $this->checkLogin())){
       redirect($this->config->item('login_url').$this->config->item('base_url'));
     }
     if(in_array($this->userInfo['groupid'],$this->adminList)){

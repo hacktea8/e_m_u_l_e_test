@@ -1,7 +1,8 @@
 <?php
 defined('P_W') || define('P_W', '1');
 
-require_once BASEPATH.'../uc_config.php';
+require_once BASEPATH.'../config_ucenter.php';
+require_once BASEPATH.'../uc_client/client.php';
 
 if ( ! function_exists('strcode'))
 {
@@ -42,25 +43,15 @@ if ( ! function_exists('get_client_ip'))
   }
 }
 
-if ( ! function_exists('getKeyBydomain'))
-{
-  function getKeyBydomain(){
-    global $domain_app;
-    $domain = strtolower($_SERVER['HTTP_HOST']);
-    return $domain_app[$domain];
-  }
-}
-
 if ( ! function_exists('getSynuserUid'))
 {
-  function getSynuserUid(){
-    global $cookie_key;
-    $apikey = getKeyBydomain();
+  function getSynuserUid($cookie_key = 'hk8_auth'){
     if(isset($_COOKIE[$cookie_key])){
       $code = $_COOKIE[$cookie_key];
-      $uinfo = strcode($code, false, $apikey);
-      list($uid) = explode("\t", $uinfo);
-      return $uid;
+      $uinfo = uc_authcode($code, $operation = 'DECODE');
+      $info = array();
+      list($info['uname'],$info['uid']) = explode("\t", $uinfo);
+      return $info;
     }
     return false;
   }
@@ -72,28 +63,9 @@ if ( ! function_exists('getSynuserInfo'))
     if( !$uid){
        return false;
     }
-    global $uc_api,$master_uckey;
-    $request = array(
-    'params'=>"$uid",
-    'type'=>'uc',
-    'mode'=>'User',
-    'method'=>'getInfo'
-    );
-    $url = $uc_api.strtrip($request,$master_uckey);
-    $ctx = stream_context_create(array(
-    'http' => array(
-        'timeout' => 35
-        )
-    )
-    );
-    $uinfo = @file_get_contents($url, null, $ctx);
-    $uinfo = unserialize($uinfo);
-    $uinfo = $uinfo['result'][$uid];
-    $groups = explode(',', $uinfo['groups']);
-    $groups[] = $uinfo['groupid'];
-    $groups = array_unique($groups);
-    $uinfo['groups'] = $groups;
-    return $uinfo;
+    list($status['uid'],$status['groupid'],$status['groupexpiry'],$status['groups']) = uc_user_info($uid);
+    $status['groups'] = explode(',',$status['groups']);
+    return $status;
   }
 }
 
