@@ -11,7 +11,9 @@
     </div>
     </div>
      <div id="contentInfo">
-        <h1 id="topicstitle"><?php echo $info['name'];?></h1>
+        <h1 id="topicstitle"><?php echo $info['name'];?> 
+ <?php if($uinfo['uid'] === $info['uid'] || $uinfo['isadmin']){echo "<a href='$editeUrl/$info[id]'>编辑</a>"; }?>
+</h1>
                                  <input value="" name="entryid" id="entryid" type="hidden">
                  <div class="topicImg">
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">

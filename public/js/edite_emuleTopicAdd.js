@@ -1,3 +1,14 @@
+$('#parentcate').change(function(){
+var pid = $(this).val();
+if(pid < 1){
+  return false;
+}
+$.getJSON("/ajaxapi/getcate/0/"+pid, function(result){
+    $.each(result, function(i, field){
+      $("#cateid").append("<option value='"+field.id+"'>"+field.name + "</option>");
+    });
+});
+});
 function post_entry(){
     Sizzle('#submit_button')[0].disabled='disabled';
     VeryCD.show_loading();

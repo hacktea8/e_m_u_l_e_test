@@ -13,6 +13,9 @@ class Edite extends Usrbase {
     parent::__construct();
 //    $this->load->model('indexmodel');
     // check login 
+    if( !$this->checkLogin()){
+     redirect('/');
+    }
   }
   public function index($type, $id = 0){
      if( !in_array($type, $this->_action)){

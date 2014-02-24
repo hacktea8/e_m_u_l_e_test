@@ -10,16 +10,16 @@ class userModel extends baseModel{
         }
         public function getUserInfo($uinfo){
                 if( !isset($uinfo['uid']) || !$uinfo['uid']){
-                   return array('uid'=>0,'uname'=>'','isvip'=>0);
+                   return false;
                 }
                 $sql = sprintf("SELECT * FROM `%s` WHERE `uid`=%d LIMIT 1", $this->db->dbprefix('user'), $uinfo['uid']);
                 $row = $this->db->query($sql)->row_array();
                 $uinfo['isvip'] = 0;
                 foreach($uinfo['groups'] as $group){
-                  if($group == 16){
+                  if($group == 25){
                     $uinfo['isvip'] = 1;
                     break;
-                  }elseif($group == 24){
+                  }elseif($group == 33){
                     $uinfo['isvip'] = 2;
                     break;
                   }
@@ -38,17 +38,17 @@ class userModel extends baseModel{
                   if($row['isvip'] != $uinfo['isvip']){
                      $row['isvip'] = $update['isvip'] = $uinfo['isvip'];
                   }
-                  if($row['uname'] != $uinfo['username']){
-                     $row['uname'] = $update['uname'] = $uinfo['username'];
+                  if($row['uname'] != $uinfo['uname']){
+                     $row['uname'] = $update['uname'] = $uinfo['uname'];
                   }
                   if(count($update)){
                      $where = sprintf(" `uid` =%d LIMIT 1", $uinfo['uid']);
-                     $sql = $this->db->update_string('user',$update,$where);
+                     $sql = $this->db->update_string($this->db->dbprefix('user'),$update,$where);
                      $this->db->query($sql);
                   }
                   return $row;
                 }else{
-                  $sql = sprintf("INSERT INTO `user`(`uid`, `uname`, `isvip`, `loginip`, `logintime`, `collectcount`, `bmarkcount`) VALUES (%d,'%s',%d,'%s',%d,0,0)",$uinfo['uid'],mysql_real_escape_string($uinfo['uname']),$uinfo['isvip'],mysql_real_escape_string($ip),date('Ymd'));
+                  $sql = sprintf("INSERT INTO %s(`uid`, `uname`, `isvip`, `loginip`, `logintime`, `collectcount`, `bmarkcount`) VALUES (%d,'%s',%d,'%s',%d,0,0)", $this->db->dbprefix('user'), $uinfo['uid'],mysql_real_escape_string($uinfo['uname']),$uinfo['isvip'],mysql_real_escape_string($ip),date('Ymd'));
                   $this->db->query($sql);
                 }
                 return $uinfo;

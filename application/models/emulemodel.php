@@ -39,7 +39,7 @@ class emuleModel extends baseModel{
      return $data;
   }
 
-  public function getAllSubcateByCid($cid,$limit=0){
+  public function getAllSubcateByCid($cid,$limit = 0){
     $sql = sprintf('SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `id`=%d AND `flag`=1 LIMIT 1',$this->db->dbprefix('emule_cate'),$cid);
     $subinfo = $this->db->query($sql)->row_array();
     if( $subinfo['pid']){
@@ -48,6 +48,16 @@ class emuleModel extends baseModel{
     $limit = intval($limit);
     $limit = $limit ? ' ORDER BY atotal DESC LIMIT '.$limit : '';
     $sql = sprintf('SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `pid`=%d AND `flag`=1 %s',$this->db->dbprefix('emule_cate'),$cid,$limit);
+    return $this->db->query($sql)->result_array();
+  }
+
+  public function getCateListByPid($pid = 0, $limit = 0){
+    if( !$pid){
+      return false;
+    }
+    $limit = intval($limit);
+    $limit = $limit ? ' ORDER BY atotal DESC LIMIT '.$limit : '';
+    $sql = sprintf('SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `pid`=%d AND `flag`=1 %s',$this->db->dbprefix('emule_cate'),$pid,$limit);
     return $this->db->query($sql)->result_array();
   }
 

@@ -21,13 +21,13 @@
     <tbody><tr>
         <td style="width:70px;font-size:14px;">分类:</td>
         <td style="font-weight:bold;">
-<select>
+<select id="parentcate">
 <option value = "0">--请选择分类--</option>
-<?php foreach($parentCate as $val){ ?>
+<?php foreach($rootCate as $val){ ?>
 <option value = "<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
 <?php } ?>
 </select>
-<select name="header[cid]">
+<select name="header[cid]" id="cateid">
 
 </select></td>
     </tr>

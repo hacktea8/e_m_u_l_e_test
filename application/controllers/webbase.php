@@ -7,7 +7,7 @@ class Webbase extends CI_Controller {
   protected $redis = '';
   public $viewData = array();
   protected $userInfo = array('uid'=>0,'uname'=>'','isvip'=>0,'isadmin'=>0);
-  public $adminList = array(3);
+  public $adminList = array(1);
   protected $_c = 'index'; 
   protected $_a = 'index'; 
   
@@ -21,11 +21,15 @@ class Webbase extends CI_Controller {
     $uinfo = getSynuserUid();
     if($uinfo){
       $this->userInfo['uname'] = $uinfo['uname'];
-      $uinfo = getSynuserInfo($uid);
-      $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
-    //$this->userInfo += $this->usermodel->getUserInfo($uinfo);
+      $uinfo = getSynuserInfo($uinfo['uid']);
+      $uinfo['uname'] = $this->userInfo['uname'];
+      $uinfo = $this->usermodel->getUserInfo($uinfo);
+      if($uinfo){
+        $this->userInfo = array_merge($this->userInfo,$uinfo);
+        $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
+      }
     }
-    //var_dump($uinfo);exit;
+    //var_dump($this->userInfo);exit;
     $this->_c = $this->uri->segment(1,'index');
     $this->_a = $this->uri->segment(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';

@@ -29,7 +29,7 @@ class Usrbase extends Webbase {
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description,'seo_title'=>$this->seo_title
     ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
     'thumhost'=>'http://i.ed2kers.com','cpid'=>0,'cid'=>0
-    
+    ,'editeUrl' => '/edite/index/emuleTopicAdd'
     ));
     $this->_get_postion();
 //var_dump($this->viewData);exit;
