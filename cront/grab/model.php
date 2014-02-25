@@ -129,8 +129,12 @@ class Model{
     return $this->checkArticleByOname($data['name']);
   }
   function getArticleList($page = 1, $limit = 100){
-    $sql = sprintf('SELECT * FROM %s LIMIT %d,%d',$this->db->getTable('emule_article_content'),($page - 1)*$limit,$limit);
+    $sql = sprintf('SELECT `id` FROM %s LIMIT %d,%d',$this->db->getTable('emule_article'),($page - 1)*$limit,$limit);
     return $this->db->result_array($sql);
+  }
+  function getArticleByid($id){
+    $sql = sprintf('SELECT * FROM %s WHERE `id` = %d LIMIT 1',$this->db->getTable('emule_article_content'),$id);
+    return $this->db->row_array($sql);
   }
   function update_article_contents($data = array()){
     if( !isset($data['id'])){

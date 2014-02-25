@@ -17,16 +17,20 @@ class Webbase extends CI_Controller {
     $this->mem = &$this->memcache;
     $this->load->library('rediscache');
     $this->redis = &$this->rediscache;
-    //解析UID
-    $uinfo = getSynuserUid();
-    if($uinfo){
-      $this->userInfo['uname'] = $uinfo['uname'];
-      $uinfo = getSynuserInfo($uinfo['uid']);
-      $uinfo['uname'] = $this->userInfo['uname'];
-      $uinfo = $this->usermodel->getUserInfo($uinfo);
+    $session_uinfo = $this->session->userdata('user_logindata');
+    if(empty($session_uinfo)){
+      //解析UID
+      $uinfo = getSynuserUid();
       if($uinfo){
-        $this->userInfo = array_merge($this->userInfo,$uinfo);
-        $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
+        $this->userInfo['uname'] = $uinfo['uname'];
+        $uinfo = getSynuserInfo($uinfo['uid']);
+        $uinfo['uname'] = $this->userInfo['uname'];
+        $uinfo = $this->usermodel->getUserInfo($uinfo);
+        if($uinfo){
+          $this->userInfo = array_merge($this->userInfo,$uinfo);
+          $this->userInfo['isadmin'] = $this->checkIsadmin($return = 1);
+          $this->session->set_userdata(array('user_logindata'=>$this->userInfo));
+        }
       }
     }
     //var_dump($this->userInfo);exit;

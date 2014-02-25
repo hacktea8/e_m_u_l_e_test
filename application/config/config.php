@@ -24,7 +24,7 @@ $config['adm_css_url']	= '/public/css/admin/';
 $config['adm_img_url']	= '/public/images/admin/';
 $config['domain']	= 'emu.hacktea8.com';
 $config['web_title']	= '电驴BT资源分享';
-$config['login_url']	= 'http://www.hacktea8.com/login.php?jumpurl=';
+$config['login_url']	= 'http://www.hacktea8.com/login.php?goto=';
 
 
 /*
@@ -235,7 +235,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'ilovehk8';
 
 /*
 |--------------------------------------------------------------------------

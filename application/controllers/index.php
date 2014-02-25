@@ -107,7 +107,6 @@ class Index extends Usrbase {
     $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin']);
     $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
-//var_dump($data['postion']);exit;
     $this->_rewrite_list_url($data['postion']);
     $this->_rewrite_article_url($data['info']);
     $data['info'] = $data['info'][0];
@@ -198,6 +197,18 @@ class Index extends Usrbase {
     $goto = '/';
     $this->assign(array('goto'=>$goto,'seo_title' =>'找不到您需要的页面..现在为您返回首页..'));
     $this->view('index_show404');
+  }
+  public function login(){
+//var_dump($_SERVER);exit;
+    $url = $this->viewData['login_url'].urlencode($this->viewData['base_url'].$_SERVER['REQUEST_URI']);
+//echo $url;exit;
+    redirect($url);
+  }
+  public function loginout(){
+    $this->session->unset_userdata('user_logindata');
+    $url = $this->viewData['base_url'].$_SERVER['REQUEST_URI'];
+//echo $url;exit;
+    redirect($url);
   }
 }
 

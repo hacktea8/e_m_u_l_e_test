@@ -88,8 +88,18 @@ class emuleModel extends baseModel{
   }
 
   public function setEmuleTopicByAid($uid=0,$data,$isadmin=false){
-     $header = $data['header'];
-     $body = $data['body'];
+     //过滤字段
+     $header = array();
+     $header['id'] = $data['header']['id'];
+     $header['cid'] = $data['header']['cid'];
+     $header['name'] = $data['header']['name'];
+     $header['cover'] = $data['header']['cover'];
+     $header['utime'] = time();
+     $body = array();
+     $body['keyword'] = $data['body']['keyword'];
+     $body['downurl'] = $data['body']['downurl'];
+     $body['vipdwurl'] = $data['body']['vipdwurl'];
+     $body['intro'] = $data['body']['intro'];
      if(isset($header['id']) && $header['id']){
         $this->_datatopicStruct = ' `id` ';
         $check = $this->getEmuleTopicByAid($header['id'],$uid,$isadmin);
@@ -97,12 +107,9 @@ class emuleModel extends baseModel{
            return false;
         }
         $where = array('id'=>$header['id']);
-        unset($header['uid']);
-//过滤字段
         $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$header,$where);
 echo $sql;exit;
         $this->db->query($sql);
-        unset($body['id']);
         $sql = $this->db->update_string($this->db->dbprefix('emule_article_content'),$body,$where);
         $this->db->query($sql);
         return $data['id'];
