@@ -25,6 +25,7 @@ $strreplace=array(
 array('from'=>'http://hi.baidu.com/ed2kers/item/4fd50d532f2c8d30aaf6d72d','to'=>'/aboutus/serverlist'),
 array('from'=>'http://hi.baidu.com/ed2kers/item/5af6243b27e7a7e32e8ec22f','to'=>'/aboutus/connectsrv'),
 array('from'=>'http://hi.baidu.com/ed2kers/item/4b66a3c6b8b679f796445257','to'=>'/aboutus/connectkad')
+array('from'=>'www.ed2kers.com','to'=>'emu.hacktea8.com')
 );
 //
 $pregreplace=array(

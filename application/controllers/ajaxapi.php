@@ -11,23 +11,7 @@ class Ajaxapi extends Webbase {
   }
   
   public function getcate($cid = 0, $pid = 0){
-    $return = array();
-    if($pid == 0){
-       $return = $this->mem->get('emu-rootCate');
-    }elseif($pid && !$cid){
-       $cateMap = $this->mem->get('emu-catemap');
-       if(isset($cateMap[$pid])){
-          $return = $cateMap[$pid];
-       }else{
-          $return = $this->emulemodel->getCateListByPid($pid,$limit = 0);
-          if(is_array($cateMap)){
-            $cateMap[$pid] = $return;
-          }else{
-            $cateMap = array($pid => $return);
-          }
-          $this->mem->set('emu-catemap', $cateMap, $this->expirettl['1d']);
-       }
-    }
+    $return = $this->_getCateListById($id, $pid);
     die(json_encode($return));
   }
 }

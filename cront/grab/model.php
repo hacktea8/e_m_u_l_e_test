@@ -128,6 +128,20 @@ class Model{
     $this->db->query($sql);
     return $this->checkArticleByOname($data['name']);
   }
+  function getArticleList($page = 1, $limit = 100){
+    $sql = sprintf('SELECT * FROM %s LIMIT %d,%d',$this->db->getTable('emule_article_content'),($page - 1)*$limit,$limit);
+    return $this->db->result_array($sql);
+  }
+  function update_article_contents($data = array()){
+    if( !isset($data['id'])){
+       return false;
+    }
+    $where = array('id'=>$data['id']);
+    unset($data['id']);
+    $sql = $this->db->update_string($this->db->getTable('emule_article_content'),$data, $where);
+    $this->db->query($sql);
+    return true;
+  }
   function updateCateatotal(){
     $sql='SELECT `id` FROM '.$this->db->getTable('emule_cate').' WHERE `pid`!=0';
     $res=$this->db->result_array($sql);

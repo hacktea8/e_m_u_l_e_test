@@ -88,26 +88,31 @@ class emuleModel extends baseModel{
   }
 
   public function setEmuleTopicByAid($uid=0,$data,$isadmin=false){
-     if(isset($data['id']) && $data['id']){
+     $header = $data['header'];
+     $body = $data['body'];
+     if(isset($header['id']) && $header['id']){
         $this->_datatopicStruct = ' `id` ';
-        $check = $this->getEmuleTopicByAid($data['id'],$uid,$isadmin);
+        $check = $this->getEmuleTopicByAid($header['id'],$uid,$isadmin);
         if( !isset($check['id'])){
            return false;
         }
-        $where = array('id'=>$data['id']);
-        $info = array();
-        $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$info,$where);
+        $where = array('id'=>$header['id']);
+        unset($header['uid']);
+//过滤字段
+        $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$header,$where);
 echo $sql;exit;
         $this->db->query($sql);
-        $info = array();
-        $sql = $this->db->update_string($this->db->dbprefix('emule_article_content'),$info,$where);
+        unset($body['id']);
+        $sql = $this->db->update_string($this->db->dbprefix('emule_article_content'),$body,$where);
         $this->db->query($sql);
         return $data['id'];
      }
-     $sql = $this->db->insert_string($this->db->dbprefix('emule_article'),$info);
+     $header['uid'] = $uid;
+     $sql = $this->db->insert_string($this->db->dbprefix('emule_article'),$header);
+echo $sql;exit;
      $this->db->query($sql);
      $id = $this->db->insert_id();
-     $info['id'] = $id;
+     $body['id'] = $id;
      $sql = $this->db->insert_string($this->db->dbprefix('emule_article_content'),$info);
      $this->db->query($sql);
      return $id;

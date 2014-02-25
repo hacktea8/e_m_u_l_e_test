@@ -24,16 +24,18 @@
 <select id="parentcate">
 <option value = "0">--请选择分类--</option>
 <?php foreach($rootCate as $val){ ?>
-<option value = "<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+<option value = "<?php echo $val['id'];?>" <?php echo $val['id'] === $pid ? 'selected = "selected" ': ''; ?>><?php echo $val['name'];?></option>
 <?php } ?>
 </select>
 <select name="header[cid]" id="cateid">
-
+<?php foreach($subCate as $val){ ?>
+<option value = "<?php echo $val['id'];?>" <?php echo $val['id'] === $info['cid'] ? 'selected = "selected" ': ''; ?>><?php echo $val['name'];?></option>
+<?php } ?>
 </select></td>
     </tr>
 	<tr>
         <td style="width:70px;font-size:14px;">中文名称:</td>
-        <td><input type="text" id="cname" name="header[name]" value="<?php echo @$info['name'];?>" class="input_1" style="width:200px"></td>
+        <td><input type="text" id="cname" name="header[name]" value="<?php echo $info['name'];?>" class="input_1" style="width:200px"></td>
     </tr>
     <tr>
         <td style="font-size:14px;">资料封面:</td>
@@ -49,7 +51,7 @@
     </tr>
     <tr>
         <td style="font-size:14px;">标签:</td>
-        <td><input type="text" id="alias" name="body[tags]" value="<?php echo @$info['keyword'];?>" class="input_1" style="width:200px"><span class="red">(以英文逗号分隔,长度6个汉字以内)</span></td>
+        <td><input type="text" id="alias" name="header[tags]" value="<?php echo @$info['keyword'];?>" class="input_1" style="width:200px"><span class="red">(以英文逗号分隔,长度6个汉字以内)</span></td>
     </tr>
     <tr>
         <td style="font-size:14px;" valign="top">简介:</td>

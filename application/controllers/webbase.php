@@ -93,4 +93,26 @@ class Webbase extends CI_Controller {
       $v['url'] = article_url($v['id']);
     }
   }
+  protected function _getCateListById($cid = 0, $pid = 0){
+    $return = array();
+    if($cid){
+       $return = $this->emulemodel->getAllSubcateByCid($cid,$limit = 0);
+    }elseif($pid == 0){
+       $return = $this->mem->get('emu-rootCate');
+    }elseif($pid && !$cid){
+       $cateMap = $this->mem->get('emu-catemap');
+       if(isset($cateMap[$pid])){
+          $return = $cateMap[$pid];
+       }else{
+          $return = $this->emulemodel->getCateListByPid($pid,$limit = 0);
+          if(is_array($cateMap)){
+            $cateMap[$pid] = $return;
+          }else{
+            $cateMap = array($pid => $return);
+          }
+          $this->mem->set('emu-catemap', $cateMap, $this->expirettl['1d']);
+       }
+    }
+    return $return;
+  }
 }
