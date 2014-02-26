@@ -16,7 +16,7 @@ array('from'=>'www.ed2kers.com','to'=>'emu.hacktea8.com')
 
 $info = array();
 
-for($page = 232; $page<500;$page++){
+for($page = 800; $page<1000;$page++){
   $list = $model->getArticleList($page, $limit = 500);
   if(empty($list)){
     break;

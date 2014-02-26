@@ -13,9 +13,9 @@ if(12357 < $val['id']){
 }
 if('http://' != substr($val['thum'],0,7)){
   $val['thum'] = str_replace('/res','',$val['thum']);
-  $thum = 'http://i.ed2kers.com/'.$val['thum'];
+  $val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
 }
-echo $thum,"\n";
+echo $val['thum'],"\n";
 $default_opts = array(
   'http'=>array(
     'method'=>"GET",
@@ -27,7 +27,7 @@ $default_opts = array(
   )
 );
 $default = stream_context_get_default($default_opts);
-$data = get_headers($thum, 1);
+$data = get_headers($val['thum'], 1);
 //var_dump($data);exit;
 //echo substr($data['Content-Type'],0,6);exit;
 if('image/' != substr($data['Content-Type'],0,6) || $data['Content-Length'] < 1000){

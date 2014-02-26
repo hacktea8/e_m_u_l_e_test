@@ -50,18 +50,29 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 <a version="1.0" class="qzOpenerDiv" href="http://goo.gl/LwcZXa" target="_blank" alt="赞一个" title="赞一个">赞一个</a>
   </li>
 	</ul>
-<?php if(0){ ?>
 <div id="header_login">
 <span class="link_box">
 <ul>
+<?php if(0){ ?>
 	<li type="history" name="dropmenu" class="watching" status="hide"
 		original_class="watching"><a
 		onclick=""
 		class="watching_item" href="javascript: void(0);">我正在看<span
 		class="top_arrow"></span></a></li>
+<?php } 
+if($uinfo['uid']){
+  $loginurl = '/index/loginout';
+  $logintitle = $uinfo['uname'];
+}else{
+  $loginurl = '/index/login';
+  $logintitle = '点击登录';
+}
+?>
+  <li>
+   <?php echo '<a href="'.$loginurl.'" title="'.$logintitle.'">'.$logintitle.'</a>';?>
+  </li>
 </ul>
 </span></div>
-<?php } ?>
 </div>
 </div>
 </div>

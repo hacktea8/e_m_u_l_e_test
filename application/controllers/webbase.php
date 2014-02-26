@@ -18,6 +18,7 @@ class Webbase extends CI_Controller {
     $this->load->library('rediscache');
     $this->redis = &$this->rediscache;
     $session_uinfo = $this->session->userdata('user_logindata');
+    //var_dump($session_uinfo);exit;
     if(empty($session_uinfo)){
       //解析UID
       $uinfo = getSynuserUid();
@@ -32,6 +33,8 @@ class Webbase extends CI_Controller {
           $this->session->set_userdata(array('user_logindata'=>$this->userInfo));
         }
       }
+    }else{
+      $this->userInfo = $session_uinfo;
     }
     //var_dump($this->userInfo);exit;
     $this->_c = $this->uri->segment(1,'index');

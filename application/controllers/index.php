@@ -200,13 +200,14 @@ class Index extends Usrbase {
   }
   public function login(){
 //var_dump($_SERVER);exit;
-    $url = $this->viewData['login_url'].urlencode($this->viewData['base_url'].$_SERVER['REQUEST_URI']);
+    $url = $this->viewData['login_url'].urlencode($_SERVER['HTTP_REFERER']);
 //echo $url;exit;
     redirect($url);
   }
   public function loginout(){
     $this->session->unset_userdata('user_logindata');
-    $url = $this->viewData['base_url'].$_SERVER['REQUEST_URI'];
+    setcookie('hk8_auth','',time()-3600,'/');
+    $url = $_SERVER['HTTP_REFERER'];
 //echo $url;exit;
     redirect($url);
   }
