@@ -15,9 +15,10 @@ $list = getnocoverlist();
 foreach($list as $val){
 if('http://' != substr($val['thum'],0,7)){
   $val['thum'] = str_replace('/res','',$val['thum']);
-  $thum = 'http://i.ed2kers.com/'.$val['thum'];
+  $val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
 }
-$data['imgurl'] = $thum;
+//echo "== $val[thum] ==\n";
+$data['imgurl'] = $val['thum'];
 $cover = getHtml($data);
 //去除字符串前3个字节
 $cover = substr($cover,3);

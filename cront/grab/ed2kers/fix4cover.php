@@ -8,14 +8,17 @@ $task = 500;
 while($task){
 $list = getnocoverlist();
 foreach($list as $val){
-if(12357 < $val['id']){
+/*
+if(22357 < $val['id']){
    die('The task is OK!');
 }
+*/
 if('http://' != substr($val['thum'],0,7)){
   $val['thum'] = str_replace('/res','',$val['thum']);
   $val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
 }
-echo $val['thum'],"\n";
+//var_dump($val);exit;
+echo $val['id']," == ",$val['thum'],"\n";
 $default_opts = array(
   'http'=>array(
     'method'=>"GET",
@@ -37,6 +40,7 @@ if('image/' != substr($data['Content-Type'],0,6) || $data['Content-Length'] < 10
 }
 //
 setcoverByid(0,$val['id']);
+//exit;
 sleep(5);
 }
 //var_dump($list);exit;
@@ -49,13 +53,14 @@ file_put_contents('errcover.txt',$val['id']);
 
 function getnocoverlist($limit = 20){
     global $db;
+    //$sql=sprintf('SELECT `id`,`thum`,`cover`,`ourl` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
     $sql=sprintf('SELECT `id`,`thum` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
     $res=$db->result_array($sql);
     return $res;
 }
 
 function setcoverByid($cover = '',$id = 0){
-    if(!$cover || !$id){
+    if(!$id){
        return false;
     }
     global $db;
