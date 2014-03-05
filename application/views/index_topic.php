@@ -143,7 +143,7 @@
 <?php
 echo $info['downurl'];
 if($verifycode){
-  echo '<form id="verify_form">',$verifycode,'</form>';
+  echo '<h1 style="color:red;text-align:center;">温馨提示:输入验证码即可显示下载地址!</h1><form id="verify_form">',$verifycode,'</form>';
 ?>
 <button id="startcheck" title="输入验证码，展示下载地址!" style="width: 80px;height: 30px;background-color: green;cursor: pointer;margin-left: 100px;">开始校验</button>
 <script type="text/javascript">
