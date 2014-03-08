@@ -125,6 +125,12 @@ line-height: 22px;
 padding: 10px 0 0;
 height: 45px;
 }
+a.delFavModule_a {
+display: block;
+width: 120px;
+height: 30px;
+background: url(/public/images/cancelfav.gif) no-repeat center top;
+}
 a.addFavModule_a {
 display: block;
 width: 120px;

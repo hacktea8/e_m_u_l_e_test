@@ -8,6 +8,60 @@ class emuleModel extends baseModel{
      parent::__construct();
   }
 
+  public function getUserCollectList($uid,$order=0,$page=1,$limit=25){
+    if( !$uid){
+      return false;
+    }
+    $order = isset($ordermap[$order]) ? $ordermap[$order] : array_shift($ordermap);
+    $order = ' ORDER BY '.$order;
+    $page = intval($page) - 1;
+    $page = $page ? $page : 0;
+    $page *= $limit;
+    $sql = sprintf("");
+    $list = $this->db->query($sql)->result_array();
+    foreach($list as &$v){
+      $v['utime'] = date('Y-m-d H:i:s', $val['utime']);
+      $v['atime'] = date('Y-m-d H:i:s', $val['atime']);
+    }
+    return $list;
+  }
+
+  public function addUserCollect($uid,$aid){
+    if( !$uid || !$aid){
+      return false;
+    }
+    $sql = sprintf("SELECT `flag` FROM `collect` WHERE `aid`=%d AND `uid`=%d LIMIT 1",$aid,$uid);
+    $row = $this->db->query($sql)->row_array();
+    if(isset($row['flag'])){
+      $flag = $row['flag'];
+      $flag = $flag ? 0:1;
+      $sql = $this->db->update_string('collect',array('flag'=>$flag),array('aid'=>$aid,'uid'=>$uid));
+      $this->db->query($sql);
+      return $flag;
+    }
+    $data = array('aid'=>$aid,'uid'=>$uid,'flag'=>1,'atime'=>time());
+    $sql = $this->db->insert_string($table,$data);
+    return $this->db->query($sql)->insert_id();
+  }
+
+  public function getUserIscollect($uid,$aid){
+    if( !$uid || !$aid){
+      return false;
+    }
+    $sql = sprintf("SELECT `flag` FROM `collect` WHERE `aid`=%d AND `uid`=%d LIMIT 1",$aid,$uid);
+    $row = $this->db->query($sql)->row_array();
+    return isset($row['flag']) ? 1:0;
+  }
+
+  public function getUserCollectTotal($uid){
+    if( !$uid){
+      return false;
+    }
+    $sql = sprintf("SELECT count(*) as total FROM `collect` WHERE `uid`=%d",$uid);
+    $row = $this->db->query($sql)->row_array();
+    return isset($row['total']) ? $row['total']: 0;
+  }
+
   public function getArticleListByCid($cid='',$order=0,$page=1,$limit=25){
      switch($order){
        case 1:

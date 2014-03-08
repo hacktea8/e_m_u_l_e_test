@@ -60,15 +60,29 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 		class="watching_item" href="javascript: void(0);">我正在看<span
 		class="top_arrow"></span></a></li>
 <?php } 
-if($uinfo['uid']){
-  $loginurl = '/index/loginout';
-  $logintitle = $uinfo['uname'];
-}else{
-  $loginurl = '/index/login';
-  $logintitle = '点击登录';
-}
 ?>
   <li>
+   <div id="user_login">
+   <span class="user">Œ</span>
+   <div class="iconList" style="display: none;">
+   <ul>
+<?php if(0){ ?>
+    <li><a href="/history/" title="我看過的"><em class="watch">图片</em>我看過的</a></li>
+    <li><a href="/bookmark/" title="我的書簽"><em class="iconfont">ŷ</em><cite>我的書簽</cite></a></li>
+    <li><a href="/fav/" title="我的收藏"><em class="iconfont">ũ</em><cite>我的收藏</cite></a></li>
+<?php } ?>
+    <li><a href="/index/logout" title="登出"><em class="iconfont">ơ</em><cite>登出</cite></a></li>
+   </ul>
+   </div>
+   <div class="dropMenu" style="display: none;">
+   <ul>
+<?php if(0){ ?>
+    <li><a href="http://ck101.com/member.php?mod=register" title="注冊會員">注冊會員</a></li>
+<?php } ?>
+    <li><a class="btn" title="登入" href="/index/login">登入</a></li>
+   </ul> 
+   </div>
+  </div>
    <?php echo '<a href="'.$loginurl.'" title="'.$logintitle.'">'.$logintitle.'</a>';?>
   </li>
 </ul>

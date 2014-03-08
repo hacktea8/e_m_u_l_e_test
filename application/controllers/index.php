@@ -44,6 +44,46 @@ class Index extends Usrbase {
     }
     exit();
   }
+  public function collect($page = 1){
+    if( !isset($this->userInfo['uid']) || !$this->userInfo['uid']){
+      redirect('/');
+    }
+    $page = intval($page);
+    $limit = 30;
+    $total = $this->emulemodel->getUserCollectTotal($this->userInfo['uid']);
+    $endP = ceil($total/$limit);
+    if($total && $endP >= $page){
+      $lists = $this->emulemodel->getUserCollectList($this->userInfo['uid'],$order = 'new',$page,$limit);
+    }
+    $this->load->library('pagination');
+    $config['base_url'] = sprintf('/index/collect/');
+    $config['total_rows'] = $total;
+    $config['per_page'] = 25;
+    $config['first_link'] = '第一页';
+    $config['next_link'] = '下一页';
+    $config['prev_link'] = '上一页';
+    $config['last_link'] = '最后一页';
+    $config['cur_tag_open'] = '<span class="current">';
+    $config['cur_tag_close'] = '</span>';
+    $config['suffix'] = '.html';
+    $config['use_page_numbers'] = TRUE;
+    $config['num_links'] = 5;
+    $config['cur_page'] = $page;
+
+    $this->pagination->initialize($config);
+    $page_string = $this->pagination->create_links();
+    $this->assign(array(
+    'page_string'=>$page_string,'infolist'=>$lists));
+    $this->view('index_collect');
+  }
+  public function addCollect($aid){
+    $data = array('status'=>0);
+    if($this->userInfo['uid']){
+      $f = $this->emulemodel->addUserCollect($this->userInfo['uid'],$aid);
+      $data['status'] = $f;
+    }
+    die(json_encode($data));
+  }
   public function lists($cid,$order = 0,$page = 1){
     $page = intval($page);
     $cid = intval($cid);
@@ -211,7 +251,11 @@ class Index extends Usrbase {
 //echo $url;exit;
     redirect($url);
   }
+  public function isUserInfo(){
+    $data = array('status'=>0);
+    if( isset($this->userInfo['uid']) && $this->userInfo['uid']){
+       $data['status'] = 1;
+    }
+    die(json_encode($data));
+  }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

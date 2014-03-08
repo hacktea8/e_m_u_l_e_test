@@ -294,8 +294,8 @@ foreach($hotTopic as $row){
 <a title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </dd>
 <?php
-} ?>	        
-   </dl>  <!-- end of hotres -->
+} ?>
+</dl>  <!-- end of hotres -->
 </div>
 </div> 
   </div><!-- end of navside -->
@@ -307,4 +307,19 @@ function show_hide_tab(show,hide){
   $('#'+show).parent().addClass('current');
   $('#con_'+show).show();
 }
+$('#addFav').click(function(){
+var uid = <?php echo $uinfo['uid']?0:1;?>;
+if(uid){return false;}
+$.get("/index/addCollect/<?php echo $info['aid'];?>", function(result){
+  if(result.status == 1){
+    $(this).removeClass('addFavModule_a');
+    $(this).addClass('delFavModule_a');
+    $(this).attr('title','取消收藏');
+  }else{
+    $(this).addClass('addFavModule_a');
+    $(this).removeClass('delFavModule_a');
+    $(this).attr('title','收藏该资源');
+  }
+},'json');
+});
 </script>

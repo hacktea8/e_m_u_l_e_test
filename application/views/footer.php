@@ -45,6 +45,25 @@ window.setTimeout("_loadIndex()",5000);
 <?php if(in_array($_a,array('topic'))){ ?>
 window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 <?php } ?>
+function _Userlogin(){
+  var timer=null;
+  var _hide=function(){
+    $('.iconList').hide();$('.dropMenu').hide();}
+  var init=function(){
+    $('#user_login').mouseout(function(){
+      timer=setTimeout(_hide,500);});
+    $('#user_login').mouseover(function(){
+     clearTimeout(timer);
+     if($('.iconList').is(":visible") || $('.dropMenu').is(":visible")){
+       return false;}
+     $.get('/index/isUserInfo/',function(data){
+       if(data.status==1){
+         $('.iconList').show();$('.dropMenu').hide();
+       }else{
+         $('.iconList').hide();$('.dropMenu').show();}
+      },"json");});}
+  init();}
+_Userlogin();
 </script>
 <?php if(in_array($_a,array('emuleTopicAdd'))){ ?>
 <script  src="<?php echo $js_url,$_c,'_',$_a,'.js?v=',$version;?>" ></script>
