@@ -75,7 +75,7 @@
         <div class="block2" style="float:left;">
             <div style="float:left;">
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
-                    <a class="addFav addFavModule_a" title="收藏该资源" id="addFav"></a>
+                    <a class="addFav" alt="收藏该资源" id="addFav"><img src="<?php echo $img_url,$isCollect?'del':'','favorite.gif';?>" id="addFavBtn" alt="收藏该资源" /></a>
                     <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;z-index:3;" id="folderfavoritatips">
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
@@ -310,15 +310,11 @@ function show_hide_tab(show,hide){
 $('#addFav').click(function(){
 var uid = <?php echo $uinfo['uid']?0:1;?>;
 if(uid){return false;}
-$.get("/index/addCollect/<?php echo $info['aid'];?>", function(result){
-  if(result.status == 1){
-    $(this).removeClass('addFavModule_a');
-    $(this).addClass('delFavModule_a');
-    $(this).attr('title','取消收藏');
+$.get("/index/addCollect/<?php echo $info['id'];?>", function(result){
+  if(result.status==1){
+    $('#addFavBtn').attr("src","<?php echo $img_url;?>delfavorite.gif");
   }else{
-    $(this).addClass('addFavModule_a');
-    $(this).removeClass('delFavModule_a');
-    $(this).attr('title','收藏该资源');
+    $('#addFavBtn').attr("src","<?php echo $img_url;?>favorite.gif");
   }
 },'json');
 });

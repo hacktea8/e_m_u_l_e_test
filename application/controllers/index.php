@@ -44,7 +44,7 @@ class Index extends Usrbase {
     }
     exit();
   }
-  public function collect($page = 1){
+  public function fav($page = 1){
     if( !isset($this->userInfo['uid']) || !$this->userInfo['uid']){
       redirect('/');
     }
@@ -173,8 +173,8 @@ class Index extends Usrbase {
        $this->load->library('verify');
        $verifycode = $this->verify->show();
     }
-    
-    $this->assign(array('verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
+    $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
+    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
 //var_dump($this->redis->exists($key));exit;

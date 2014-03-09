@@ -85,27 +85,24 @@ foreach($hotTopic as $row){
     <span class="left_class_filter"><img alt="<?php echo $web_title;?>" title="<?php echo $web_title;?>" src="<?php echo $img_url;?>line.gif?v=<?php echo $version;?>"></span>
         </div>
 </form></li>
+<li><ul id="favlist">
 <?php
 foreach($infolist as $row){
 ?>
-        <li>
-          <a href="<?php echo $row['url'];?>" onClick=""><img class="lazy file_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="file_img" /></noscript></a>
+  <li>
+   <div class="imgcover"> <a href="<?php echo $row['url'];?>" onClick=""><img class="lazy file_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="file_img" /></noscript></a>
+</div>
+<h3>收藏: <span class="date-time"><?php echo $row['atime'];?></span></h3>
+<h3>更新: <span class="date-time"><?php echo $row['utime'];?></span></h3>
  <h3>
 <span class="left_topics_class_sort"><a href="<?php echo $row['curl'];?>"><?php echo $row['cname'];?></a></span> <a href="<?php echo $row['url'];?>" onClick=""><?php echo $row['name'];?></a>
  </h3>
-        <div class="blog_entry">
-<?php echo isset($row['intro'])? $row['intro']:'';;?>
-(<a href="<?php echo $row['url'];?>" class="fullarticle" onClick="">全文</a>)
-                    <br>
-    	<span style="color:green;">
-    	<span class="date-time"><?php echo $row['ptime'];?></span> 发布, <?php if(0){ ?><span class="date-time"></span> 更新 - <strong>128</strong>个文件, <strong>4.05GB</strong>, <strong>1630</strong>条评论</span>
-<?php } ?>
-        <div class="blog_metadata">        </div>
-        </div>
-        </li>
+  </li>
 <?php
 } 
-?>	
+?>
+</ul>
+</li>	
         </ul>
 <div class="pnav">
 <div class="pages-nav" style="margin: 10px 7px 0px 0px;padding:0 0 20px 0px!important;padding-bottom:0;">

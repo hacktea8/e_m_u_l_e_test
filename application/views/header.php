@@ -12,9 +12,9 @@
 
 <link rel="stylesheet" href="<?php echo $css_url;?>global.css?v=<?php echo $version;?>" type="text/css">
 <link rel="stylesheet" href="<?php echo $css_url,$_c,'_',$_a;?>.css?v=<?php echo $version;?>" type="text/css">
-<script type="text/javascript" src="<?php echo $js_url;?>jquery-1.7.2.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<?php echo $js_url;?>global.js?v=<?php echo $version;?>"></script>
-<?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
+<?php if(in_array($_a,array('index','lists','topic','fav','search'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
 <?php } ?>
 <?php if(in_array($_a,array('topic'))){ ?>
@@ -69,8 +69,8 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 <?php if(0){ ?>
     <li><a href="/history/" title="我看過的"><em class="watch">图片</em>我看過的</a></li>
     <li><a href="/bookmark/" title="我的書簽"><em class="iconfont">ŷ</em><cite>我的書簽</cite></a></li>
-    <li><a href="/fav/" title="我的收藏"><em class="iconfont">ũ</em><cite>我的收藏</cite></a></li>
 <?php } ?>
+    <li><a href="/index/fav/" title="我的收藏"><em class="iconfont">ũ</em><cite>我的收藏</cite></a></li>
     <li><a href="/index/logout" title="登出"><em class="iconfont">ơ</em><cite>登出</cite></a></li>
    </ul>
    </div>

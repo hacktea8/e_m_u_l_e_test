@@ -12,52 +12,64 @@ class emuleModel extends baseModel{
     if( !$uid){
       return false;
     }
+    $ordermap = array('new'=>'ct.`atime` DESC ');
     $order = isset($ordermap[$order]) ? $ordermap[$order] : array_shift($ordermap);
     $order = ' ORDER BY '.$order;
     $page = intval($page) - 1;
     $page = $page ? $page : 0;
     $page *= $limit;
-    $sql = sprintf("");
+    $limit = sprintf(' LIMIT %d,%d ',$page,$limit);
+    $sql = sprintf("SELECT ae.`id`, ae.`cid`, ae.`uid`, ae.`name`, ae.`utime`, ae.`cover`,ct.`atime` FROM %s as ae INNER JOIN %s as ct ON(ae.id=ct.aid) WHERE ct.uid=%d AND ct.`flag`=1 %s %s",$this->db->dbprefix('emule_article'),$this->db->dbprefix('collect'),$uid,$order,$limit);
     $list = $this->db->query($sql)->result_array();
     foreach($list as &$v){
-      $v['utime'] = date('Y-m-d H:i:s', $val['utime']);
-      $v['atime'] = date('Y-m-d H:i:s', $val['atime']);
+      $v['utime'] = date('Y-m-d H:i:s', $v['utime']);
+      $v['atime'] = date('Y-m-d H:i:s', $v['atime']);
     }
     return $list;
+  }
+
+  public function renewUserShip($data){
+    //collect
+    if('collect' === $data['type']){
+       $sql = sprintf("UPDATE %s SET `collectcount`=`collectcount` %s WHERE `id`=%d LIMIT 1",$this->db->dbprefix('emule_article'),$data['collect'],$data['aid']);
+       return $this->db->query($sql);
+    }
   }
 
   public function addUserCollect($uid,$aid){
     if( !$uid || !$aid){
       return false;
     }
-    $sql = sprintf("SELECT `flag` FROM `collect` WHERE `aid`=%d AND `uid`=%d LIMIT 1",$aid,$uid);
+    $table = $this->db->dbprefix('collect');
+    $sql = sprintf("SELECT `flag` FROM %s WHERE `aid`=%d AND `uid`=%d LIMIT 1",$table,$aid,$uid);
     $row = $this->db->query($sql)->row_array();
     if(isset($row['flag'])){
       $flag = $row['flag'];
       $flag = $flag ? 0:1;
-      $sql = $this->db->update_string('collect',array('flag'=>$flag),array('aid'=>$aid,'uid'=>$uid));
+      $sql = $this->db->update_string($table,array('flag'=>$flag),array('aid'=>$aid,'uid'=>$uid));
       $this->db->query($sql);
       return $flag;
     }
     $data = array('aid'=>$aid,'uid'=>$uid,'flag'=>1,'atime'=>time());
     $sql = $this->db->insert_string($table,$data);
-    return $this->db->query($sql)->insert_id();
+    $this->db->query($sql);
+    return 1;
   }
 
   public function getUserIscollect($uid,$aid){
     if( !$uid || !$aid){
       return false;
     }
-    $sql = sprintf("SELECT `flag` FROM `collect` WHERE `aid`=%d AND `uid`=%d LIMIT 1",$aid,$uid);
+    $sql = sprintf("SELECT `flag` FROM %s WHERE `aid`=%d AND `uid`=%d LIMIT 1",$this->db->dbprefix('collect'),$aid,$uid);
     $row = $this->db->query($sql)->row_array();
-    return isset($row['flag']) ? 1:0;
+    return isset($row['flag']) ? $row['flag']:0;
   }
 
   public function getUserCollectTotal($uid){
     if( !$uid){
       return false;
     }
-    $sql = sprintf("SELECT count(*) as total FROM `collect` WHERE `uid`=%d",$uid);
+    $sql = sprintf("SELECT count(*) as total FROM %s WHERE `uid`=%d",$this->db->dbprefix('collect'),$uid);
     $row = $this->db->query($sql)->row_array();
     return isset($row['total']) ? $row['total']: 0;
   }

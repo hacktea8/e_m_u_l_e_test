@@ -23,7 +23,7 @@
 <div id="#show_msg_div_" ></div>
 <div style="display:none;">
 <script type="text/javascript">
-<?php if(in_array($_a,array('index','lists','topic','search'))){ ?>
+<?php if(in_array($_a,array('index','lists','fav','topic','search'))){ ?>
 $("img.lazy").show().lazyload({ 
     effect : "fadeIn",
     //placeholder : "img/grey.gif",
