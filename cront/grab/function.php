@@ -290,10 +290,13 @@ function getinfodetail(&$data){
      return false;
   }
  // $data['intro']=mysql_real_escape_string($data['intro']);
-//  echo '<pre>';var_dump($data);exit;
+  //echo '<pre>';var_dump($strreplace);exit;
+/*
 foreach($data as $key=>$val){
    $data[$key]=mysql_real_escape_string($val);
 }
+*/
+  //echo '<pre>';var_dump($data);exit;
   $aid=$model->addArticle($data);
   if(!$aid){
     echo "添加失败! $data[ourl] \r\n";

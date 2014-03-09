@@ -7,6 +7,11 @@ $db=new DB_MYSQL();
 $task = 500;
 while($task){
 $list = getnocoverlist();
+if(empty($list)){
+echo "\n== list is empty! ==\n";
+sleep(600);
+break;
+}
 foreach($list as $val){
 /*
 if(22357 < $val['id']){
@@ -39,6 +44,7 @@ if('image/' != substr($data['Content-Type'],0,6) || $data['Content-Length'] < 10
   continue;
 }
 //
+//var_dump($val);
 setcoverByid(0,$val['id']);
 //exit;
 sleep(5);
@@ -48,13 +54,14 @@ $task --;
 //2min
 sleep(8);
 }
+
 file_put_contents('errcover.txt',$val['id']);
 
 
 function getnocoverlist($limit = 20){
     global $db;
-    //$sql=sprintf('SELECT `id`,`thum`,`cover`,`ourl` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
-    $sql=sprintf('SELECT `id`,`thum` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
+    $sql=sprintf('SELECT `id`,`thum`,`cover`,`ourl` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
+//    $sql=sprintf('SELECT `id`,`thum` FROM %s WHERE `cover`=\'4\' LIMIT %d',$db->getTable('emule_article'),$limit);
     $res=$db->result_array($sql);
     return $res;
 }
@@ -64,8 +71,9 @@ function setcoverByid($cover = '',$id = 0){
        return false;
     }
     global $db;
-    $sql = sprintf('UPDATE %s SET `cover`=\'%s\' WHERE `id`=%d LIMIT 1',$db->getTable('emule_article'),mysql_real_escape_string($cover),$id);
-    $db->query($sql);
+    $sql = sprintf("UPDATE %s SET `cover`='%s' WHERE `id`=%d ",$db->getTable('emule_article'),mysql_real_escape_string($cover),$id);
+    $query = $db->query($sql);
+    return true;
 }
 function getHtml(&$data){
   $curl = curl_init();

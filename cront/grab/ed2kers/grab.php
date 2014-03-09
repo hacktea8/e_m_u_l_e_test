@@ -12,12 +12,16 @@ $data = array('url' => 'http://img.hacktea8.com/imgapi/uploadurl?seq=', 'imgurl'
 $task = 600;
 while($task){
 $list = getnocoverlist();
+if(empty($list)){
+sleep(600);
+break;
+}
 foreach($list as $val){
 if('http://' != substr($val['thum'],0,7)){
   $val['thum'] = str_replace('/res','',$val['thum']);
   $val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
 }
-//echo "== $val[thum] ==\n";
+echo "== $val[thum] ==\n";
 $data['imgurl'] = $val['thum'];
 $cover = getHtml($data);
 //去除字符串前3个字节
@@ -53,7 +57,7 @@ function getnocoverlist($limit = 20){
 }
 
 function setcoverByid($cover = '',$id = 0){
-    if(!$cover || !$id){
+    if(!$id){
        return false;
     }
     global $db;
