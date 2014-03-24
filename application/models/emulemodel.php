@@ -162,27 +162,27 @@ class emuleModel extends baseModel{
      $header['cover'] = $data['header']['cover'];
      $header['utime'] = time();
      $body = array();
-     $body['keyword'] = $data['body']['keyword'];
+     $body['keyword'] = $data['header']['tags'];
      $body['downurl'] = $data['body']['downurl'];
      $body['vipdwurl'] = $data['body']['vipdwurl'];
      $body['intro'] = $data['body']['intro'];
      if(isset($header['id']) && $header['id']){
-        $this->_datatopicStruct = ' `id` ';
+        $this->_datatopicStruct = ' a.`id` ';
         $check = $this->getEmuleTopicByAid($header['id'],$uid,$isadmin);
-        if( !isset($check['id'])){
+        if( !isset($check['info']['id'])){
            return false;
         }
         $where = array('id'=>$header['id']);
+        unset($header['id']);
         $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$header,$where);
-echo $sql;exit;
         $this->db->query($sql);
         $sql = $this->db->update_string($this->db->dbprefix('emule_article_content'),$body,$where);
         $this->db->query($sql);
         return $data['id'];
      }
      $header['uid'] = $uid;
+     unset($header['id']);
      $sql = $this->db->insert_string($this->db->dbprefix('emule_article'),$header);
-echo $sql;exit;
      $this->db->query($sql);
      $id = $this->db->insert_id();
      $body['id'] = $id;

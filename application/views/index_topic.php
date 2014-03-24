@@ -196,6 +196,12 @@ VIP通道:<?php echo $info['vipdwurl'];?>
  </ul>
    </div>
         <div id="con_theRel" class="tab_con_tab">
+<!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:14,itemTitle:'猜你喜欢:',picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1762590"></script>
+<a href="" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
     	<table class="restable topic_class_restable">
 	<tbody>
 <?php foreach($info['relatdata'] as $key=>$row){
@@ -301,6 +307,15 @@ foreach($hotTopic as $row){
   </div><!-- end of navside -->
 </div><!-- end of page wrap-->
 <script type="text/javascript">
+var href = '';
+$(document).ready(function(){
+$(".ujian-hook div div div a").each(function(){
+href = $(this).attr('href');
+if(href.indexOf('ujian.cc')){
+$(this).attr('href','');
+}
+});
+});
 function show_hide_tab(show,hide){
   $('.'+hide).hide();
   $('.group-mods ul li').removeClass('current');

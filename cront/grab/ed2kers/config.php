@@ -33,7 +33,7 @@ array('from'=>'http://hi.baidu.com/ed2kers/item/4b66a3c6b8b679f796445257','to'=>
 //
 $pregreplace=array(
 array('from'=>'#<br>引用.+</td>#Us','to'=>'</td>')
-,array('from'=>'#<script [^>]+>.+</script>#','to'=>'')
+,array('from'=>'#<script [^>]+>.*</script>#','to'=>'')
 );
 
 

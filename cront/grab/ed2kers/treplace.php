@@ -14,9 +14,14 @@ array('from'=>'www.ed2kers.com','to'=>'emu.hacktea8.com')
 ,array('from'=>'\n','to'=>'')
 );
 
+$pregreplace=array(
+array('from'=>'#<br>引用.+</td>#Us','to'=>'</td>')
+,array('from'=>'#<script [^>]+>.*</script>#','to'=>'')
+);
+
 $info = array();
 
-for($page = 800; $page<1000;$page++){
+for($page = 400; $page<500; $page++){
   $list = $model->getArticleList($page, $limit = 500);
   if(empty($list)){
     break;
@@ -24,9 +29,9 @@ for($page = 800; $page<1000;$page++){
 
   foreach($list as $val){
     $data = $model->getArticleByid($val['id']);
-    foreach($strreplace as $replace){
-      $data['downurl'] = str_replace($replace['from'],$replace['to'],$data['downurl']);
-      $data['intro'] = str_replace($replace['from'],$replace['to'],$data['intro']);
+    foreach($pregreplace as $replace){
+      $data['downurl'] = preg_replace($replace['from'],$replace['to'],$data['downurl']);
+      $data['intro'] = preg_replace($replace['from'],$replace['to'],$data['intro']);
     }
     $info['downurl'] = $data['downurl'];
     $info['intro'] = $data['intro'];
@@ -36,7 +41,7 @@ for($page = 800; $page<1000;$page++){
 //    exit;
   }
 
-  sleep(5);
+  sleep(1);
 }
 
 echo "\n== 执行完毕! ===\n";
