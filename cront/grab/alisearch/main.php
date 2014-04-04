@@ -1,17 +1,18 @@
 <?php
 
 $root = dirname(__FILE__);
-
+define('BASEPATH',1);
 require_once $root.'/model.php';
 require_once $root.'/config.php';
-require_once $root.'/../../../src/library/base/AliyunSearchApi.php';
+require_once $root.'/../../../application/libraries/Aliyunsearchapi.php';
+require_once $root.'/../../../application/helpers/rewrite_helper.php';
 
 $search = new AliyunSearchApi();
 $model = new Model();
 $count = 20;
 
 while($count){
-   $lists = $model->getNoneSearchLimit(5);
+   $lists = $model->getNoneSearchLimit(3);
 //var_dump($lists);exit;
    $_itemsArr = array();
    $idarr = array();
@@ -30,7 +31,7 @@ while($count){
 //var_dump($itemArr['body']);exit;
       $itemArr['thumbnail'] = 'http://img.hacktea8.com/showpic.php?key='.$val['cover'];
       $itemArr['hit_num'] = $val['hits'];
-      $itemArr['url'] = '/index.php?m=emule&c=topic&a=run&aid='.$val['id'];
+      $itemArr['url'] = article_url($val['id']);
       $_itemsArr[] = $itemArr;
       $idarr[] = $val['id'];
    }

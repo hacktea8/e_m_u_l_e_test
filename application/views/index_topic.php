@@ -197,7 +197,7 @@ VIP通道:<?php echo $info['vipdwurl'];?>
    </div>
         <div id="con_theRel" class="tab_con_tab">
 <!-- UJian Button BEGIN -->
-<div class="ujian-hook"></div>
+<div id="ujian-hook" class="ujian-hook"></div>
 <script type="text/javascript">var ujian_config = {num:14,itemTitle:'猜你喜欢:',picSize:84,textHeight:45};</script>
 <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1762590"></script>
 <a href="" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
@@ -230,7 +230,9 @@ if($key%5==0){
 </div>									
 <div id="con_theCom" class="tab_con_tab">
 <!-- Comment BEGIN -->	
-<div class="ds-thread topic_admin_class_edit"></div>
+<div id="emu_comment">
+ <div class="ds-thread topic_admin_class_edit"></div>
+</div>
 <script type="text/javascript">var duoshuoQuery = {short_name:"emu"};	(function() {		var ds = document.createElement('script');		ds.type = 'text/javascript';ds.async = true;		ds.src = 'http://static.duoshuo.com/embed.js';		ds.charset = 'UTF-8';		(document.getElementsByTagName('head')[0] 		|| document.getElementsByTagName('body')[0]).appendChild(ds);	})();	
 </script><!-- Comment END -->
 </div>
@@ -309,7 +311,13 @@ foreach($hotTopic as $row){
 <script type="text/javascript">
 var href = '';
 $(document).ready(function(){
-$(".ujian-hook div div div a").each(function(){
+$("#emu_comment p a").bind('mouseover',function(){
+href = $(this).attr('href');
+if(href.indexOf('duoshuo.com')){
+$(this).attr('href','');
+}
+});
+$("#ujian-hook a").mouseover(function(){
 href = $(this).attr('href');
 if(href.indexOf('ujian.cc')){
 $(this).attr('href','');
