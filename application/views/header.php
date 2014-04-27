@@ -31,6 +31,9 @@
   ga('send', 'pageview');
 
 </script>
+<?php if(in_array($_a,array('index','lists','topic'))){ ?>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+<?php } ?>
 </head>
 <body>
 <a style="display: none;" id="gotop" href="#" title="返回顶部"

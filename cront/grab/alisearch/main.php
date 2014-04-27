@@ -9,10 +9,10 @@ require_once $root.'/../../../application/helpers/rewrite_helper.php';
 
 $search = new AliyunSearchApi();
 $model = new Model();
-$count = 20;
+$count = 200;
 
 while($count){
-   $lists = $model->getNoneSearchLimit(3);
+   $lists = $model->getNoneSearchLimit(5);
 //var_dump($lists);exit;
    $_itemsArr = array();
    $idarr = array();

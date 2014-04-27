@@ -1,5 +1,8 @@
 </div>
 <div id="advertisement_bottom" class="mainDiv">
+<?php if(in_array($_c,array('index','lists','topic'))){?>
+<script type="text/javascript">BAIDU_CLB_fillSlot("902635");</script>
+<?php }?>
 <div class="line_space"></div>
 </div>
 
