@@ -124,7 +124,8 @@ class Model{
        return false;
     }
     $contents['id'] = $id;
-    $sql=$this->db->insert_string($this->db->getTable('emule_article_content'),$contents);
+    $table = $this->get_content_table($id);
+    $sql=$this->db->insert_string($this->db->getTable($table),$contents);
     $this->db->query($sql);
     return $this->checkArticleByOname($data['name']);
   }
@@ -133,7 +134,8 @@ class Model{
     return $this->db->result_array($sql);
   }
   function getArticleByid($id){
-    $sql = sprintf('SELECT * FROM %s WHERE `id` = %d LIMIT 1',$this->db->getTable('emule_article_content'),$id);
+    $table = $this->get_content_table($id);
+    $sql = sprintf('SELECT * FROM %s WHERE `id` = %d LIMIT 1',$this->db->getTable($table),$id);
     return $this->db->row_array($sql);
   }
   function update_article_contents($data = array()){
@@ -141,10 +143,24 @@ class Model{
        return false;
     }
     $where = array('id'=>$data['id']);
+    $table = $this->get_content_table($data['id']);
     unset($data['id']);
-    $sql = $this->db->update_string($this->db->getTable('emule_article_content'),$data, $where);
+    $sql = $this->db->update_string($this->db->getTable($table),$data, $where);
     $this->db->query($sql);
     return true;
+  }
+  function add_article_contents($data = array()){
+    if( !isset($data['id'])){
+       return false;
+    }
+    $table = $this->get_content_table($data['id']);
+//echo $table;exit;
+    $sql = $this->db->insert_string($this->db->getTable($table),$data);
+    $this->db->query($sql);
+    return true;
+  }
+  function get_content_table($id){
+    return sprintf('emule_article_content%d',$id%10);
   }
   function updateCateatotal(){
     $sql='SELECT `id` FROM '.$this->db->getTable('emule_cate').' WHERE `pid`!=0';

@@ -167,7 +167,7 @@ class Index extends Usrbase {
     $emu_aid = explode("\t",$emu_aid);
     $emu_aid = $emu_aid[0];
     $verifycode = '';
-    if( !($emu_aid == $data['info']['id'] || $this->userInfo['isvip'] || $this->userInfo['isadmin'])){
+    if( !( 1 || $emu_aid == $data['info']['id'] || $this->userInfo['isvip'] || $this->userInfo['isadmin'])){
        $data['info']['downurl'] = '';
        $data['info']['vipdwurl'] = '';
        $this->load->library('verify');

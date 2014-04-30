@@ -2,7 +2,7 @@
 require_once 'basemodel.php';
 class emuleModel extends baseModel{
   protected $_dataStruct = 'a.`id`, a.`cid`, a.`uid`, a.`name`, a.`collectcount`, a.`ptime`, a.`utime`, a.`thum`, a.`cover`, a.`hits`';
-  protected $_datatopicStruct = 'a.`id`, a.`cid`, a.`uid`, a.`name`, ac.`relatdata`, a.`collectcount`, ac.`keyword`, ac.`downurl`, ac.`vipdwurl`, a.`ptime`, a.`utime`, ac.`intro`, a.`thum`, a.`cover`, a.`hits`';
+  protected $_datatopicStruct = 'a.`id`, a.`cid`, a.`uid`, a.`name`, a.`collectcount`, ac.`keyword`, ac.`downurl`, ac.`vipdwurl`, a.`ptime`, a.`utime`, ac.`intro`, a.`thum`, a.`cover`, a.`hits`';
 
   public function __construct(){
      parent::__construct();
@@ -140,13 +140,16 @@ class emuleModel extends baseModel{
      }
      return $res = array(array('id'=>$parinfo[0]['id'],'name'=>$parinfo[0]['name']),array('id'=>$subinfo['id'],'name'=>$subinfo['name']));
   }
-
+  public function get_content_table($id){
+    return sprintf('emule_article_content%d',$id%10);
+  }
   public function getEmuleTopicByAid($aid,$uid=0,$isadmin=false){
      $where = '';
      if($uid && !$isadmin)
        $where = sprintf(' AND `uid`=%d LIMIT 1',$uid);
 
-     $sql = sprintf('SELECT %s FROM %s as a LEFT JOIN %s as ac ON (a.id=ac.id) WHERE a.id =%d  %s',$this->_datatopicStruct,$this->db->dbprefix('emule_article'),$this->db->dbprefix('emule_article_content'),$aid,$where);
+     $table = $this->get_content_table($aid);
+     $sql = sprintf('SELECT %s FROM %s as a LEFT JOIN %s as ac ON (a.id=ac.id) WHERE a.id =%d  %s',$this->_datatopicStruct,$this->db->dbprefix('emule_article'),$this->db->dbprefix($table),$aid,$where);
      $data = array();
      $data['info'] = $this->db->query($sql)->row_array();
      $data['postion'] = $this->getsubparentCate($data['info']['cid']);
@@ -176,7 +179,8 @@ class emuleModel extends baseModel{
         unset($header['id']);
         $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$header,$where);
         $this->db->query($sql);
-        $sql = $this->db->update_string($this->db->dbprefix('emule_article_content'),$body,$where);
+        $table = $this->get_content_table($where['id']);
+        $sql = $this->db->update_string($this->db->dbprefix($table),$body,$where);
         $this->db->query($sql);
         return $data['id'];
      }
@@ -186,7 +190,8 @@ class emuleModel extends baseModel{
      $this->db->query($sql);
      $id = $this->db->insert_id();
      $body['id'] = $id;
-     $sql = $this->db->insert_string($this->db->dbprefix('emule_article_content'),$info);
+     $table = $this->get_content_table($id);
+     $sql = $this->db->insert_string($this->db->dbprefix($table),$info);
      $this->db->query($sql);
      return $id;
   }
@@ -203,7 +208,8 @@ class emuleModel extends baseModel{
      $where = array('id'=>$aid);
      $sql = $this->db->delete($this->db->dbprefix('emule_article'),$where);
      $this->db->query($sql);
-     $sql = $this->db->delete($this->db->dbprefix('emule_article_content'),$where);
+     $table = $this->get_content_table($aid);
+     $sql = $this->db->delete($this->db->dbprefix($table),$where);
      $this->db->query($sql);
      return $aid;
   }
