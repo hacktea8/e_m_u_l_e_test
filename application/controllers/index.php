@@ -258,4 +258,5 @@ class Index extends Usrbase {
     }
     die(json_encode($data));
   }
+  
 }

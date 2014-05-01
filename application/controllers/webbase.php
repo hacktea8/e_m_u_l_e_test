@@ -43,13 +43,14 @@ class Webbase extends CI_Controller {
     if($c){
        $this->_a = 'list' == $c ? 'lists' : 'topic';
     }
+    $current_url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $this->assign(array('domain'=>$this->config->item('domain'),
                 'base_url'=>$this->config->item('base_url'),'css_url'=>$this->config->item('css_url'),
                 'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
                 'img_url'=>$this->config->item('img_url'),'js_url'=>$this->config->item('js_url'),
                 'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
                 ,'version'=>20140109,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
-                ,'_c'=>$this->_c,'_a'=>$this->_a
+                ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
     ));
   }
   

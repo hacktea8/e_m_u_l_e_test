@@ -129,9 +129,18 @@ foreach($infolist as $row){
 <div class="pages-nav" style="margin: 10px 7px 0px 0px;padding:0 0 20px 0px!important;padding-bottom:0;">
 <?php echo $page_string;?>
 
-<span href="#" style="display:none">  </span>
 </div>
 </div>
 </div><!--End of content-->
 <div style="clear:both"></div>
 </div><!-- End of page wrap-->
+<div class="mainDiv" id="advertisement_click_bottom">
+<div class="line_space"></div>
+<div style=" border: 1px solid #ccc; padding: 10px 14px;">
+<!--960X90_AD-->
+<?php if($click_ad_link){?>
+<script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
+<?php }?>
+</div>
+<div class="clear"></div>
+</div>

@@ -238,9 +238,12 @@ foreach($value['rand'] as $key=>$row){
 
 <div class="mainDiv" id="advertisement_bottom">
 <div class="line_space"></div>
-<div
-	style="width: 960px; height: 90px; border: 1px solid #ccc; padding: 10px 14px;">
-<!--960X90_AD--></div>
+<div style="border: 1px solid #ccc; padding: 10px 14px;">
+<!--960X90_AD-->
+<?php if($click_ad_link){?>
+<script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
+<?php }?>
+</div>
 <div class="clear"></div>
 </div>
 <script type="text/javascript">
