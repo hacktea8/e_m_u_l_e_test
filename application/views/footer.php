@@ -1,6 +1,16 @@
 </div>
 <div id="advertisement_bottom" class="mainDiv">
-<?php if(in_array($_a,array('topic'))){?>
+<div class="line_space"></div>
+<div style=" border: 1px solid #ccc; padding: 10px 14px;">
+<!--960X90_AD-->
+<?php if($click_ad_link){?>
+<script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
+<?php }?>
+</div>
+<div class="clear"></div>
+</div>
+<div class="mainDiv">
+<?php if(in_array($_a,array('lists'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("902635");</script>
 <?php }?>
 <div class="line_space"></div>
@@ -74,7 +84,7 @@ _Userlogin();
 <script  src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20110603&style=3&showcount=1&width=130&height=30" charset="utf-8" defer="defer" ></script>
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5815536'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/stat.php%3Fid%3D5815536%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
 var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "//hm.baidu.com/hm.js?268a910d12a04866f4f834ce95825591";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
-<?php if(in_array($_a,array('lists'))){ ?>
+<?php if(in_array($_a,array('lists','topic'))){ ?>
 <script  src="<?php echo $js_url,'moneysad.js?v=',$version;?>" ></script>
 <?php } ?>
 </div>
