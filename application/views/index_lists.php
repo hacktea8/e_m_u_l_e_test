@@ -134,13 +134,7 @@ foreach($infolist as $row){
 </div><!--End of content-->
 <div style="clear:both"></div>
 </div><!-- End of page wrap-->
-<div class="mainDiv" id="advertisement_click_bottom">
+<div class="mainDiv">
 <div class="line_space"></div>
-<div style=" border: 1px solid #ccc; padding: 10px 14px;">
-<!--960X90_AD-->
-<?php if($click_ad_link){?>
-<script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
-<?php }?>
-</div>
 <div class="clear"></div>
 </div>

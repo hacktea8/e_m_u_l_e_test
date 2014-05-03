@@ -36,6 +36,9 @@
 <div id="#show_msg_div_" ></div>
 <div style="display:none;">
 <script type="text/javascript">
+<?php if($click_ad_link){?>
+$('#adlink_button').attr('href',"<?php echo $click_ad_link;?>");
+<?php }?>
 <?php if(in_array($_a,array('index','lists','fav','topic','search'))){ ?>
 $("img.lazy").show().lazyload({ 
     effect : "fadeIn",
