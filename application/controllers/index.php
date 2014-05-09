@@ -87,6 +87,7 @@ class Index extends Usrbase {
   public function lists($cid,$order = 0,$page = 1){
     $page = intval($page);
     $cid = intval($cid);
+    $cid = $cid < 1 ?1:$cid;
     $order = intval($order);
     $page = $page > 0 ? $page: 1;
     if($page < 11){
@@ -98,18 +99,18 @@ class Index extends Usrbase {
        if( empty($data['emulelist'])){
 //die($this->expirettl['12h'].'empty');
          $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
-         $this->_rewrite_list_url($data['postion']);
-         $this->_rewrite_list_url($data['subcatelist']);
-         $this->_rewrite_article_url($data['emulelist']);
 //echo '<pre>';var_dump($data);exit;
-         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['3h']);
-         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['3h']);
-         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['3h']);
-         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3h']);
+         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1d']);
+         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['3d']);
+         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['3d']);
+         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3d']);
        }
     }else{
        $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
     }
+         $this->_rewrite_list_url($data['postion']);
+         $this->_rewrite_list_url($data['subcatelist']);
+         $this->_rewrite_article_url($data['emulelist']);
     $data['emulelist'] = is_array($data['emulelist']) ? $data['emulelist']: array();
     $cpid = isset($data['postion'][0]['id'])?$data['postion'][0]['id']:0;
     $this->load->library('pagination');

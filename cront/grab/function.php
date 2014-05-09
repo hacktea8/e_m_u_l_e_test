@@ -298,6 +298,7 @@ foreach($data as $key=>$val){
 */
   //echo '<pre>';var_dump($data);exit;
   $aid=$model->addArticle($data);
+//echo '|',$aid,'|';exit;
   if(!$aid){
     echo "添加失败! $data[ourl] \r\n";
     return false;

@@ -112,7 +112,6 @@ class Model{
     unset($data['downurl']);
     $contents['intro'] = $data['intro'];
     $contents['keyword'] = '0';
-    $contents['relatdata'] = '0';
     unset($data['intro']);
     unset($data['oid']);
     unset($data['keyword']);
