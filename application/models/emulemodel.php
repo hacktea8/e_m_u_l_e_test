@@ -143,9 +143,9 @@ class emuleModel extends baseModel{
   public function get_content_table($id){
     return sprintf('emule_article_content%d',$id%10);
   }
-  public function getEmuleTopicByAid($aid,$uid=0,$isadmin=false){
+  public function getEmuleTopicByAid($aid,$uid=0,$isadmin=false,$edite=1){
      $where = '';
-     if($uid && !$isadmin)
+     if($uid && !$isadmin && $edite)
        $where = sprintf(' AND `uid`=%d LIMIT 1',$uid);
 
      $table = $this->get_content_table($aid);

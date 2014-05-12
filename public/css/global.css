@@ -609,6 +609,7 @@ background-position: 0 100px;
 height: 32px;
 font-weight: bold;
 }
+#addfavorite_div{background-color: yellow;}
 #nav_div .big li a.hover, #nav_div .big li a.hover:link, #nav_div .big li a.hover:visited {
 background-position: 0 -37px;
 color: #fff;

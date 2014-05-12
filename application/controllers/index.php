@@ -145,7 +145,7 @@ class Index extends Usrbase {
   }
   public function topic($aid){
     $aid = intval($aid);
-    $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin']);
+    $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
     $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
     $this->_rewrite_list_url($data['postion']);
@@ -190,11 +190,13 @@ class Index extends Usrbase {
   public function search($q='',$type = 0,$order = 0,$page = 1){
     $q = $q ? $q:$this->input->get('q');
     $q = urldecode($q);
+    $q = htmlentities($q);
     $page = intval($page);
     $page = $page < 1 ? 1: $page;
     $list = array();
+    $pageSize = 25;
     if($q){
-      $param = array('kw' => $q, 'page' => $page, 'page_size' => 20);
+      $param = array('kw' => $q, 'page' => $page, 'page_size' => $pageSize);
       if(1 == $type){
         $param[] = '';
       }elseif(2 == $type){
@@ -218,7 +220,7 @@ class Index extends Usrbase {
     $this->load->library('pagination');
     $config['base_url'] = sprintf('/index/search/%s/%d/%d/',urlencode($q),$type,$order);
     $config['total_rows'] = $list['result']['viewtotal'];
-    $config['per_page'] = 25;
+    $config['per_page'] = $pageSize;
     $config['first_link'] = '第一页';
     $config['next_link'] = '下一页';
     $config['prev_link'] = '上一页';
