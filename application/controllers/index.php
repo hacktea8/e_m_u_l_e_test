@@ -44,9 +44,20 @@ class Index extends Usrbase {
     }
     exit();
   }
+  public function setvipdown($page = 1){
+    if( !isset($this->userInfo['uid']) || !$this->userInfo['uid']){
+      header('Location: /');
+    }
+    $page = intval($page);
+    $limit = 20;
+    $lists = $this->emulemodel->getNoVIPDownList($limit);
+    $this->assign(array(
+    'infolist'=>$lists));
+    $this->view('index_setvipdown');
+  }
   public function fav($page = 1){
     if( !isset($this->userInfo['uid']) || !$this->userInfo['uid']){
-      redirect('/');
+      header('Location: /');
     }
     $page = intval($page);
     $limit = 30;

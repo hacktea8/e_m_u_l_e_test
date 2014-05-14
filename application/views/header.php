@@ -70,8 +70,8 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
    <span class="user">Œ</span>
    <div class="iconList" style="display: none;">
    <ul>
-<?php if(0){ ?>
-    <li><a href="/history/" title="我看過的"><em class="watch">图片</em>我看過的</a></li>
+<?php if($uinfo['isadmin']){ ?>
+    <li><a href="/index/setvipdown/" title="VIP download"><em class="watch">图片</em>VIP下载</a></li>
     <li><a href="/bookmark/" title="我的書簽"><em class="iconfont">ŷ</em><cite>我的書簽</cite></a></li>
 <?php } ?>
     <li><a href="/index/fav/" title="我的收藏"><em class="iconfont">ũ</em><cite>我的收藏</cite></a></li>

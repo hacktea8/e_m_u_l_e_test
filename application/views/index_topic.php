@@ -19,13 +19,6 @@
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
                 <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" >
               </a>
-                <div>
-                    <div id="visitTimes" style="margin-top:5px; display:none">
-                      <strong id="visitTimes-title" style="display:inline-block;vertical-align:top;"></strong>
-                     <span id="current-page-views" style="display: inline-block; vertical-align: top;"><?php echo $info['hits'];?>次 浏览</span><br>
-                            <span id="favoriteNumber" favorites="274" style="display:inline-block;vertical-align:top;"><?php echo $info['fav'];?>次 收藏</span>
-                                            </div>
-               </div>
         </div>
         <div style="float:left;width:500px;overflow:hidden;">
         <div class="block1">
@@ -38,6 +31,10 @@
                     <li>
                     <strong style="display:inline-block;vertical-align:top;">更新：</strong>
                     <span class="date-time" style="display:inline-block;vertical-align:top;"><?php echo $info['utime'];?></span>
+                    </li>
+                    <li>
+                    <strong style="display:inline-block;vertical-align:top;">浏览：</strong>
+                    <span class="date-time" style="display:inline-block;vertical-align:top;"><?php echo $info['hits'];?></span>
                     </li>
                 </ul>
             </div>
@@ -181,6 +178,9 @@ alert('验证码输入有误!');
 </div>
                  <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
 VIP通道:<?php echo $info['vipdwurl'];?>
+</div>
+<div onclick="_hmt.push(['_trackEvent', 'download', 'click_down_method', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
+<a href="http://goo.gl/iIn59w" target="_blank">如何快速下载资源(点我告诉你!)</a>
 </div>
             </div>
             <div class="iptcom" id="iptcomCname">

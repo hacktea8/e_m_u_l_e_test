@@ -66,6 +66,10 @@
         <td><?php $key_name = 'vipdwurl';$editor_name = 'body[vipdwurl]';require 'wind_editor.php';?></td>
     </tr>
     <tr>
+        <td style="font-size:14px;" valign="top">VIP下载地址:</td>
+        <td><input type="text" name="header[vipdown]" value="<?php echo @$info['vipdown'];?>"></td>
+    </tr>
+    <tr>
         <td style="font-size:14px;" valign="top"></td>
         <td height="50">
         <input type="submit" class="button" id="submit_button" value="保存">
