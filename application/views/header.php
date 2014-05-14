@@ -83,7 +83,7 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 <?php if(0){ ?>
     <li><a href="http://ck101.com/member.php?mod=register" title="注冊會員">注冊會員</a></li>
 <?php } ?>
-    <li><a class="btn" title="登入" href="/index/login">登入</a></li>
+    <li><a class="btn" title="登入" href="/index/login" target="_blank">登入</a></li>
    </ul> 
    </div>
   </div>

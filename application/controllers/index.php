@@ -28,7 +28,7 @@ class Index extends Usrbase {
     }
     $view .= 'index.html';
     $lock = $view . '.lock';
-    if( !file_exists($view) || (time() - filemtime($view)) > 3*3600 ){
+    if( !file_exists($view) || (time() - filemtime($view)) > 1*3600 ){
       if(!file_exists($lock)){
         
         $this->assign(array('_a'=>'index','emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
@@ -163,6 +163,7 @@ class Index extends Usrbase {
     $keywords = $data['info']['name'].','.$kw.$this->seo_keywords;
     $title = $data['info']['name'];
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
+    //$data['info']['downurl'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['downurl']);
     // not VIP Admin check verify
     $emu_aid = isset($_COOKIE['hk8_verify_topic_dw'])?strcode($_COOKIE['hk8_verify_topic_dw'],false):'';
     $emu_aid = explode("\t",$emu_aid);

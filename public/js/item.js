@@ -11,10 +11,10 @@ $(function () {
 	//默认全选中
 	$("input:checkbox").attr("checked","checked");
 	$(".cbxitem").each(function(){
-		var es = $(this).val().replace("[www.ed2kers.com]","");
+		var es = $(this).val().replace("[emu.hacktea8.com]","");
 		var es = es.split("|");
 		var fs = es[2].split(".");
-		fs[fs.length-2] = fs[fs.length-2]+"[www.ed2kers.com]";
+		fs[fs.length-2] = fs[fs.length-2]+"[emu.hacktea8.com]";
 		es[2] = fs.join('.');
 		$(this).val(es.join('|'));
 		$(this).next().attr("href",$(this).val());
