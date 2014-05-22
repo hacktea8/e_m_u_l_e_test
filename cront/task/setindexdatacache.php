@@ -103,7 +103,7 @@ sleep(2);
     $list=array();
     foreach($rootCate as $cate){
 sleep(2);
-      $list=$this->getArticleListByCid($cate['id'],2,1,10);
+      $list=$this->getArticleListByCid($cate['id'],2,1,13);
 //echo '<pre>';var_dump($list);exit;
       $this->emuleIndex['catehot'][]=array('name'=>$cate['name'],'id'=>$cate['id'],'list'=>$list,'url'=>list_url($cate['id']));
         //List article

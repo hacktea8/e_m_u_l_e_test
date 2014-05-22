@@ -9,7 +9,7 @@ class emuleModel extends baseModel{
   }
 
   public function getNoVIPDownList($limit = 30){
-    $sql = sprintf("SELECT `id`, `name` FROM %s WHERE `vipdown`=0 ORDER BY `hits` DESC LIMIT %d",$this->db->dbprefix('emule_article'),$limit);
+    $sql = sprintf("SELECT `id`, `name` FROM %s WHERE `flag`=2 ORDER BY `hits` DESC LIMIT %d",$this->db->dbprefix('emule_article'),$limit);
     $list = $this->db->query($sql)->result_array();
     return $list;
   }
@@ -169,6 +169,8 @@ class emuleModel extends baseModel{
      $header['cid'] = $data['header']['cid'];
      $header['name'] = $data['header']['name'];
      $header['cover'] = $data['header']['cover'];
+     $header['thum'] = $data['header']['thum'];
+     $header['flag'] = $data['header']['flag']?$data['header']['flag']:1;
      $header['utime'] = time();
      $body = array();
      $body['keyword'] = $data['header']['tags'];
@@ -186,22 +188,37 @@ class emuleModel extends baseModel{
         $sql = $this->db->update_string($this->db->dbprefix('emule_article'),$header,$where);
         $this->db->query($sql);
         $table = $this->get_content_table($where['id']);
-        $sql = $this->db->update_string($this->db->dbprefix($table),$body,$where);
+        $cinfo = $this->checkArticleContent($where['id']);
+        if($cinfo){
+          $sql = $this->db->update_string($this->db->dbprefix($table),$body,$where);
+        }else{
+          $body['id'] = $where['id'];
+          $sql = $this->db->insert_string($this->db->dbprefix($table),$body);
+        }
         $this->db->query($sql);
         return $data['id'];
      }
      $header['uid'] = $uid;
      unset($header['id']);
+     $header['ptime'] = $header['ptime']?$header['ptime']:time();
      $sql = $this->db->insert_string($this->db->dbprefix('emule_article'),$header);
      $this->db->query($sql);
      $id = $this->db->insert_id();
      $body['id'] = $id;
      $table = $this->get_content_table($id);
-     $sql = $this->db->insert_string($this->db->dbprefix($table),$info);
+     $sql = $this->db->insert_string($this->db->dbprefix($table),$body);
      $this->db->query($sql);
      return $id;
   }
-
+  public function checkArticleContent($aid){
+     if(!$aid){
+       return 0;
+     }
+     $table = $this->get_content_table($aid);
+     $sql = sprintf("SELECT `id` FROM %s WHERE `id`=%d LIMIT 1",$table,$aid);
+     $row = $this->db->query($sql)->row_array();
+     return $row;
+  }
   public function delEmuleTopicByAid($aid = 0,$uid=0,$isadmin=false){
      if( !$aid){
         return false;

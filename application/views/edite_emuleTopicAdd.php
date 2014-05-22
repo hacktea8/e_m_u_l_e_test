@@ -38,6 +38,18 @@
         <td><input type="text" id="cname" name="header[name]" value="<?php echo $info['name'];?>" class="input_1" style="width:200px"></td>
     </tr>
     <tr>
+        <td style="font-size:14px;">资料状态:</td>
+        <td><select id="flag" name="header[flag]" >
+<?php $flagArr = array(array('id'=>0,'title'=>'初始化'),array('id'=>1,'title'=>'发布'),array('id'=>2,'title'=>'待发布'),array('id'=>3,'title'=>'审核'),array('id'=>4,'title'=>'删除'));foreach($flagArr as $v){?>
+<option value="<?php echo $v['id']?>" <?php if($info['flag'] == $v['id'])?>><?php echo $v['title'];?></option>
+<?php }?>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-size:14px;">资料原封面:</td>
+        <td><input type="text" id="thum" name="header[thum]" value="<?php echo @$info['thum'];?>" class="input_1" style="width:400px"></td>
+    </tr>
+    <tr>
         <td style="font-size:14px;">资料封面:</td>
         <td><input type="text" id="cover" name="header[cover]" value="<?php echo @$info['cover'];?>" class="input_1" style="width:200px"></td>
     </tr>

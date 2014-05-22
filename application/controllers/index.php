@@ -28,10 +28,14 @@ class Index extends Usrbase {
     }
     $view .= 'index.html';
     $lock = $view . '.lock';
-    if( !file_exists($view) || (time() - filemtime($view)) > 1*3600 ){
+    if( !file_exists($view) || (time() - filemtime($view)) > 3*3600 ){
       if(!file_exists($lock)){
         
         $this->assign(array('_a'=>'index','emuleIndex'=>$this->mem->get('emutest-emuleIndexinfo')));
+        if(empty($this->viewData['emuleIndex'])){
+           touch($view);
+           return 0;
+        }
         $this->view('index_index');
         $output = $this->output->get_output();
         file_put_contents($lock, '');
