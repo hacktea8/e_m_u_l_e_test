@@ -115,10 +115,10 @@ class Index extends Usrbase {
 //die($this->expirettl['12h'].'empty');
          $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
 //echo '<pre>';var_dump($data);exit;
-         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1d']);
-         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['3d']);
-         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['3d']);
-         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3d']);
+         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1h']);
+         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['3h']);
+         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['3h']);
+         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3h']);
        }
     }else{
        $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);

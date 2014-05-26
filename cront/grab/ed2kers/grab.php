@@ -17,17 +17,21 @@ sleep(600);
 break;
 }
 foreach($list as $val){
+$val['thum'] = getCover($val['ourl']);
 if('http://' != substr($val['thum'],0,7)){
-  $val['thum'] = str_replace('/res','',$val['thum']);
-  $val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
+//  $val['thum'] = str_replace('/res','',$val['thum']);
+//  $tmp = explode('/',$val['thum']);
+//  $imp = array_pop($tmp);
+  //$val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
+  $val['thum'] = 'http://www.ed2kers.com/'.$val['thum'];
 }
-echo "== $val[thum] ==\n";
+echo "==$val[id] $val[thum] ==\n";
+//exit;
 $data['imgurl'] = $val['thum'];
 $cover = getHtml($data);
 //去除字符串前3个字节
 $cover = substr($cover,3);
 echo $cover,"\n";
-//exit;
 //echo strlen($cover);exit;
 if(44 == $cover){
   die('Token 失效!');
@@ -51,7 +55,7 @@ file_put_contents('imgres.txt',$val['id']);
 
 function getnocoverlist($limit = 20){
     global $db;
-    $sql=sprintf('SELECT `id`,`thum` FROM %s WHERE `cover`=\'0\' LIMIT %d',$db->getTable('emule_article'),$limit);
+    $sql=sprintf('SELECT `id`,`ourl` FROM %s WHERE `cover`=\'0\' LIMIT %d',$db->getTable('emule_article'),$limit);
     $res=$db->result_array($sql);
     return $res;
 }
@@ -63,6 +67,13 @@ function setcoverByid($cover = '',$id = 0){
     global $db;
     $sql = sprintf('UPDATE %s SET `cover`=\'%s\' WHERE `id`=%d LIMIT 1',$db->getTable('emule_article'),mysql_real_escape_string($cover),$id);
     $db->query($sql);
+}
+function getCover($url){
+  $data['url'] = $url;
+  $html = getHtml($data);
+  preg_match('#<div class="litimg fLeft">\s+<img alt="[^"]+" src="([^"]+)"[^>]* /></div>#Uis',$html,$match);
+  $cover = $match[1];
+  return $cover;
 }
 function getHtml(&$data){
   $curl = curl_init();
