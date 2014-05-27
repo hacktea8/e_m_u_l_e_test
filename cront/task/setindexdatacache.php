@@ -9,6 +9,14 @@ require_once($root.'../../application/libraries/memcache.php');
 require_once($root.'../../application/helpers/rewrite_helper.php');
 
 $model=new model();
+/*
+$data = $model->getMemData();
+$l = strlen(serialize($data));
+$h = strlen(json_encode($data));
+echo $l,' | h',$h,"\n";exit;
+$s = $model->getMemStatus();
+print_r($s);exit;
+*/
 $model->getIndexData();
 
 class model{
@@ -19,6 +27,13 @@ class model{
   function __construct(){
     $this->db=new DB_MYSQL();
     $this->mem=new Memcache();
+  }
+  function getMemData(){
+    $data = $this->mem->get('emutest-emuleIndexinfo');
+    return $data;
+  }
+  function getMemStatus(){
+    return $this->mem->get_status();
   }
   function getArticleListByCid($cid,$order,$page,$limit){
     switch($order){

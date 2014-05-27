@@ -25,6 +25,9 @@ class Memcache{
      }
 
   }
+  public function get_status(){
+     return $this->_memcached->getstats();
+  }
 // ------------------------------------------------------------
   /**
    * Fetch from cache
