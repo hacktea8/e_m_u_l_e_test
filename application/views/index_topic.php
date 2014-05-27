@@ -206,8 +206,7 @@ if($key%4==0){
 </script><!-- Comment END -->
 </div>
 </div>
-   <a id="commentFolder"></a>
-<div class="clearBoth"></div><br>
+</div>
  <div id="navside">
 <?php if(0){?>		                            
  <div id="userres">
@@ -242,7 +241,6 @@ if($key%4==0){
 						<br><p style="margin:6px 0px 0px 65px;color:#999999"><span title="2013/08/24 09:37:20" class="date-time">7小时前</span>&nbsp;收藏了</p>
 					</div>
 <?php } ?>
-</div>
 </div>
 <div id="relativeres">
   <h3>相关资源</h3> <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" id="closeRel" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
