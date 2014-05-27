@@ -12,12 +12,16 @@ class Usrbase extends Webbase {
     
     $this->load->helper('rewrite');
     $this->load->model('emulemodel');
-    $hotTopic = $this->mem->get('emu-hotTopic');
+    
+    $hotTopic = array();
+    if('lists' == $this->_a){
+     $hotTopic = $this->mem->get('emu-hotTopic');
 //var_dump($hotTopic);exit;
-    if(empty($hotTopic)){
+     if(empty($hotTopic)){
       $hotTopic = $this->emulemodel->getHotTopic();
       $this->_rewrite_article_url($hotTopic);
       $this->mem->set('emu-hotTopic',$hotTopic,$this->expirettl['12h']);
+     }
     }
     $rootCate = $this->mem->get('emu-rootCate');
     if( empty($rootCate)){

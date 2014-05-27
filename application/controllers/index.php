@@ -191,7 +191,21 @@ class Index extends Usrbase {
        $verifycode = $this->verify->show();
     }
     $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
-    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid)); 
+    $right_hot = $this->mem->get('emu-right_hot'.$cid);
+    $bottom_cold = $this->mem->get('emu-bottom_cold'.$cid);
+    if(!$right_hot){
+      $data = $this->emulemodel->getArticleListByCid($cid,2,2,16);
+      $right_hot = $data['emulelist'];
+      $this->_rewrite_article_url($right_hot);
+      $data = $this->emulemodel->getArticleListByCid($cid,1,2,16);
+      $bottom_cold = $data['emulelist'];
+      $this->_rewrite_article_url($bottom_cold);
+      $this->mem->set('emu-right_hot'.$cid,$right_hot,$this->expirettl['3h']);
+      $this->mem->set('emu-bottom_cold'.$cid,$bottom_cold,$this->expirettl['3h']);
+    }
+    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
+    ,'right_hot'=>$right_hot,'bottom_cold'=>$bottom_cold
+    )); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
 //var_dump($this->redis->exists($key));exit;

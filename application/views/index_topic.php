@@ -40,31 +40,7 @@
             </div>
 <?php if (0){ ?>            
 	<div class="resInfoBox" id="membertable">
-	  <div class="header">
-	   <a class="imgs" href="http://www.verycd.com/i/4416523/" onClick="" style="text-decoration:none;"><img src="">
-	    <span class="follow">关注 <em>2</em></span>
-	      <span class="fans">粉丝 <em>340</em></span>
-                	</a>
-				</div>
-				<div class="context">
-					<p class="text">
-						<strong><a hoverstyle="3" hovertips="type=2&amp;id=4416523" href="http://www.verycd.com/i/4416523/" onClick="VeryCD.TrackEvent('topic','发布者','用户名');">达漫V</a></strong>
-						<span><img src="/15.gif" class="honorimage" title="金光盘(Exp:17641)" align="absmiddle" height="20" width="25"></span>
-											</p>
-					<p class="num">精华资源: <a onClick="" href="http://www.verycd.com/i/4416523/create/folders/?stat=elite">169</a></p>
-					<p class="num">全部资源: <a onClick="" href="http://www.verycd.com/i/4416523/create/folders/?stat=total">172</a></p>
-										<div class="btn">
-						<div class="haddle_btn">
-					        <div data-follow-type="0" data-follow-id="4416523" data-follow="0" style="" class="haddle_btn" onClick="">
-					        	<a data-follow="0" style="" class="light_addbtn" href="#"><span class="addicon"></span>加关注</a>
-								<span data-follow="1" style="display:none;" class="addbtn_even"><span class="addbtn_dgray"></span>已关注<em>|</em><a class="red" style="cursor:pointer;">取消</a></span>
-								<a data-follow="2" style="display:none;" class="light_addbtn" href="#"><span class="addicon_a"></span><em>|</em><span class="addicon"></span>加关注</a>
-						    	<span data-follow="3" style="display:none;" class="addbtn_even"><span class="addicon_c"></span>相互关注<em>|</em><a class="red" style="cursor:pointer;">取消</a></span>
-					        </div>
-						</div>
-					</div>
-									</div>
-			</div>
+	</div>
 <?php } ?>
 			        </div>
 <!-- .block1 -->
@@ -118,11 +94,6 @@
      </div>
 
 </div>
-        <div id="favWindow" class="glassbox" style="display:none">
-        <div class="loginNote"><span style="margin-left:6px;margin-top:2px;display:inline-block;">请登录</span></div><iframe id="favIframe" src="" marginwidth="0" marginheight="0" border="0" allowtransparency="true" frameborder="0" scrolling="no"></iframe><div class="bottom-bar">
-        <a href="javascript://" class="closeButton" onClick="closeLoginBox()">关闭</a>
-                </div>
-                </div>
         <div style="clear:both"></div>
         <!-- ads start -->
                 <!-- ads over -->
@@ -202,10 +173,13 @@ VIP通道:<?php echo $info['vipdwurl'];?>
 <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1762590"></script>
 <a href="" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
 <!-- UJian Button END -->
-    	<table class="restable topic_class_restable">
-	<tbody>
-<?php foreach($info['relatdata'] as $key=>$row){
-if($key%5==0){
+</div>
+<div class="tab_con_tab" id="con_theRes">
+  <div class="emuletop-no">
+    <table class="restable topic_class_restable">
+  <tbody>
+<?php $length = count($bottom_cold) -1;foreach($bottom_cold as $key=>$row){
+if($key%4==0){
    echo '<tr>';
 }
 ?>	   	            			<td>
@@ -214,18 +188,13 @@ if($key%5==0){
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </td>
 <?php
-  if($key%5==0){
+  if($key%4==3 || $key == $length){
      echo '</tr>';
   }
 }
 ?>
     </tbody>
     </table>
-</div>
-<div class="tab_con_tab" id="con_theRes">
-            <h3>这里是其它用户补充的资源(<a href="#commentFolder" id="extred2k">我也要补充</a>):</h3>
-                			<div class="emuletop-no">
-    				暂无补充资源
     			</div>
 </div>									
 <div id="con_theCom" class="tab_con_tab">
@@ -240,7 +209,7 @@ if($key%5==0){
    <a id="commentFolder"></a>
 <div class="clearBoth"></div><br>
  <div id="navside">
-		                            
+<?php if(0){?>		                            
  <div id="userres">
    <h3>该用户的其它精华资源</h3> <img title="<?php echo $info['name'];?>" alt="="<?php echo $info['name'];?>"" id="closeUser" class="closebtn" alt="" src="<?php echo $img_url;?>toggle.gif?v=<?php echo $version;?>">
 	            <div id="userMore">
@@ -288,11 +257,12 @@ foreach($info['relatdata'] as $row){
 </p>
 <?php
 } ?>
+<?php }?>
  <dl id="hotres">
   <dt>今日热门</dt>
     				                                               
 <?php
-foreach($hotTopic as $row){
+foreach($right_hot as $row){
 ?>
 <dd class="itshot">
 <a id="entry_link_<?php echo $row['id'];?>" title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank" style="text-decoration:none;"><img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px;display:inline;" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="hot_img" /></noscript>
