@@ -1,15 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require_once 'usrbase.php';
 class Index extends Usrbase {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 */
   public function __construct(){
     parent::__construct();
-//    $this->load->model('indexmodel');
-//var_dump($this->viewData);exit;
   }
   public function index()
   {
@@ -108,24 +101,30 @@ class Index extends Usrbase {
     if($page < 11){
        $data = array();
        $data['emulelist'] = $this->mem->get('emu-emulelist'.$cid.'-'.$page.$order);
-       $data['atotal'] = $this->mem->get('emu-listatotal'.$cid);
-       $data['subcatelist'] = $this->mem->get('emu-listsubcatelist'.$cid);
        $data['postion'] = $this->mem->get('emu-listpostion'.$cid);
        if( empty($data['emulelist'])){
 //die($this->expirettl['12h'].'empty');
          $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
 //echo '<pre>';var_dump($data);exit;
          $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1h']);
-         $this->mem->set('emu-listatotal'.$cid,$data['atotal'],$this->expirettl['3h']);
-         $this->mem->set('emu-listsubcatelist'.$cid,$data['subcatelist'],$this->expirettl['3h']);
          $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3h']);
        }
     }else{
        $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
     }
-         $this->_rewrite_list_url($data['postion']);
-         $this->_rewrite_list_url($data['subcatelist']);
-         $this->_rewrite_article_url($data['emulelist']);
+    $cinfo = $this->viewData['channel'][$cid];
+    $data['atotal'] = $cinfo['atotal'];
+    if(!$cinfo['pid']){
+      $data['atotal'] = 0;
+      foreach($this->viewData['channel'] as &$v){
+        if($cid != $v['pid']){
+          continue;
+        }
+        $data['atotal'] += $v['atotal'];
+      }
+    }
+    $this->_rewrite_list_url($data['postion']);
+    $this->_rewrite_article_url($data['emulelist']);
     $data['emulelist'] = is_array($data['emulelist']) ? $data['emulelist']: array();
     $cpid = isset($data['postion'][0]['id'])?$data['postion'][0]['id']:0;
     $this->load->library('pagination');
@@ -153,7 +152,7 @@ class Index extends Usrbase {
        $kw .= $row['name'].',';
     }
     $keywords = $kw.$this->seo_keywords;
-   
+  
     $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cpid'=>$cpid,'infolist'=>$data['emulelist'],'postion'=>$data['postion']
     ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
     $this->view('index_lists');

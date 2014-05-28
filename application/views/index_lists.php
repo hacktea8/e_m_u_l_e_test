@@ -8,7 +8,12 @@
 <div class="main" style="padding:0 5px;">
 <dl id="libCatalog">
 <?php
-foreach($subcatelist as $row){
+$pid = $channel[$cid];
+$pid = $pid['pid']?$pid['pid']:$cid;
+foreach($channel as &$row){
+if($row['pid']!=$pid){
+continue;
+}
 ?>
      <dd><a href="<?php echo $row['url'];?>">&gt;<?php echo $row['name'];?><span class="recordCount">(<?php echo $row['atotal'];?>)</span></a></dd>
 <?php
@@ -26,29 +31,24 @@ foreach($subcatelist as $row){
 </div>
 <div class="main" style="padding:10px;">
 <dl id="someLinks">
-<dd><a href="#" title="订阅本站资源">订阅本站资源</a></dd>
-<dd><a href="#" id="emuleOld" title="Download eMule">电驴(eMule)经典版下载</a></dd>
-<dd><a href="#" title="get firefox" id="getfirefox" target="_blank">推荐使用 Firefox 浏览器</a></dd>
+<dd><a href="javascript:void(0);" title="订阅本站资源">订阅本站资源</a></dd>
+<dd><a href="javascript:void(0);" id="emuleOld" title="Download eMule">电驴(eMule)经典版下载</a></dd>
+<dd><a href="javascript:void(0);" title="get firefox" id="getfirefox" target="_blank">推荐使用 Firefox 浏览器</a></dd>
+<dd><a href="http://btv.hacktea8.com" title="静思乐BT影视种子" target="_blank">静思乐BT影视种子</a></dd>
+<dd><a href="http://jok.hacktea8.com" title="尽情爆笑吧" target="_blank">尽情爆笑吧</a></dd>
 <dd style=" clear:both;"></dd>
 </dl>
 </div>
 </div>
-
 <div style="height:10px;background:#fff;"></div>
-
-
-<!---->
-
 <div class="box_7 rightBox">
 <div class="rightTitle title_bg">
 <div class="h3"><span>今日热门</span></div>
 </div>
-
 <div class="main" style="padding:10px;">
-<!---->
 <dl class="indexLeftItem">
 <?php
-foreach($hotTopic as $row){
+foreach($hotTopic as &$row){
 ?>
 <dd class="leftMiddle">
    <a href="<?php echo $row['url'];?>" onClick="" style="text-decoration:none;" id="entry_link_<?php echo $row['id'];?>"><img class="lazy hot_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a><br>
@@ -97,26 +97,18 @@ foreach($hotTopic as $row){
         </div>
 </form></li>
 <?php
-foreach($infolist as $row){
+foreach($infolist as &$row){
 ?>
         <li>
           <a href="<?php echo $row['url'];?>" onClick=""><img class="lazy file_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="file_img" /></noscript></a>
  <h3>
-<span class="left_topics_class_sort"><a href="<?php echo $row['curl'];?>"><?php echo $row['cname'];?></a></span> <a href="<?php echo $row['url'];?>" onClick=""><?php echo $row['name'];?></a>
+<span class="left_topics_class_sort"><a href="<?php echo $channel[$row['cid']]['url'];?>"><?php echo $channel[$row['cid']]['name'];?></a></span> <a href="<?php echo $row['url'];?>" onClick=""><?php echo $row['name'];?></a>
  </h3>
         <div class="blog_entry">
-<?php if(0){
-?>
-     <div class="face">
-        <a href="http://www.verycd.com/i/4489064/" onClick="VeryCD.Track('/stat/indexUserface/');"><img src="{@theme:css}/64_avatar_small.jpg" hoverstyle="2" hovertips="type=2&amp;id=4489064" class="fixsize"></a><p style="WORD-WRAP: break-word;TABLE-LAYOUT: fixed;word-break:break-all"><a hoverstyle="2" hovertips="type=2&amp;id=4489064" href="http://www.verycd.com/i/4489064/" onClick="VeryCD.Track('/stat/indexUsername/');">cctv098998</a></p></div>
-<?php } ?>
-<!--[if IE 6]><span style="text-indent:-24px;margin-left:-12px"></span><![endif]-->
-<?php echo isset($row['intro'])? $row['intro']:'';;?>
 (<a href="<?php echo $row['url'];?>" class="fullarticle" onClick="">全文</a>)
                     <br>
     	<span style="color:green;">
-    	<span class="date-time"><?php echo $row['ptime'];?></span> 发布, <?php if(0){ ?><span class="date-time"></span> 更新 - <strong>128</strong>个文件, <strong>4.05GB</strong>, <strong>1630</strong>条评论</span>
-<?php } ?>
+    	<span class="date-time"><?php echo $row['ptime'];?></span> 发布
         <div class="blog_metadata">        </div>
         </div>
         </li>

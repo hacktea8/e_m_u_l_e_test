@@ -3,7 +3,7 @@
 <div class="line_space"></div>
 <div style=" border: 1px solid #ccc; padding: 10px 14px;">
 <!--960X90_AD-->
-<?php if($click_ad_link){?>
+<?php if(in_array($_a,array('topic'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
 <?php }?>
 </div>

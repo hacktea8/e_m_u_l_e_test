@@ -7,7 +7,15 @@ class emuleModel extends baseModel{
   public function __construct(){
      parent::__construct();
   }
-
+  public function getChannels(){
+    $sql = sprintf("SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `flag`=1",$this->db->dbprefix('emule_cate'));
+    $list = $this->db->query($sql)->result_array();
+    $return = array();
+    foreach($list as &$v){
+      $return[$v['id']] = $v;
+    }
+    return $return;
+  }
   public function getNoVIPDownList($limit = 30){
     $sql = sprintf("SELECT `id`, `name` FROM %s WHERE `flag`=2 ORDER BY `hits` DESC LIMIT %d",$this->db->dbprefix('emule_article'),$limit);
     $list = $this->db->query($sql)->result_array();
@@ -97,7 +105,7 @@ class emuleModel extends baseModel{
        $cids = implode(',',$cids);
        $where = ' a.`cid` in ('.$cids.')  ';
      }
-     $sql = sprintf('SELECT %s,c.`name` as cname,c.atotal FROM %s as a LEFT JOIN %s as c ON (a.cid=c.id) WHERE %s AND a.`flag`=1 AND c.flag=1 %s LIMIT %d,%d',$this->_dataStruct,$this->db->dbprefix('emule_article'),$this->db->dbprefix('emule_cate'),$where,$order,$page,$limit);
+     $sql = sprintf('SELECT %s FROM %s as a  WHERE %s AND a.`flag`=1 %s LIMIT %d,%d',$this->_dataStruct,$this->db->dbprefix('emule_article'),$where,$order,$page,$limit);
 //echo $sql;exit;
      $data = array();
      $data['emulelist'] = $this->db->query($sql)->result_array();
@@ -106,8 +114,6 @@ class emuleModel extends baseModel{
        $val['utime'] = date('Y/m/d', $val['utime']);
      }
      $data['postion'] = $this->getsubparentCate($cid);
-     $data['subcatelist'] = $this->getAllSubcateByCid($cid);
-     $data['atotal']   = $this->getCateAtotal($cid);
      return $data;
   }
 
@@ -150,7 +156,7 @@ class emuleModel extends baseModel{
     return sprintf('emule_article_content%d',$id%10);
   }
   public function getEmuleTopicByAid($aid,$uid=0,$isadmin=false,$edite=1){
-     $where = '';
+     $where = ' LIMIT 1';
      if($uid && !$isadmin && $edite)
        $where = sprintf(' AND `uid`=%d LIMIT 1',$uid);
 
@@ -290,7 +296,12 @@ class emuleModel extends baseModel{
      }
 
      $sql = sprintf('SELECT `id`, `pid`, `name`, `atotal` FROM %s WHERE `pid` = 0 AND `flag` = 1',$this->db->dbprefix('emule_cate'));
-     return $this->db->query($sql)->result_array();
+     $list = $this->db->query($sql)->result_array();
+     $return = array();
+     foreach($list as &$v){
+       $return[$v['id']] = $v;
+     }
+     return $return;
   }
   public function getdata(){
      return 9999999;
