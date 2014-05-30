@@ -101,9 +101,12 @@ class emuleModel extends baseModel{
      $page = $page ? $page : 0;
      $page *= $limit;
      if($cid){
+/*
        $cids = $this->getAllCateidsByCid($cid);
        $cids = implode(',',$cids);
        $where = ' a.`cid` in ('.$cids.')  ';
+*/
+       $where = ' a.`cid`='.$cid.'  ';
      }
      $sql = sprintf('SELECT %s FROM %s as a  WHERE %s AND a.`flag`=1 %s LIMIT %d,%d',$this->_dataStruct,$this->db->dbprefix('emule_article'),$where,$order,$page,$limit);
 //echo $sql;exit;

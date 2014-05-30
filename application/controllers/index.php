@@ -98,30 +98,34 @@ class Index extends Usrbase {
     $cid = $cid < 1 ?1:$cid;
     $order = intval($order);
     $page = $page > 0 ? $page: 1;
-    if($page < 11){
-       $data = array();
-       $data['emulelist'] = $this->mem->get('emu-emulelist'.$cid.'-'.$page.$order);
-       $data['postion'] = $this->mem->get('emu-listpostion'.$cid);
-       if( empty($data['emulelist'])){
-//die($this->expirettl['12h'].'empty');
-         $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
-//echo '<pre>';var_dump($data);exit;
-         $this->mem->set('emu-emulelist'.$cid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1h']);
-         $this->mem->set('emu-listpostion'.$cid,$data['postion'],$this->expirettl['3h']);
-       }
-    }else{
-       $data = $this->emulemodel->getArticleListByCid($cid,$order,$page);
-    }
     $cinfo = $this->viewData['channel'][$cid];
-    $data['atotal'] = $cinfo['atotal'];
+    $scid = $cid;
+    $atotal = $cinfo['atotal'];
     if(!$cinfo['pid']){
-      $data['atotal'] = 0;
+      $atotal = 0;
       foreach($this->viewData['channel'] as &$v){
         if($cid != $v['pid']){
           continue;
         }
-        $data['atotal'] += $v['atotal'];
+        if($scid == $cid){
+          $scid = $v['id'];
+        }
+        $atotal += $v['atotal'];
       }
+    }
+    if($page < 11){
+       $data = array();
+       $data['emulelist'] = $this->mem->get('emu-emulelist'.$scid.'-'.$page.$order);
+       $data['postion'] = $this->mem->get('emu-listpostion'.$scid);
+       if( empty($data['emulelist'])){
+//die($this->expirettl['12h'].'empty');
+         $data = $this->emulemodel->getArticleListByCid($scid,$order,$page);
+//echo '<pre>';var_dump($data);exit;
+         $this->mem->set('emu-emulelist'.$scid.'-'.$page.$order,$data['emulelist'],$this->expirettl['1h']);
+         $this->mem->set('emu-listpostion'.$scid,$data['postion'],$this->expirettl['3h']);
+       }
+    }else{
+       $data = $this->emulemodel->getArticleListByCid($scid,$order,$page);
     }
     $this->_rewrite_list_url($data['postion']);
     $this->_rewrite_article_url($data['emulelist']);
@@ -129,7 +133,7 @@ class Index extends Usrbase {
     $cpid = isset($data['postion'][0]['id'])?$data['postion'][0]['id']:0;
     $this->load->library('pagination');
     $config['base_url'] = sprintf('/index/lists/%d/%d/',$cid,$order);
-    $config['total_rows'] = $data['atotal'];
+    $config['total_rows'] = $atotal;
     $config['per_page'] = 25; 
     $config['first_link'] = '第一页'; 
     $config['next_link'] = '下一页';
