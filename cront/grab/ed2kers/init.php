@@ -8,57 +8,29 @@ require_once $APPPATH.'singleProcess.php';
 
 $db=new DB_MYSQL();
 
-$data = array('url' => 'http://img.hacktea8.com/imgapi/uploadurl?seq=', 'imgurl'=>'');
-$task = 600;
-while($task){
-$list = getnocoverlist();
+for($p=0;;$p++){
+$list = getnocoverlist($p);
 if(empty($list)){
-sleep(600);
 break;
 }
 foreach($list as $val){
-$val['thum'] = getCover($val['ourl']);
-if('http://' != substr($val['thum'],0,7)){
-//  $val['thum'] = str_replace('/res','',$val['thum']);
-//  $tmp = explode('/',$val['thum']);
-//  $imp = array_pop($tmp);
-  //$val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
-  $val['thum'] = 'http://www.ed2kers.com/'.$val['thum'];
+echo "\nId: $val[id] cover: $val[cover]\n";
+if(false != stripos($val['cover'],'.')){
+  seterrcoverByid(1,$val['id']);
 }
-echo "==$val[id] $val[thum] ==\n";
 //exit;
-$data['imgurl'] = $val['thum'];
-$cover = getHtml($data);
-//去除字符串前3个字节
-$cover = substr($cover,3);
-echo $cover,"\n";
-//echo strlen($cover);exit;
-if(44 == $cover){
-  die('Token 失效!');
 }
-if(0 == $cover){
-  echo "$val[id] cover is down!\n";
-  seterrcoverByid(4,$val['id']);
-  continue;
-}
-//
-setcoverByid($cover,$val['id']);
 sleep(5);
 }
-//var_dump($list);exit;
-$task --;
-//2min
-sleep(8);
-}
-file_put_contents('imgres.txt',$val['id']);
 
-
-function getnocoverlist($limit = 20){
+function getnocoverlist($page=0,$limit = 1000){
     global $db;
-    $sql=sprintf('SELECT `id`,`ourl` FROM %s WHERE `iscover`=0 LIMIT %d',$db->getTable('emule_article'),$limit);
+    $p = $page*$limit;
+    $sql=sprintf('SELECT `id`,`cover` FROM %s WHERE `iscover`=0 LIMIT %d,%d',$db->getTable('emule_article'),$p,$limit);
     $res=$db->result_array($sql);
     return $res;
 }
+
 function seterrcoverByid($cover = '',$id = 0){
     if(!$id){
        return false;
