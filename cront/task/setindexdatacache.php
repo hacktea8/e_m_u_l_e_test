@@ -39,9 +39,11 @@ class model{
     switch($order){
       case 1:
       $order=' ORDER BY a.hits ASC ';
+      //$order=' ORDER BY a.ptime ASC ';
       break;
       case 2:
       $order=' ORDER BY a.hits DESC ';
+      //$order=' ORDER BY a.ptime DESC ';
       break;
       default:
       $order=' ORDER BY a.ptime DESC ';
@@ -51,11 +53,14 @@ class model{
    $limit=intval($limit);
    $page*=$limit;
    if($cid){
+/*
       $cids=$this->getAllCateidsByCid($cid);
       $cids=implode(',',$cids);
       $where=' a.`cid` in ('.$cids.') AND ';
+*/
+      $where=' a.`cid`='.$cid.' AND ';
    }
-   $sql=sprintf("SELECT a.`id`, a.`cid`, a.`uid`,c.`name` as cname,c.atotal, a.`name`, a.`ptime`, a.`utime`, a.`cover`, a.`hits` FROM ".$this->db->getTable('emule_article')." as a LEFT JOIN ".$this->db->getTable('emule_cate')." as c ON(a.cid=c.id) WHERE %s a.`flag`=1 AND c.flag=1 %s LIMIT %d,$limit",$where,$order,$page);
+   $sql=sprintf("SELECT a.`id`, a.`cid`, a.`uid`, a.`name`, a.`ptime`, a.`utime`, a.`cover`, a.`hits` FROM ".$this->db->getTable('emule_article')." as a WHERE %s a.`flag`=1 %s LIMIT %d,$limit",$where,$order,$page);
    $list = $this->db->result_array($sql);
    if( !is_array($list)){
       return array();
@@ -118,18 +123,19 @@ sleep(2);
     $list=array();
     foreach($rootCate as $cate){
 sleep(2);
-      $list=$this->getArticleListByCid($cate['id'],2,1,13);
+      $subcate=$this->getAllSubcateByCid($cate['id'],13);
+      $pcid = $subcate[0]['id'];
+      $list=$this->getArticleListByCid($pcid,2,1,13);
 //echo '<pre>';var_dump($list);exit;
       $this->emuleIndex['catehot'][]=array('name'=>$cate['name'],'id'=>$cate['id'],'list'=>$list,'url'=>list_url($cate['id']));
         //List article
 sleep(2);
-        $subcate=$this->getAllSubcateByCid($cate['id'],13);
         $list=array();
         foreach($subcate as $val){
 sleep(2);
           $list[]=$this->getArticleListByCid($val['id'],0,1,15);
         }
-        $this->emuleIndex['topiclist'][]=array('rand'=>$this->getArticleListByCid($cate['id'],1,1,20),'subcate'=>array('cate'=>$subcate,'list'=>$list));
+        $this->emuleIndex['topiclist'][]=array('rand'=>$this->getArticleListByCid($pcid,1,1,20),'subcate'=>array('cate'=>$subcate,'list'=>$list));
 
     }
 

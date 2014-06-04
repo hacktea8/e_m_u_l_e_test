@@ -98,21 +98,20 @@ class Index extends Usrbase {
     $cid = $cid < 1 ?1:$cid;
     $order = intval($order);
     $page = $page > 0 ? $page: 1;
-    $cinfo = $this->viewData['channel'][$cid];
     $scid = $cid;
-    $atotal = $cinfo['atotal'];
     if(!$cinfo['pid']){
-      $atotal = 0;
       foreach($this->viewData['channel'] as &$v){
         if($cid != $v['pid']){
           continue;
         }
         if($scid == $cid){
           $scid = $v['id'];
+          break;
         }
-        $atotal += $v['atotal'];
       }
     }
+    $cinfo = $this->viewData['channel'][$scid];
+    $atotal = $cinfo['atotal'];
     if($page < 11){
        $data = array();
        $data['emulelist'] = $this->mem->get('emu-emulelist'.$scid.'-'.$page.$order);
@@ -183,6 +182,7 @@ class Index extends Usrbase {
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
     //$data['info']['downurl'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['downurl']);
     // not VIP Admin check verify
+/*
     $emu_aid = isset($_COOKIE['hk8_verify_topic_dw'])?strcode($_COOKIE['hk8_verify_topic_dw'],false):'';
     $emu_aid = explode("\t",$emu_aid);
     $emu_aid = $emu_aid[0];
@@ -193,15 +193,16 @@ class Index extends Usrbase {
        $this->load->library('verify');
        $verifycode = $this->verify->show();
     }
+*/
     $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
     $right_hot = $this->mem->get('emu-right_hot'.$cid);
     $bottom_cold = $this->mem->get('emu-bottom_cold'.$cid);
     if(!$right_hot){
-      $data = $this->emulemodel->getArticleListByCid($cid,2,2,16);
-      $right_hot = $data['emulelist'];
+      $datas = $this->emulemodel->getArticleListByCid($cid,2,2,16);
+      $right_hot = $datas['emulelist'];
       $this->_rewrite_article_url($right_hot);
-      $data = $this->emulemodel->getArticleListByCid($cid,1,2,16);
-      $bottom_cold = $data['emulelist'];
+      $datas = $this->emulemodel->getArticleListByCid($cid,1,2,16);
+      $bottom_cold = $datas['emulelist'];
       $this->_rewrite_article_url($bottom_cold);
       $this->mem->set('emu-right_hot'.$cid,$right_hot,$this->expirettl['3h']);
       $this->mem->set('emu-bottom_cold'.$cid,$bottom_cold,$this->expirettl['3h']);
