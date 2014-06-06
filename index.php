@@ -1,5 +1,5 @@
 <?php
-
+redirect();
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -202,12 +202,13 @@ if (defined('ENVIRONMENT'))
 require_once BASEPATH.'core/CodeIgniter.php';
 
 function redirect(){
-$domain = $_SERVER['SERVER_NAME'];// 获得当前输入的 url
-if('emu.hacktea8.com' != $domain){
+$domain = $_SERVER['HTTP_HOST'];// 获得当前输入的 url
+$root = 'www.emubt.com';
+if($root == $domain){
   return false;
 }
 $uri = $_SERVER['REQUEST_URI'];
-$jumpUrl = 'http://www.emubt.com'.$uri;
+$jumpUrl = 'Location: http://'.$root.$uri;
 
 header('HTTP/1.1 301 Moved Permanently');
 header($jumpUrl);// 301 跳转到设置的 url
