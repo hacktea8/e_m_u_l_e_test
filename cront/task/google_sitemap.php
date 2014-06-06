@@ -51,7 +51,7 @@ class model{
 }
 
 $type = 1;
-$base_url = 'http://emu.hacktea8.com/';
+$base_url = 'http://www.emubt.com/';
 $count = 1;
 $countLimit = 30000;
 $model = new model();

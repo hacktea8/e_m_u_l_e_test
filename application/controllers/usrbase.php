@@ -37,8 +37,8 @@ class Usrbase extends Webbase {
     } 
     $this->assign(array(
     'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description,'seo_title'=>$this->seo_title
-    ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,
-    'thumhost'=>'http://i.ed2kers.com','cpid'=>0,'cid'=>0,'channel'=>$channel
+    ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,'click_ad_link'=>''
+    ,'cpid'=>0,'cid'=>0,'channel'=>$channel
     ,'editeUrl' => '/edite/index/emuleTopicAdd'
     ));
     $this->_get_postion();
@@ -52,6 +52,9 @@ class Usrbase extends Webbase {
    $click_ad_link = '';
    if(!isset($_COOKIE['ahref_click']) && in_array($this->_a,array('lists','topic'))){
     $host = $_SERVER['HTTP_HOST'];
+    if('emu.hacktea8.com' != $host){
+      return false;
+    }
     $url = sprintf("http://c.3808010.com/code1/cpc_0_1_1.asp?w=960&h=130&s_h=1&s_l=6&c1=CCCCCC&c2=c90000&c3=ffffff&pid=264232&u=204756&top=%s&err=&ref=%s/",$this->viewData['current_url'],$host);
     $referer = 'http://'.$this->viewData['current_url'];
     $default_opts = array(
