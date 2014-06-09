@@ -250,8 +250,9 @@ function getinfodetail(&$data){
   preg_match('#<meta name="description" content="(.+)" />#U',$html,$match);
   $data['description']=trim($match[1]);
   //
-  preg_match($bookimg,$html,$match);
-  $data['thum']=trim($match[1]);
+//  preg_match($bookimg,$html,$match);
+//  $data['thum']=trim($match[1]);
+  $data['thum'] = '';
   //
   preg_match($detailPattern,$html,$match);
   $data['ptime']=time();//strtotime(trim($match[1]));

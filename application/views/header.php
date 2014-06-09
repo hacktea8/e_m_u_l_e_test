@@ -27,9 +27,9 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-43439571-1', 'hacktea8.com');
+  ga('create', 'UA-43439571-1', 'emubt.com');
   ga('send', 'pageview');
-
+var _action = '<?php echo $_a;?>';
 </script>
 <?php if(in_array($_a,array('index','lists','topic'))){ ?>
 <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>

@@ -17,14 +17,10 @@ sleep(600);
 break;
 }
 foreach($list as $val){
-$val['thum'] = getCover($val['ourl']);
-if('http://' != substr($val['thum'],0,7)){
-//  $val['thum'] = str_replace('/res','',$val['thum']);
-//  $tmp = explode('/',$val['thum']);
-//  $imp = array_pop($tmp);
-  //$val['thum'] = 'http://i.ed2kers.com/'.$val['thum'];
-  $val['thum'] = 'http://www.ed2kers.com/'.$val['thum'];
-}
+  $val['thum'] = getCover($val['ourl']);
+ if('http://' != substr($val['thum'],0,7)){
+  //$val['thum'] = getCover($val['ourl']);
+ }
 echo "==$val[id] $val[thum] ==\n";
 //exit;
 $data['imgurl'] = $val['thum'];

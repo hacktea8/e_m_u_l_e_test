@@ -162,6 +162,11 @@ class Index extends Usrbase {
   }
   public function topic($aid){
     $aid = intval($aid);
+    if($aid <1){
+      header('HTTP/1.1 301 Moved Permanently');
+      header('Location: /');
+      exit;
+    }
     $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
     $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
@@ -279,14 +284,16 @@ class Index extends Usrbase {
 //var_dump($_SERVER);exit;
     $url = $this->viewData['login_url'].urlencode($_SERVER['HTTP_REFERER']);
 //echo $url;exit;
-    redirect($url);
+    header('Location: '.$url);
+    exit;
   }
   public function loginout(){
     $this->session->unset_userdata('user_logindata');
     setcookie('hk8_auth','',time()-3600,'/');
     $url = $_SERVER['HTTP_REFERER'];
 //echo $url;exit;
-    redirect($url);
+    header('Location: '.$url);
+    exit;
   }
   public function isUserInfo(){
     $data = array('status'=>0);
