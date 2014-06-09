@@ -50,7 +50,7 @@ class Usrbase extends Webbase {
   }
   protected function _get_ads_link(){
    $click_ad_link = '';
-   $ad_key = 'ahref_click';
+   $ad_key = 'ahref_click'.$this->_a;
    if(!isset($_COOKIE[$ad_key]) && in_array($this->_a,array('lists','topic'))){
     $host = $_SERVER['HTTP_HOST'];
     $url = sprintf("http://c.3808010.com/code1/cpc_0_1_1.asp?w=960&h=130&s_h=1&s_l=6&c1=CCCCCC&c2=c90000&c3=ffffff&pid=264232&u=204756&top=%s&err=&ref=%s/",$this->viewData['current_url'],$host);
