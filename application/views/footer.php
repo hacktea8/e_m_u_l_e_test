@@ -3,14 +3,14 @@
 <div class="line_space"></div>
 <div style=" border: 1px solid #ccc; padding: 10px 14px;">
 <!--960X90_AD-->
-<?php if(in_array($_a,array('lists','topic'))){?>
+<?php if(0 &&in_array($_a,array('lists','topic'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
 <?php }?>
 </div>
 <div class="clear"></div>
 </div>
 <div class="mainDiv">
-<?php if(in_array($_a,array('lists'))){?>
+<?php if(in_array($_a,array('lists','topic'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("902635");</script>
 <?php }?>
 <div class="line_space"></div>

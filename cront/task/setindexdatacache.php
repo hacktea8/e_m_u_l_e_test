@@ -133,9 +133,9 @@ sleep(2);
         $list=array();
         foreach($subcate as $val){
 sleep(2);
-          $list[]=$this->getArticleListByCid($val['id'],0,1,15);
+          $list[]=$this->getArticleListByCid($val['id'],0,1,10);
         }
-        $this->emuleIndex['topiclist'][]=array('rand'=>$this->getArticleListByCid($pcid,1,1,20),'subcate'=>array('cate'=>$subcate,'list'=>$list));
+        $this->emuleIndex['topiclist'][]=array('rand'=>$this->getArticleListByCid($pcid,1,1,12),'subcate'=>array('cate'=>$subcate,'list'=>$list));
 
     }
 

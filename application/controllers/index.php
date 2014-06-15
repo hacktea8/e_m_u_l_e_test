@@ -168,6 +168,11 @@ class Index extends Usrbase {
       exit;
     }
     $data = $this->emulemodel->getEmuleTopicByAid($aid,$this->userInfo['uid'], $this->userInfo['isadmin'],0);
+    if(empty($data['info'])){
+      header('HTTP/1.1 301 Moved Permanently');
+      header('Location: /');
+      exit;
+    }
     $data['info']['ptime']=date('Y:m:d', $data['info']['ptime']);
     $data['info']['utime'] = date('Y/m/d', $data['info']['utime']);
     $this->_rewrite_list_url($data['postion']);

@@ -2,7 +2,7 @@
 
 $APPPATH=dirname(__FILE__).'/';
 include_once($APPPATH.'../db.class.php');
-
+require_once $APPPATH.'config.php';
 $pattern = '/ed2kers/grab.php';
 require_once $APPPATH.'singleProcess.php';
 
@@ -19,7 +19,7 @@ break;
 foreach($list as $val){
   $val['thum'] = getCover($val['ourl']);
  if('http://' != substr($val['thum'],0,7)){
-  //$val['thum'] = getCover($val['ourl']);
+  $val['thum'] = $_root.$val['thum'];
  }
 echo "==$val[id] $val[thum] ==\n";
 //exit;
@@ -32,7 +32,7 @@ echo $cover,"\n";
 if(44 == $cover){
   die('Token 失效!');
 }
-if(0 == $cover){
+if(0 == $cover || '2668249111_0000000002.jpg' == $cover){
   echo "$val[id] cover is down!\n";
   seterrcoverByid(4,$val['id']);
   continue;
@@ -73,6 +73,10 @@ function setcoverByid($cover = '',$id = 0){
     $db->query($sql);
 }
 function getCover($url){
+  global $_root;
+  if('http://' != substr($url,0,7)){
+    $url = $_root.$url;
+  }
   $data['url'] = $url;
   $html = getHtml($data);
   preg_match('#<div class="litimg fLeft">\s*<img alt="[^"]+" src="([^"]+)"[^>]*></div>#Uis',$html,$match);

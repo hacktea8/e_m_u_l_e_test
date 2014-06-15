@@ -1,0 +1,7 @@
+User-agent: *
+Sitemap: http://www.emubt.com/google_sitemap.xml
+Disallow: /index/addCollect/
+Disallow: /index/login
+Disallow: /index/loginout
+Disallow: /index/isUserInfo
+
