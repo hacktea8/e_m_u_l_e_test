@@ -240,15 +240,10 @@ class Index extends Usrbase {
     $list = array();
     $pageSize = 25;
     if($q){
-      $param = array('kw' => $q, 'page' => $page, 'page_size' => $pageSize);
-      if(1 == $type){
-        $param[] = '';
-      }elseif(2 == $type){
-        $param[] = '';
-      }
-      $this->load->library('aliyunsearchapi');
-      $this->aliyunsearchapi->getsearch($list, $type, $param);
-      $hotKeywords = $this->aliyunsearchapi->topQuery($params = array('num'=>8,'days'=>30));
+      $this->load->library('yunsearchapi');
+      $opt = array('query'=>$q,'start'=>$page,'hits'=>$pageSize);
+      $this->yunsearchapi->search($list,$opt);
+      $hotKeywords = $this->yunsearchapi->getTopQuery($num=8,$days=30);
       //var_dump($hotKeywords);exit;
       if('OK' == $hotKeywords['status']){
          $hotKeywords = $hotKeywords['result']['items']['emu_hacktea8'];
