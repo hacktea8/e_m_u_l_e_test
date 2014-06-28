@@ -128,5 +128,6 @@ foreach($infolist as &$row){
 </div><!-- End of page wrap-->
 <div class="mainDiv">
 <div class="line_space"></div>
+<a class="show_site_tags"><?php echo $seo_keywords;?></a>
 <div class="clear"></div>
 </div>

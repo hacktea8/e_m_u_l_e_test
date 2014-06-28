@@ -4,10 +4,10 @@ $root = dirname(__FILE__);
 define('BASEPATH',1);
 require_once $root.'/model.php';
 require_once $root.'/config.php';
-require_once $root.'/../../../application/libraries/Aliyunsearchapi.php';
+require_once $root.'/../../../application/libraries/Yunsearchapi.php';
 require_once $root.'/../../../application/helpers/rewrite_helper.php';
 
-$search = new AliyunSearchApi();
+$search = new Yunsearchapi();
 $model = new Model();
 $count = 200;
 
@@ -32,11 +32,11 @@ while($count){
       $itemArr['thumbnail'] = 'http://img.hacktea8.com/showpic.php?key='.$val['cover'];
       $itemArr['hit_num'] = $val['hits'];
       $itemArr['url'] = article_url($val['id']);
-      $_itemsArr[] = $itemArr;
+      $_itemsArr[] = array('fields'=>$itemArr,'cmd'=>'ADD');;
       $idarr[] = $val['id'];
    }
 //var_dump($_itemsArr);exit;
-   $search->adddocument($_itemsArr);
+   $search->addDoc($_itemsArr);
    $model->setIsSearch($idarr);
    $count --;
 }

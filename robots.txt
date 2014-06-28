@@ -1,7 +1,19 @@
 User-agent: *
 Sitemap: http://www.emubt.com/google_sitemap.xml
-Disallow: /index/addCollect/
-Disallow: /index/login
-Disallow: /index/loginout
-Disallow: /index/isUserInfo
+Disallow: /*index/addCollect/
+Disallow: /*index/login
+Disallow: /*index/loginout
+Disallow: /*index/isUserInfo
+Allow: /*index/
+Allow: /*.htm*
+Disallow: /*.php
+Disallow: /*.jpg
+Disallow: /*.jpeg
+Disallow: /*.gif
+Disallow: /*.png
+Disallow: /*.js
+Disallow: /*.css
+User-agent: Googlebot
+Disallow: /*/topic/307670
+Disallow: /*/topic/314041
 

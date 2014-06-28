@@ -73,20 +73,6 @@
 <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
                     </div>
 
-                        <div id="folderfavoritatips" style="position:absolute;margin:-35px 0 0 -38px;*margin:-15px 0 0 -239px;border:1px solid #cdb47e;width:310px;background:#ffffcd;display:none;height:55px;">
-                        <div style="position:absolute;height:12px;width:23px;margin:-12px 0 0 18px;background:url(<?php echo $img_url;?>tipstop.gif) no-repeat;"></div>
-                        <div style="padding:4px;color:#686459;">
-                            <span style="margin-left:3px;padding-top:4px;float:left;"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>light.gif?v=<?php echo $version;?>"></span>
-                            <div style="padding:4px;color:#686459;">
-                                <div style="padding:0px;margin:0px;margin-left:17px;">
-                                <span style="float:left">收藏资源后，一旦有新更新（字幕、文件）我们</span>
-                                <a href="#" style="float:right;display:block;padding:3px 7px 0 3px;padding:3px 3px 0 0\9;width:5px;height:30px;" onClick="return hidden_favorite_tips();"><img alt="<?php echo $info['name'];?>" title=""<?php echo $info['name'];?>" src="<?php echo $img_url;?>canceltips.gif?v=<?php echo $version;?>"></a>
-                                <div>将会用站内消息和电子邮件通知你。</div>
-                                <div style="clear:both"></div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
                 </span>
             </div>
             <div id="feedbackspan" style="float:left;width:100%;text-align:right;"></div>
@@ -158,6 +144,7 @@ VIP通道:<?php echo $info['vipdwurl'];?>
 <?php echo $info['intro'];?>
         <!--Wrap-tail end--></div>
                 </div>
+<a class="show_site_tags"><?php echo $seo_keywords;?></a>
   <div class="tab-nav group-mods">
 	<ul>
 	<li><a href="#theCon">详细内容</a></li>

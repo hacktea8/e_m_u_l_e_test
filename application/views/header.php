@@ -2,7 +2,7 @@
 <html lang="zh-CN" xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta content="<?php echo $seo_keywords,',',$web_title;?>,BT种子下载,电驴资源,eD2k,磁力链接,龙BT发布,BT之家" name="keywords">
+<meta content="<?php echo $seo_keywords,',',$web_title;?><?php if($_a != 'topic'){?>,BT种子下载,电驴资源,eD2k,磁力链接,龙BT发布,BT之家<?php }?>" name="keywords">
 <meta content="<?php echo $seo_title,'-',$web_title,$seo_description;?>" name="description">
 <?php if(isset($cid)){?>
 <link href="/api/feed/<?php echo $cid;?>" title="<?php echo $seo_title;?> - <?php echo $web_title;?>" type="application/rss+xml" rel="alternate">
@@ -161,6 +161,8 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
                 <li><a href="<?php echo $row['url'];?>" onclick="" class="<?php echo in_array($row['id'],array($cid,$cpid)) ? 'hover':'';?>"><?php echo $row['name'];?></a></li>
 <?php
 } ?>
+<li><a onclick="" href="http://btv.emubt.com" title="静思乐BT影视种子" target="_blank">静思乐</a></li>
+<li><a onclick="" href="http://jok.emubt.com" title="尽情爆笑吧" target="_blank">笑话</a></li>
 </ul>
 
 </div>

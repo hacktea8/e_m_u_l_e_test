@@ -154,7 +154,7 @@ class Index extends Usrbase {
        $title .= $row['name'];
        $kw .= $row['name'].',';
     }
-    $keywords = $kw.$this->seo_keywords;
+    $keywords = $kw.sprintf('ed2000.com,资源分享,ed2000资源共享,资源共享,ed2000,simplecd,ed,ed2k,人人影视,电驴');
   
     $this->assign(array('seo_title'=>$title,'seo_keywords'=>$keywords,'cpid'=>$cpid,'infolist'=>$data['emulelist'],'postion'=>$data['postion']
     ,'page_string'=>$page_string,'subcatelist'=>$data['subcatelist'],'cid'=>$cid));
@@ -187,8 +187,11 @@ class Index extends Usrbase {
     foreach($data['postion'] as $row){
        $kw .= $row['name'].',';
     }
-    $keywords = $data['info']['name'].','.$kw.$this->seo_keywords;
+    $channel = &$this->viewData['channel'];
+    $cinfo = $channel[$cpid];
+    
     $title = $data['info']['name'];
+    $keywords = sprintf('%s,%s下载,%s电驴资源,%sed2k,%s网盘下载,%s种子,%s在线,%s%s下载',$title,$title,$title,$title,$title,$title,$title,$title,$cinfo['name']);
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
     //$data['info']['downurl'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['downurl']);
     // not VIP Admin check verify
