@@ -3,7 +3,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta content="<?php echo $seo_keywords,',',$web_title;?><?php if($_a != 'topic'){?>,BT种子下载,电驴资源,eD2k,磁力链接,龙BT发布,BT之家<?php }?>" name="keywords">
-<meta content="<?php echo $seo_title,'-',$web_title,$seo_description;?>" name="description">
+<meta content="<?php echo $seo_description;?>" name="description">
 <?php if(isset($cid)){?>
 <link href="/api/feed/<?php echo $cid;?>" title="<?php echo $seo_title;?> - <?php echo $web_title;?>" type="application/rss+xml" rel="alternate">
 <?php }?>

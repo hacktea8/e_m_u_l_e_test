@@ -36,6 +36,8 @@
 <div id="#show_msg_div_" ></div>
 <div style="display:none;">
 <script type="text/javascript">
+var default_language = '<?php echo $language;?>';
+
 <?php if(in_array($_a,array('index','lists','fav','topic','search'))){ ?>
 $("img.lazy").show().lazyload({ 
     effect : "fadeIn",

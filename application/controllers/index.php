@@ -193,6 +193,9 @@ class Index extends Usrbase {
     $title = $data['info']['name'];
     $keywords = sprintf('%s,%s下载,%s电驴资源,%sed2k,%s网盘下载,%s种子,%s在线,%s%s下载',$title,$title,$title,$title,$title,$title,$title,$title,$cinfo['name']);
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
+    $seo_description = strip_tags($data['info']['intro']);
+    $seo_description = preg_replace('#\s+#Uis','',$seo_description);
+    $seo_description = mb_substr($seo_description,0,250);
     //$data['info']['downurl'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['downurl']);
     // not VIP Admin check verify
 /*
@@ -222,6 +225,7 @@ class Index extends Usrbase {
     }
     $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
     ,'right_hot'=>$right_hot,'bottom_cold'=>$bottom_cold
+    ,'seo_description'=>$seo_description
     )); 
     $ip = $this->input->ip_address();
     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
@@ -239,7 +243,8 @@ class Index extends Usrbase {
     $q = urldecode($q);
     $q = htmlentities($q);
     $page = intval($page);
-    $page = $page < 1 ? 1: $page;
+    $page = $page -1;
+    $page = $page < 0 ? 0: $page;
     $list = array();
     $pageSize = 25;
     if($q){
