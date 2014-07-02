@@ -141,7 +141,8 @@ VIP通道:<?php echo $info['vipdwurl'];?>
 </div>
             </div>
             <div class="iptcom" id="iptcomCname">
-<?php echo $info['intro'];?>
+<?php echo $info['name'],$info['intro'];?><br />
+如果您喜欢本网站(<?php echo $web_title;?>)的资源,请分享《<?php echo $info['name'];?>》.!
         <!--Wrap-tail end--></div>
                 </div>
 <a class="show_site_tags"><?php echo $seo_keywords;?></a>
