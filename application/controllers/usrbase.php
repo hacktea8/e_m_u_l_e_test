@@ -51,11 +51,10 @@ class Usrbase extends Webbase {
   }
   protected function _get_ads_link(){
    $click_ad_link = '';
-   $ad_key = 'ahref_click'.$this->_a;
    $pos = mt_rand(1,5);
-   $mod = mt_rand(0,6);
+   $mod = date('w');
    $ad_status = $this->rand_num_status($mod,$pos);
-   if( 0 && $ad_status && !isset($_COOKIE[$ad_key]) && in_array($this->_a,array('lists','topic'))){
+   if( $ad_status && !isset($_COOKIE[$ad_key]) && in_array($this->_a,array('lists','topic'))){
     $host = $_SERVER['HTTP_HOST'];
     $url = sprintf("http://c.3808010.com/code1/cpc_0_1_1.asp?w=960&h=130&s_h=1&s_l=6&c1=CCCCCC&c2=c90000&c3=ffffff&pid=264232&u=204756&top=%s&err=&ref=%s/",$this->viewData['current_url'],$host);
     $referer = 'http://'.$this->viewData['current_url'];
@@ -82,32 +81,32 @@ class Usrbase extends Webbase {
     //echo $links[$k];exit;
   }
   protected function rand_num_status($mod = 0,$val){
-    $ad_status = 1;
+    $ad_status = 0;
     if(0 == $mod){
-     if( in_array($pos,array(1,2,3,4,5))){
-      $ad_status = 0;
+     if( in_array($pos,array(2,3,4,5))){
+      $ad_status = 1;
      }
     }elseif(1 == $mod){
-     if( in_array($pos,array(2,3,4,5))){
-      $ad_status = 0;
+     if( in_array($pos,array(1,3,4,5))){
+      $ad_status = 1;
      }
     }elseif(2 == $mod){
-     if( in_array($pos,array(3,4,5))){
-      $ad_status = 0;
+     if( in_array($pos,array(1,2,4,5))){
+      $ad_status = 1;
      }
     }elseif(3 == $mod){
-     if( in_array($pos,array(4,5))){
-      $ad_status = 0;
+     if( in_array($pos,array(1,2,3,5))){
+      $ad_status = 1;
      }
     }elseif(4 == $mod){
-     if( in_array($pos,array(5))){
-      $ad_status = 0;
+     if( in_array($pos,array(1,2,3,4))){
+      $ad_status = 1;
      }
     }
     if($ad_status){
       return 1;
     }
-    setcookie($ad_key,'1',time()+2*3600,'/');
+    setcookie('ahref_click','1',time()+2*3600,'/');
     return 0;
   }
 }

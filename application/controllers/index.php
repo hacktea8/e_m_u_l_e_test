@@ -193,6 +193,8 @@ class Index extends Usrbase {
     $title = $data['info']['name'];
     $keywords = sprintf('%s,%s下载,%s电驴资源,%sed2k,%s网盘下载,%s种子,%s在线,%s%s下载',$title,$title,$title,$title,$title,$title,$title,$title,$cinfo['name']);
     $data['info']['intro'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['intro']);
+    $data['info']['intro'] = preg_replace('#<a.*>#Uis','',$data['info']['intro']);
+    $data['info']['intro'] = str_replace('</a>','',$data['info']['intro']);
     $seo_description = strip_tags($data['info']['intro']);
     $seo_description = preg_replace('#\s+#Uis','',$seo_description);
     $seo_description = mb_substr($seo_description,0,250);
