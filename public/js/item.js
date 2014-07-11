@@ -1,4 +1,5 @@
 window.onerror=function(){return true;}
+var _domain = 'www.qvdhd.com';
 $(function () {
 	//隔行变色
 	$('tr').addClass('odd');
@@ -11,10 +12,10 @@ $(function () {
 	//默认全选中
 	$("input:checkbox").attr("checked","checked");
 	$(".cbxitem").each(function(){
-		var es = $(this).val().replace("[emu.hacktea8.com]","");
+		var es = $(this).val().replace("["+_domain+"]","");
 		var es = es.split("|");
 		var fs = es[2].split(".");
-		fs[fs.length-2] = fs[fs.length-2]+"[emu.hacktea8.com]";
+		fs[fs.length-2] = fs[fs.length-2]+"["+_domain+"]";
 		es[2] = fs.join('.');
 		$(this).val(es.join('|'));
 		$(this).next().attr("href",$(this).val());

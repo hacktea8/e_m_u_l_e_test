@@ -163,6 +163,7 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 } ?>
 <li><a onclick="" href="http://btv.emubt.com" title="静思乐BT影视种子" target="_blank">静思乐</a></li>
 <li><a onclick="" href="http://jok.emubt.com" title="尽情爆笑吧" target="_blank">笑话</a></li>
+<li><a onclick="" href="http://www.qvdhd.com" title="QVDHD影院" target="_blank">QVDHD在线影院</a></li>
 </ul>
 
 </div>

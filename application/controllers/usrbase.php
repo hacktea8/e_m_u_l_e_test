@@ -80,26 +80,34 @@ class Usrbase extends Webbase {
     $this->assign(array('click_ad_link'=>$click_ad_link));
     //echo $links[$k];exit;
   }
-  protected function rand_num_status($mod = 0,$val){
+  protected function rand_num_status($mod = 0,$pos){
     $ad_status = 0;
     if(0 == $mod){
-     if( in_array($pos,array(2,3,4,5))){
+     if( in_array($pos,array(3,4,5))){
       $ad_status = 1;
      }
     }elseif(1 == $mod){
-     if( in_array($pos,array(1,3,4,5))){
+     if( in_array($pos,array(1,4,5))){
       $ad_status = 1;
      }
     }elseif(2 == $mod){
-     if( in_array($pos,array(1,2,4,5))){
+     if( in_array($pos,array(4,5))){
       $ad_status = 1;
      }
     }elseif(3 == $mod){
-     if( in_array($pos,array(1,2,3,5))){
+     if( in_array($pos,array(1,5))){
       $ad_status = 1;
      }
     }elseif(4 == $mod){
-     if( in_array($pos,array(1,2,3,4))){
+     if( in_array($pos,array(1,2,4))){
+      $ad_status = 1;
+     }
+    }elseif(5 == $mod){
+     if( in_array($pos,array(3,4))){
+      $ad_status = 1;
+     }
+    }elseif(6 == $mod){
+     if( in_array($pos,array(1,3,4))){
       $ad_status = 1;
      }
     }
