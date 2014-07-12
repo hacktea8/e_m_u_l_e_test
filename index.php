@@ -1,5 +1,5 @@
 <?php
-redirect();
+//redirect();
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -199,6 +199,10 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+/* cache html
+define('CACHEDIR',APPPATH.'cache/webhtmlcache/');
+webhtmlcache();
+*/
 require_once BASEPATH.'core/CodeIgniter.php';
 
 function redirect(){
@@ -213,4 +217,31 @@ $jumpUrl = 'Location: http://'.$root.$uri;
 header('HTTP/1.1 301 Moved Permanently');
 header($jumpUrl);// 301 跳转到设置的 url
 exit(0);
+}
+function webhtmlcache(){
+$param = explode('/',$_SERVER['REQUEST_URI']);
+$aid = intval($param[3]);
+$cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
+if(isset($_COOKIE['ahref_click']) && !isset($_GET['_makehtml']) && stripos($_SERVER['REQUEST_URI'],'/topic/') && file_exists($cache_file)){
+  $html = file_get_contents($cache_file);
+  echo $html;exit;
+}
+if(isset($_GET['_makehtml']) && stripos($_SERVER['REQUEST_URI'],'/topic/')){
+ if( file_exists($cache_file) && (time() - filemtime($cache_file)) < 3600){
+   die('cache');
+ }
+}
+//走PHP路由
+#echo $cache_file;exit;
+}
+function makedir($dir,$mod = 0777,$mkindex = true){
+if(!is_dir($dir)) {
+ makedir(dirname($dir), $mod, $mkindex);
+ @mkdir($dir, $mod);
+ @chmod($dir, 0777);
+ if(!empty($mkindex)) {
+   @touch($dir.'/index.htm'); @chmod($dir.'/index.htm', 0777);
+ }
+}
+return true;
 }
