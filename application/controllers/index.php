@@ -225,8 +225,12 @@ class Index extends Usrbase {
       $this->mem->set('emu-right_hot'.$cid,$right_hot,$this->expirettl['3h']);
       $this->mem->set('emu-bottom_cold'.$cid,$bottom_cold,$this->expirettl['3h']);
     }
-    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
+    $_makehtml = isset($_GET['_makehtml'])?1:0;
+    $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode
+    ,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid
+    ,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
     ,'right_hot'=>$right_hot,'bottom_cold'=>$bottom_cold
+    ,'_makehtml'=>$_makehtml
     ,'seo_description'=>$seo_description
     )); 
     $ip = $this->input->ip_address();
