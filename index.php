@@ -1,5 +1,5 @@
 <?php
-//redirect();
+redirect();
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

@@ -3,7 +3,7 @@
 <div class="line_space"></div>
 <div style=" border: 1px solid #ccc; padding: 10px 14px;">
 <!--960X90_AD-->
-<?php if(in_array($_a,array('lists','topic'))){?>
+<?php if( $click_ad_dh>=7 && $click_ad_dh<=18 &&in_array($_a,array('lists','topic'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
 <?php }?>
 </div>
@@ -39,11 +39,17 @@
 var default_language = '<?php echo $language;?>';
 
 <?php if(in_array($_a,array('index','lists','fav','topic','search'))){ ?>
-$("img.lazy").show().lazyload({ 
-    effect : "fadeIn",
-    //placeholder : "img/grey.gif",
-    placeholder : '<?php echo $errorimg;?>',
-    threshold : 60
+$(function() {          
+ $("img.lazy").lazyload({
+  event : "sporty",
+  effect : "fadeIn",
+  //placeholder : "img/grey.gif",
+  placeholder : '<?php echo $errorimg;?>',
+  threshold : 60
+ });
+});
+$(window).bind("load", function() { 
+ var timeout = setTimeout(function() { $("img.lazy").trigger("sporty") }, 5000);
 });
 function show404(img){
 //var img=this;//event.srcElement;

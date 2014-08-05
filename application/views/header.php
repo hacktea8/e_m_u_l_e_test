@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="<?php echo $css_url;?>global.css?v=<?php echo $version;?>" type="text/css">
 <link rel="stylesheet" href="<?php echo $css_url,$_c,'_',$_a;?>.css?v=<?php echo $version;?>" type="text/css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $js_url;?>global.js?v=<?php echo $version;?>"></script>
 <?php if(in_array($_a,array('index','lists','topic','fav','search'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
@@ -29,7 +29,7 @@
 
   ga('create', 'UA-43439571-1', 'emubt.com');
   ga('send', 'pageview');
-var _action = '<?php echo $_a;?>';
+var _action = '<?php //echo $_a;?>';
 </script>
 <?php if(in_array($_a,array('index','lists','topic'))){ ?>
 <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
@@ -42,8 +42,7 @@ var _action = '<?php echo $_a;?>';
 <?php }?>
 <a style="display: none;" id="gotop" href="#" title="返回顶部" onfocus="this.blur()"> <span><em class="tr">♦</em><em class="tube">▐</em></span></a>
 <div style="height: 31px;">
-<div id="header_div"><iframe scrolling="no" frameborder="no"
-	src="about:blank" class="topbar_iframe"></iframe>
+<div id="header_div">
 <div class="mainDiv" id="notice_wrapper">
 <ul class="header_link clearfix">
   <li class="link_item"><a href="/"
@@ -126,7 +125,7 @@ onclick="" class="hover_red"><strong>首页</strong></a></li>
 	onload="this.onload=''; if(this.style.filter) { this.src='<?php echo $img_url;?>search0.gif'; this.width=18; this.height=18; }"
 	style=""
 	src="<?php echo $img_url;?>entries.png?v=<?php echo $version;?>"
-	alt="" id="current-search-module-img"> </span> <input type="text"
+	alt="<?php echo $web_title;?> - 搜索search" id="current-search-module-img"> </span> <input type="text"
 	tabindex="1" 
 	x-webkit-grammar="builtin:translate" x-webkit-speech=""
 	onblur="if(this.value=='')this.value='搜索资料标题、内容...';this.style.color='#999';"

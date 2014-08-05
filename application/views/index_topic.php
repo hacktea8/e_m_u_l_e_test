@@ -48,7 +48,7 @@
         <div class="block2" style="float:left;">
             <div style="float:left;">
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
-                    <a class="addFav" alt="收藏该资源" id="addFav"><img src="<?php echo $img_url,$isCollect?'del':'','favorite.gif';?>" id="addFavBtn" alt="收藏该资源" /></a>
+                    <a class="addFav" alt="收藏<?php echo $info['name'];?>资源" id="addFav"><img src="<?php echo $img_url,$isCollect?'del':'','favorite.gif';?>" id="addFavBtn" alt="收藏<?php echo $info['name'];?>资源" /></a>
                     <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;z-index:3;" id="folderfavoritatips">
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
@@ -159,7 +159,7 @@ VIP通道:<?php echo $info['vipdwurl'];?>
 <div id="ujian-hook" class="ujian-hook"></div>
 <script type="text/javascript">var ujian_config = {num:14,itemTitle:'猜你喜欢:',picSize:84,textHeight:45};</script>
 <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1762590"></script>
-<a href="" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<a href="" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="<?php echo $info['name'];?>相关云推荐" style="border:0;padding:0;margin:0;" /></a>
 <!-- UJian Button END -->
 </div>
 <div class="tab_con_tab" id="con_theRes">
@@ -172,7 +172,7 @@ if($key%4==0){
 }
 ?>	   	            			<td>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank">
-<img class="lazy folder-entry-thumb" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
+<img class="lazy folder-entry-thumb" src="<?php echo $errorimg;?>" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="folder-entry-thumb" /></noscript></a>
 <a title="<?php echo $row['name'];?>" class="folder-entry-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </td>
 <?php
@@ -238,7 +238,7 @@ foreach($info['relatdata'] as $row){
 ?>
   <p class="itshot">
    <a class="relatelink" href="<?php echo $row['id'];?>" onClick="" target="_blank">
-           <img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a>
+           <img class="lazy hot_img" src="<?php echo $errorimg;?>"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a>
 			 <a title="{$row['name']}" class="topic-title" href="<?php echo $row['url'];?>" onClick="" target="_blank"><?php echo $row['name'];?></a>
 </p>
 <?php
@@ -251,7 +251,7 @@ foreach($info['relatdata'] as $row){
 foreach($right_hot as $row){
 ?>
 <dd class="itshot">
-<a id="entry_link_<?php echo $row['id'];?>" title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank" style="text-decoration:none;"><img class="lazy hot_img"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px;display:inline;" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="hot_img" /></noscript>
+<a id="entry_link_<?php echo $row['id'];?>" title="<?php echo $row['name'];?>" href="<?php echo $row['url'];?>" onClick="" target="_blank" style="text-decoration:none;"><img class="lazy hot_img" src="<?php echo $errorimg;?>"  data-original="<?php echo $showimgapi,$row['cover'];?>" style="width: 100px; height: 100px;display:inline;" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" alt="<?php echo $row['name'];?>" title="<?php echo $row['name'];?>" class="hot_img" /></noscript>
   <div id="entry_<?php echo $row['id'];?>" style="display:none;" class="entry_score_small"></div>
 </a>
   <br>

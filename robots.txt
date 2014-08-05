@@ -11,11 +11,4 @@ Disallow: /*.gif
 Disallow: /*.js
 Disallow: /*.css
 User-agent: Googlebot
-Disallow: /*/topic/307670
-Disallow: /*/topic/314041
-Disallow: /*/topic/1728
-Disallow: /*/topic/268926
-Disallow: /*/topic/43124
-Disallow: /*/topic/282481
-Disallow: /*/topic/231506
 

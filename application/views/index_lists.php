@@ -51,7 +51,7 @@ continue;
 foreach($hotTopic as &$row){
 ?>
 <dd class="leftMiddle">
-   <a href="<?php echo $row['url'];?>" onClick="" style="text-decoration:none;" id="entry_link_<?php echo $row['id'];?>"><img class="lazy hot_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a><br>
+   <a href="<?php echo $row['url'];?>" onClick="" style="text-decoration:none;" id="entry_link_<?php echo $row['id'];?>"><img class="lazy hot_img" src="<?php echo $errorimg;?>" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" style="width: 100px; height: 100px" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="hot_img" /></noscript></a><br>
 <a href="<?php echo $row['url'];?>" onClick=""><?php echo $row['name'];?></a>
             </dd>
 <?php
@@ -93,14 +93,14 @@ foreach($hotTopic as &$row){
         <option value="update">更新时间从老到新</option>
         <option value="rupdate" selected="selected">更新时间从新到老</option>
     </select>
-    <span class="left_class_filter"><img alt="<?php echo $web_title;?>" title="<?php echo $web_title;?>" src="<?php echo $img_url;?>line.gif?v=<?php echo $version;?>"></span>
+    <span class="left_class_filter"><img alt="<?php echo $web_title;?>" alt="<?php echo $web_title;?> -排序" title="<?php echo $web_title;?>-排序" src="<?php echo $img_url;?>line.gif?v=<?php echo $version;?>"></span>
         </div>
 </form></li>
 <?php
 foreach($infolist as &$row){
 ?>
         <li>
-          <a href="<?php echo $row['url'];?>" onClick=""><img class="lazy file_img" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="file_img" /></noscript></a>
+          <a href="<?php echo $row['url'];?>" onClick=""><img class="lazy file_img" src="<?php echo $errorimg;?>" data-original="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" /><noscript><img src="<?php echo $showimgapi,$row['cover'];?>" title="<?php echo $row['name'];?>" alt="<?php echo $row['name'];?>" class="file_img" /></noscript></a>
  <h3>
 <span class="left_topics_class_sort"><a href="<?php echo $channel[$row['cid']]['url'];?>"><?php echo $channel[$row['cid']]['name'];?></a></span> <a href="<?php echo $row['url'];?>" onClick=""><?php echo $row['name'];?></a>
  </h3>

@@ -13,6 +13,7 @@ $task = 600;
 while($task){
 $list = getnocoverlist();
 if(empty($list)){
+echo "\n=== The List Empty! ====\n";
 sleep(600);
 break;
 }
