@@ -13,6 +13,11 @@ $count = 200;
 
 while($count){
    $lists = $model->getNoneSearchLimit(5);
+   if(empty($lists)){
+     echo "\n==== List is Empty! =====\n";
+     break;
+   }
+   echo "+++++ The Task is $count ++++++\n";
 //var_dump($lists);exit;
    $_itemsArr = array();
    $idarr = array();

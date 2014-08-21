@@ -2,7 +2,7 @@
 */config/development
 */logs/log-*.php
 */logs/!index.html
-*/cache/*
+*.sql*
 *.swp
 *.swo
 *.bak

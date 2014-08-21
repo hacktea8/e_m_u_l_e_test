@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'emuweb';
-$db['default']['password'] = 'ilovehk8';
+$db['default']['password'] = 'ilove';
 $db['default']['database'] = 'emuweb';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'pw_';

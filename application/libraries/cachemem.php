@@ -4,9 +4,9 @@ defined('BASEPATH') || exit('Forbidden');
 *
 *
 */
-class Memcache{
+class Cachemem{
   private $_memcached;	// Holds the memcached object
-  public $pre = 'emu';
+  public $pre = 'btv';
   protected $_memcache_conf = array(
 			      'default' => array(
 			      'hostname'=> '127.0.0.1',
