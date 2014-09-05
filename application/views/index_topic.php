@@ -298,7 +298,9 @@ $.get("/index/addCollect/<?php echo $info['id'];?>", function(result){
 },'json');
 });
 <?php if($_makehtml){ ?>
-function _loadTopic(){$.get("/index/topic/<?php echo $aid;?>/?_makehtml=1");}
+function _loadTopic(){$.get("/index/topic/<?php echo $aid;?>/?_makehtml=1");
+$.get("/ajaxapi/article_pv/<?php echo $aid;?>");
+}
 $(document).ready(function(){
 window.setTimeout("_loadTopic()",5000);
 });

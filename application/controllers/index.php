@@ -225,22 +225,24 @@ class Index extends Usrbase {
       $this->mem->set('emu-right_hot'.$cid,$right_hot,$this->expirettl['3h']);
       $this->mem->set('emu-bottom_cold'.$cid,$bottom_cold,$this->expirettl['3h']);
     }
-    $_makehtml = isset($_GET['_makehtml'])?1:0;
+    $_makehtml = $this->static_html;
     $this->assign(array('isCollect'=>$isCollect,'verifycode'=>$verifycode
     ,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid
     ,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
     ,'right_hot'=>$right_hot,'bottom_cold'=>$bottom_cold
     ,'_makehtml'=>$_makehtml
     ,'seo_description'=>$seo_description
-    )); 
-    $ip = $this->input->ip_address();
-    $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
-//var_dump($this->redis->exists($key));exit;
-    if(!$this->redis->exists($key)){
-       $this->redis->set($key, 1, $this->expirettl['6h']);
+    ));
+    if( !$this->static_html){
+     $ip = $this->input->ip_address();
+     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
+ //var_dump($this->redis->exists($key));exit;
+     if(!$this->redis->exists($key)){
+       $this->redis->set($key, 1, $this->expirettl['1d']);
+     }
     }
     $this->view('index_topic');
-    if(isset($_GET['_makehtml'])){
+    if( !$this->robot && isset($_GET['_makehtml'])){
       $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
       $cache_dir = dirname($cache_file);
       makedir($cache_dir,0777);

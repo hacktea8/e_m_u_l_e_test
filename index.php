@@ -199,10 +199,10 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
-/* cache html
+/* cache html  */
 define('CACHEDIR',APPPATH.'cache/webhtmlcache/');
 webhtmlcache();
-*/
+/**/
 require_once BASEPATH.'core/CodeIgniter.php';
 
 function redirect(){

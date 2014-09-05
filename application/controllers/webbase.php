@@ -10,6 +10,8 @@ class Webbase extends CI_Controller {
   public $adminList = array(1);
   protected $_c = 'index'; 
   protected $_a = 'index'; 
+  protected $static_html = '1'; 
+  public $robot = 0;
   
   public function __construct(){
     parent::__construct();
@@ -37,13 +39,14 @@ class Webbase extends CI_Controller {
       $this->userInfo = $session_uinfo;
     }
     //var_dump($this->userInfo);exit;
-    $this->_c = $this->uri->segment(1,'index');
-    $this->_a = $this->uri->segment(2,'index');
+    $this->_c = $this->_get_c_a(1,'index');
+    $this->_a = $this->_get_c_a(2,'index');
     $c = isset($_GET['c'])?$_GET['c']:'';
     if($c){
        $this->_a = 'list' == $c ? 'lists' : 'topic';
     }
     $current_url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $this->checkIsrobot();
     $this->assign(array('domain'=>$this->config->item('domain'),
                 'base_url'=>$this->config->item('base_url'),'css_url'=>$this->config->item('css_url'),
                 'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
@@ -122,5 +125,16 @@ class Webbase extends CI_Controller {
        }
     }
     return $return;
+  }
+  protected function _get_c_a($index, $default = 'index'){
+    $return = '';
+    $return = $this->uri->segment($index, $default);
+    $return = str_replace('.','', $return);
+    return $return?$return:$default;
+  }
+  protected function checkIsrobot(){
+    if( isset($_SERVER['HTTP_USER_AGENT']) && false !== stripos($_SERVER['HTTP_USER_AGENT'],'spider')){
+      $this->robot = 1;
+    }
   }
 }
