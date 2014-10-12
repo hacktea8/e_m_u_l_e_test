@@ -1,4 +1,5 @@
 <?php
+$POST_API = 'http://www.emubt.com/grabapi/';
 
 $cateid=2;$pageno=1;
 $head='<div class="destext">';

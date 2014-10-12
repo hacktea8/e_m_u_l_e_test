@@ -2,6 +2,7 @@
 
 include_once($APPPATH.'../db.class.php');
 include_once($APPPATH.'../model.php');
+include_once($APPPATH.'../post_fun.php');
 
 $model=new Model();
 
@@ -174,7 +175,7 @@ function getinfolist(&$cateurl){
  // $flag=getlastgrabinfo();
  // $getpsize=true;
 
-  for($i=1;$i<=60;$i++){
+  for($i=1;$i<=6;$i++){
 /*
     if($flag){
        $i=$psize=$pageno;
@@ -203,7 +204,8 @@ function getinfolist(&$cateurl){
 
 //在判断是否更新
       //$aid=$model->checkArticleByOid($oid,$utime);
-      $aid=$model->checkArticleByOname($oname);
+      //$aid=$model->checkArticleByOname($oname);
+      $aid = checkArticleByOname($oname);
       if($aid){
          echo "{$aid}已存在未更新!\r\n";
  //        continue;
@@ -239,7 +241,7 @@ return 0;
 function getinfodetail(&$data){
   global $model,$cid,$bookimg,$detailPattern,$bookdownPattern,$strreplace,$str,$head,$end,$same,$pregreplace,$bookdesPattern;
   
-  $html=getHtml($data['ourl']);
+  $html = getHtml($data['ourl']);
   if(!$html){
     echo "获取html失败";exit;
   }
@@ -255,37 +257,37 @@ function getinfodetail(&$data){
   $data['thum'] = '';
   //
   preg_match($detailPattern,$html,$match);
-  $data['ptime']=time();//strtotime(trim($match[1]));
-  $data['utime']=time();//strtotime(trim($match[2]));
+  $data['ptime'] = time();//strtotime(trim($match[1]));
+  $data['utime'] = time();//strtotime(trim($match[2]));
 //  var_dump($match);exit;
   
 //  preg_match($bookdownPattern,$html,$match);
   getTagpair($str,$html,$head,$end,$same);
-  $data['downurl']=$str;
+  $data['downurl'] = $str;
   foreach($strreplace as $val){
-    $data['downurl']=str_replace($val['from'],$val['to'],$data['downurl']);
+    $data['downurl'] = str_replace($val['from'],$val['to'],$data['downurl']);
   }
   foreach($pregreplace as $val){
-    $data['downurl']=preg_replace($val['from'],$val['to'],$data['downurl']);
+    $data['downurl'] = preg_replace($val['from'],$val['to'],$data['downurl']);
   }
-  $data['downurl']=trim($data['downurl']);
+  $data['downurl'] = trim($data['downurl']);
   //
 //  preg_match($bookdesPattern,$html,$match);
   for($mk=0;$mk<2;$mk++){
-    $start=stripos($html,$head)+strlen($head);
-    $html=substr($html,$start);
+    $start = stripos($html,$head)+strlen($head);
+    $html = substr($html,$start);
   }
   $html=$head.$html;
   getTagpair($str,$html,$head,$end,$same);
-  $data['intro']=$str;
+  $data['intro'] = $str;
 //echo $str;exit;
   foreach($strreplace as $val){
-    $data['intro']=str_replace($val['from'],$val['to'],$data['intro']);
+    $data['intro'] = str_replace($val['from'],$val['to'],$data['intro']);
   }
   foreach($pregreplace as $val){
-    $data['intro']=preg_replace($val['from'],$val['to'],$data['intro']);
+    $data['intro'] = preg_replace($val['from'],$val['to'],$data['intro']);
   }
-  $data['intro']=trim($data['intro']);
+  $data['intro'] = trim($data['intro']);
   if(!$data['name'] || !$data['downurl']){
      echo "抓取失败 $data[ourl] \r\n";
      return false;
@@ -297,8 +299,9 @@ foreach($data as $key=>$val){
    $data[$key]=mysql_real_escape_string($val);
 }
 */
-  //echo '<pre>';var_dump($data);exit;
-  $aid=$model->addArticle($data);
+  echo '<pre>';var_dump($data);exit;
+  //$aid = $model->addArticle($data);
+  $aid = addArticle($data);
 //echo '|',$aid,'|';exit;
   if(!$aid){
     echo "添加失败! $data[ourl] \r\n";
