@@ -1,10 +1,10 @@
 <?php
 
-include_once($APPPATH.'../db.class.php');
-include_once($APPPATH.'../model.php');
+//include_once($APPPATH.'../db.class.php');
+//include_once($APPPATH.'../model.php');
 include_once($APPPATH.'../post_fun.php');
 
-$model=new Model();
+//$model=new Model();
 
 /*
 获取配对的标签的内容
@@ -208,7 +208,7 @@ function getinfolist(&$cateurl){
       $aid = checkArticleByOname($oname);
       if($aid){
          echo "{$aid}已存在未更新!\r\n";
- //        continue;
+         continue;
         return 6;
       }
       $purl=$_root.$list[1].'.html';
@@ -233,13 +233,13 @@ if($i>30)
 //echo $cateurl,"\n",$psize,"\n",var_dump($matches);exit;
     }
 */
-sleep(1);
+sleep(6);
   }
 return 0;
 }
 
 function getinfodetail(&$data){
-  global $model,$cid,$bookimg,$detailPattern,$bookdownPattern,$strreplace,$str,$head,$end,$same,$pregreplace,$bookdesPattern;
+  global $model,$cid,$bookimg,$detailPattern,$bookdownPattern,$strreplace,$str,$head,$end,$same,$pregreplace,$bookdesPattern,$_root;
   
   $html = getHtml($data['ourl']);
   if(!$html){
@@ -299,15 +299,17 @@ foreach($data as $key=>$val){
    $data[$key]=mysql_real_escape_string($val);
 }
 */
-  echo '<pre>';var_dump($data);exit;
+  $data['ourl'] = str_replace($_root,'',$data['ourl']);
+  //echo '<pre>';var_dump($data);exit;
   //$aid = $model->addArticle($data);
   $aid = addArticle($data);
 //echo '|',$aid,'|';exit;
   if(!$aid){
-    echo "添加失败! $data[ourl] \r\n";
-    return false;
+    echo "添加失败! $data[ourl] Cid: $data[cid] ====\r\n";
+exit;    return false;
   }
   echo "添加成功! $aid \r\n";
+//exit;
 }
 
 function getHtml($url){
