@@ -242,7 +242,7 @@ class Index extends Usrbase {
      }
     }
     $this->view('index_topic');
-    if( !$this->robot && isset($_GET['_makehtml'])){
+    if( !$this->robot && $this->static_html && isset($_GET['_makehtml'])){
       $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
       $cache_dir = dirname($cache_file);
       makedir($cache_dir,0777);

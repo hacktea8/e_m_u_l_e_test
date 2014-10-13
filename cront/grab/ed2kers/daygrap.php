@@ -20,7 +20,9 @@ $path=$APPPATH.'config/';
 
 //$rootcate=$model->getCateInfoBypid(0);
 getsubcatelist($subcate);
-//var_dump($subcate);exit;
+$json = json_encode($subcate);
+file_put_contents($APPPATH.'subcate.json',$json);
+var_dump($subcate);exit;
 foreach($subcate as $_cate){
    $lastgrab=$path.$_cate['id'].'_'.$lastgrab;
    //getCatearticle($_cate['id']);

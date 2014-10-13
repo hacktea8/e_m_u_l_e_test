@@ -40,12 +40,12 @@ if(0 == $cover || '2668249111_0000000002.jpg' == $cover){
 }
 //
 setcoverByid($cover,$val['id']);
-sleep(5);
+sleep(15);
 }
 //var_dump($list);exit;
 $task --;
 //2min
-sleep(8);
+sleep(18);
 }
 file_put_contents('imgres.txt',$val['id']);
 

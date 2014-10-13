@@ -6,4 +6,4 @@
 *.swp
 *.swo
 *.bak
-*cache/*
+*/cache

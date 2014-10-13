@@ -15,14 +15,15 @@ $keys = $redis->keys('emuhitslog:*');
 
 foreach($keys as $k){
   $id = explode(':',$k);
+  $hit = $redis->get($k);
   $id = array_pop($id);
-//var_dump($id);exit;
-  $model->setTopicHitsLog($id);
+//var_dump($hit);exit;
+  $model->setTopicHitsLog($id,$hit);
   $redis->delete($k);
 //  usleep(1000);
 }
 
-echo "\n===$id=== Update Emule Topic Hit Log OK! ========\n";
+echo "\n===".count($keys)."=== Update Emule Topic Hit Log OK! ========\n";
 
 class model{
   protected $db;
@@ -30,11 +31,11 @@ class model{
   function __construct(){
     $this->db = new DB_MYSQL();
   }
-  function setTopicHitsLog($id){
+  function setTopicHitsLog($id,$hit){
     if(!$id){
        return false;
     }
-    $sql = sprintf('UPDATE %s SET `hits`=`hits`+1 WHERE `id`=%d LIMIT 1',$this->db->getTable('emule_article'), $id);
+    $sql = sprintf('UPDATE %s SET `hits`=`hits`+%d WHERE `id`=%d LIMIT 1',$this->db->getTable('emule_article'), $hit,$id);
     $this->db->query($sql);
     return true;
   }
