@@ -9,7 +9,7 @@ require_once($root.'../../application/libraries/rediscache.php');
 $model = new model();
 
 $redis = new Rediscache();
-$keys = $redis->keys('emuhitslog:*');
+$keys = $redis->keys('user_topic_hits:*');
 
 //var_dump($keys);exit;
 
