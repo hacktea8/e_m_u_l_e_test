@@ -137,7 +137,7 @@ alert('验证码输入有误!');
 VIP通道:<?php echo $info['vipdwurl'];?>
 </div>
 <div onclick="_hmt.push(['_trackEvent', 'download', 'click_down_method', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
-<a href="http://goo.gl/iIn59w" target="_blank">如何快速下载资源(点我告诉你!)</a>
+<a href="http://www.hacktea8.com/thread-9650-1-1.html" target="_blank">如何快速下载资源(点我告诉你!)</a>
 </div>
             </div>
             <div class="iptcom" id="iptcomCname">

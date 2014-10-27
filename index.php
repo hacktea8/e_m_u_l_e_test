@@ -222,7 +222,7 @@ function webhtmlcache(){
 $param = explode('/',$_SERVER['REQUEST_URI']);
 $aid = intval($param[3]);
 $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
-if( stripos($_SERVER['REQUEST_URI'],'/topic/') && file_exists($cache_file) && (time() - filemtime($cache_file)) < 86400){
+if( stripos($_SERVER['REQUEST_URI'],'/topic/')>0 && file_exists($cache_file) && (time() - filemtime($cache_file)) < 86400){
   $html = file_get_contents($cache_file);
   echo $html;exit;
 }
