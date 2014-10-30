@@ -23,7 +23,7 @@ class grabapiModel extends CI_Model{
       return 0;
     }
     $head = $this->copy_array($data,array('name','cid','thum','ourl','ptime','utime'));
-    $contents = $this->copy_array($data,array('intro','actor','keyword'));
+    $contents = $this->copy_array($data,array('intro','downurl'));
     $sql = $this->db->insert_string($this->db->dbprefix('emule_article'),$head);
     $this->db->query($sql);
     $id = $this->db->insert_id();

@@ -16,6 +16,7 @@
 */
 $config['base_url']	= '';
 $config['admin_email']	= 'emu$hacktea8.com($ => @)';
+$config['cdn_url']	= '';
 $config['js_url']	= '/public/js/';
 $config['css_url']	= '/public/css/';
 $config['img_url']	= '/public/images/';

@@ -9,7 +9,7 @@ require_once $APPPATH.'singleProcess.php';
 $db=new DB_MYSQL();
 
 $data = array('url' => 'http://img.hacktea8.com/imgapi/uploadurl?seq=', 'imgurl'=>'');
-$task = 600;
+$task = 5;
 while($task){
 $list = getnocoverlist();
 if(empty($list)){

@@ -18,7 +18,7 @@ redirect();
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'production');
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -222,14 +222,9 @@ function webhtmlcache(){
 $param = explode('/',$_SERVER['REQUEST_URI']);
 $aid = intval($param[3]);
 $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
-if(isset($_COOKIE['ahref_click']) && !isset($_GET['_makehtml']) && stripos($_SERVER['REQUEST_URI'],'/topic/') && file_exists($cache_file)){
+if( stripos($_SERVER['REQUEST_URI'],'/topic/')>0 && file_exists($cache_file) && (time() - filemtime($cache_file)) < 86400){
   $html = file_get_contents($cache_file);
   echo $html;exit;
-}
-if(isset($_GET['_makehtml']) && stripos($_SERVER['REQUEST_URI'],'/topic/')){
- if( file_exists($cache_file) && (time() - filemtime($cache_file)) < 3600){
-   die('cache');
- }
 }
 //走PHP路由
 #echo $cache_file;exit;

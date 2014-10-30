@@ -35,9 +35,11 @@ class Usrbase extends Webbase {
       $channel = $this->emulemodel->getChannels();
       $this->_rewrite_list_url($channel);
       $this->mem->set('emu-channel',$channel,$this->expirettl['1d']);
-    } 
+    }
+    $cdn_url = $this->config->item('cdn_url');
     $this->assign(array(
-    'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description,'seo_title'=>$this->seo_title
+    'seo_keywords'=>$this->seo_keywords,'seo_description'=>$this->seo_description
+    ,'seo_title'=>$this->seo_title,'cdn_url'=>$cdn_url
     ,'showimgapi'=>$this->showimgapi,'error_img'=>$this->showimgapi.'3958009_0000671092.jpg','hotTopic'=>$hotTopic,'rootCate'=>$rootCate,'click_ad_link'=>''
     ,'cpid'=>0,'cid'=>0,'channel'=>$channel,'language'=>$this->language
     ,'editeUrl' => '/edite/index/emuleTopicAdd'

@@ -38,6 +38,11 @@ class Rediscache{
     $key = $this->getkey($key);
     return $this->redis->keys($key);
   }
+  public function incr($key,$v=1){
+    $key = $this->getkey($key);
+    $this->redis->incrBy($key,$v);
+    return 1;
+  }
   public function mset($data){
     if(is_array($data))
       return $this->redis->mset($data);
