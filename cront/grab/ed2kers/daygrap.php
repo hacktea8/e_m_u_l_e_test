@@ -1,4 +1,6 @@
 <?php
+$abort = 0;
+$lastK = 145;
 
 $APPPATH=dirname(__FILE__).'/';
 $psize=10;
@@ -28,11 +30,10 @@ if(0){
  $subcate = file_get_contents($APPPATH.'subcate.json');
  $subcate = json_decode($subcate, 1);
 }
-$abort = 0;
-$lastK = 0;
-
+$allCate = count($subcate);
 foreach($subcate as $k => $_cate){
- echo "\n===== Current Index $k  Cid $_cate[id]  Url $_cate[url] =======\n";
+//var_dump($_cate);exit;
+ echo "\n===== All $allCate Current Index $k  Cid $_cate[id]  Url $_cate[url] =======\n";
  if($abort && $k < $lastK){
   continue;
  }

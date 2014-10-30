@@ -32,4 +32,23 @@ function addArticle($data){
 //var_dump($html);exit;
   return json_decode($html,1);
 }
-
+if( !function_exists('getHtml')){
+function getHtml($url){
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.3 (Windows; U; Windows NT 5.3; zh-TW; rv:1.9.3.25) Gecko/20110419 Firefox/3.7.12');
+  // curl_setopt($curl, CURLOPT_PROXY ,"http://189.89.170.182:8080");
+  curl_setopt($curl,CURLOPT_FOLLOWLOCATION,true);
+  curl_setopt($curl, CURLOPT_AUTOREFERER, 1);
+  curl_setopt($curl, CURLOPT_HEADER, 0);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+  $tmpInfo = curl_exec($curl);
+  if(curl_errno($curl)){
+    echo 'error',curl_error($curl),"\r\n";
+    return false;
+  }
+  curl_close($curl);
+  return $tmpInfo;
+}
+ 
+}
