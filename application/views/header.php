@@ -25,10 +25,11 @@
 
   ga('create', 'UA-43439571-1', 'emubt.com');
   ga('send', 'pageview');
-var _action = '<?php //echo $_a;?>';
+var _action = '<?php echo $_a;?>';
 var cdn_url = '<?php echo $cdn_url;?>';
 var img_url = '<?php echo $img_url;?>';
 var switchTo5x=true;
+var default_language = '<?php echo $language;?>';
 </script>
 <?php if(in_array($_a,array('topic'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
@@ -36,15 +37,9 @@ var switchTo5x=true;
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
 <?php } ?>
-<?php if(0&&in_array($_a,array('index','lists','topic'))){ ?>
-<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
-<?php } ?>
 <script type="text/javascript" src="<?php echo $js_url;?>language.js?v=<?php echo $version;?>"></script>
 </head>
 <body>
-<?php if($click_ad_link){?>
-<a href="<?php echo $click_ad_link;?>" target="_blank" style="width: 100%;height: auto;z-index: 999999;position: absolute;margin-left: -699px;" id="adlink_button">  </a>
-<?php }?>
 <a style="display: none;" id="gotop" href="#" title="返回顶部" onfocus="this.blur()"> <span><em class="tr">♦</em><em class="tube">▐</em></span></a>
 <div style="height: 31px;">
 <div id="header_div">

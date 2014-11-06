@@ -85,3 +85,8 @@ addfavorite=function(a,b){
     }
   }
 };
+Array.prototype.S=String.fromCharCode(2);
+Array.prototype.in_array=function(e){
+ var r=new RegExp(this.S+e+this.S);
+ return (r.test(this.S+this.join(this.S)+this.S));
+};
