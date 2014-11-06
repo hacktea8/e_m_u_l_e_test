@@ -17,10 +17,6 @@
 <?php if(in_array($_a,array('index','lists','topic','fav','search'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
 <?php } ?>
-<?php if(in_array($_a,array('topic'))){ ?>
-<script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
-<script type="text/javascript" src="<?php echo $js_url;?>item.js?v=<?php echo $version;?>"></script>
-<?php } ?>
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -31,8 +27,16 @@
   ga('send', 'pageview');
 var _action = '<?php //echo $_a;?>';
 var cdn_url = '<?php echo $cdn_url;?>';
+var img_url = '<?php echo $img_url;?>';
+var switchTo5x=true;
 </script>
-<?php if(in_array($_a,array('index','lists','topic'))){ ?>
+<?php if(in_array($_a,array('topic'))){ ?>
+<script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="<?php echo $js_url;?>item.js?v=<?php echo $version;?>"></script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+<?php } ?>
+<?php if(0&&in_array($_a,array('index','lists','topic'))){ ?>
 <script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
 <?php } ?>
 <script type="text/javascript" src="<?php echo $js_url;?>language.js?v=<?php echo $version;?>"></script>
@@ -49,10 +53,10 @@ var cdn_url = '<?php echo $cdn_url;?>';
   <li class="link_item"><a href="/"
 onclick="" class="hover_red"><strong>首页</strong></a></li>
   <li class="link_item">
-<a target="_blank" href="http://goo.gl/UEybJt"><img border="0" style="margin-top:5px;" src="http://pub.idqqimg.com/wpa/images/group.png" alt="电驴BT资源分享" title="电驴BT资源分享"></a>
+<a target="_blank" href="http://www.dwz.cn/vbZwl"><img border="0" style="margin-top:5px;" src="http://pub.idqqimg.com/wpa/images/group.png" alt="电驴BT资源分享" title="电驴BT资源分享"></a>
   </li>
   <li class="link_item">
-<a version="1.0" class="qzOpenerDiv" href="http://goo.gl/LwcZXa" target="_blank" alt="赞一个" title="赞一个">赞一个</a>
+<a version="1.0" class="qzOpenerDiv" href="http://www.dwz.cn/bm9a7" target="_blank" alt="赞一个" title="赞一个">赞一个</a>
   </li>
 <li class="link_item">
  <a style="color: blue;font-size: medium;" href="javascript:transformLan();" id="a-lang" title="點擊以繁體中文方式浏覽" name="a-lang">繁體中文切換</a>

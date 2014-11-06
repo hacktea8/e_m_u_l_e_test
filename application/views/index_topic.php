@@ -14,7 +14,7 @@
         <h1 id="topicstitle"><?php echo $info['name'];?> 
  <?php if($uinfo['uid'] === $info['uid'] || $uinfo['isadmin']){echo "<a href='$editeUrl/$info[id]'>编辑</a>"; }?>
 </h1>
-                                 <input value="" name="entryid" id="entryid" type="hidden">
+   <input value="" name="entryid" id="entryid" type="hidden">
                  <div class="topicImg">
      		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
                 <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" >
@@ -133,11 +133,15 @@ alert('验证码输入有误!');
 }
 ?>
 </div>
-                 <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
+ <div class="iptcom">
+<script src="http://finead.cn/page/s.php?s=7340&w=728&h=90"></script>
+ </div>
+  <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
 VIP通道:<?php echo $info['vipdwurl'];?>
 </div>
 <div onclick="_hmt.push(['_trackEvent', 'download', 'click_down_method', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
-<a href="http://www.hacktea8.com/thread-9650-1-1.html" target="_blank">如何快速下载资源(点我告诉你!)</a>
+<a href="http://www.hacktea8.com/thread-9650-1-1.html" target="_blank" title="如何快速下载资源(点我告诉你!)">如何快速下载资源(点我告诉你!)</a>  |  
+<a href="/convert" target="_blank" title="迅雷、快车、QQ旋风连接互转">迅雷、快车、QQ旋风连接互转</a>
 </div>
             </div>
             <div class="iptcom" id="iptcomCname">
@@ -266,41 +270,6 @@ foreach($right_hot as $row){
 </div><!-- end of page wrap-->
 <script type="text/javascript">
 var href = '';
-$(document).ready(function(){
-$("#emu_comment p a").bind('mouseover',function(){
-href = $(this).attr('href');
-if(href.indexOf('duoshuo.com')){
-$(this).attr('href','');
-}
-});
-$("#ujian-hook a").mouseover(function(){
-href = $(this).attr('href');
-if(href.indexOf('ujian.cc')){
-$(this).attr('href','');
-}
-});
-});
-function show_hide_tab(show,hide){
-  $('.'+hide).hide();
-  $('.group-mods ul li').removeClass('current');
-  $('#'+show).parent().addClass('current');
-  $('#con_'+show).show();
-}
-$('#addFav').click(function(){
 var uid = <?php echo $uinfo['uid']?0:1;?>;
-if(uid){alert('抱歉！您还未登录。请先登录!!');return false;}
-$.get("/index/addCollect/<?php echo $info['id'];?>", function(result){
-  if(result.status==1){
-    $('#addFavBtn').attr("src","<?php echo $img_url;?>delfavorite.gif");
-  }else{
-    $('#addFavBtn').attr("src","<?php echo $img_url;?>favorite.gif");
-  }
-},'json');
-});
-function _loadTopic(){
-$.get("/ajaxapi/article_pv/<?php echo $aid;?>");
-}
-$(document).ready(function(){
-window.setTimeout("_loadTopic()",5000);
-});
 </script>
+<script type="text/javascript" src="<?php echo $js_url;?>index_topic.js?v=<?php echo $version;?>"></script>

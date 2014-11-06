@@ -1,12 +1,13 @@
 <?php
 
-$APPPATH=dirname(__FILE__).'/';
+$APPPATH = dirname(__FILE__).'/';
 include_once($APPPATH.'../db.class.php');
+include_once($APPPATH.'../post_fun.php');
 require_once $APPPATH.'config.php';
 $pattern = '/ed2kers/grab.php';
 require_once $APPPATH.'singleProcess.php';
 
-$db=new DB_MYSQL();
+$db = new DB_MYSQL();
 
 $data = array('url' => 'http://img.hacktea8.com/imgapi/uploadurl?seq=', 'imgurl'=>'');
 $task = 5;
@@ -25,9 +26,9 @@ foreach($list as $val){
 echo "==$val[id] $val[thum] ==\n";
 //exit;
 $data['imgurl'] = $val['thum'];
-$cover = getHtml($data);
+$cover = get_html($data);
 //去除字符串前3个字节
-$cover = substr($cover,3);
+$cover = trimBOM($cover);
 echo $cover,"\n";
 //echo strlen($cover);exit;
 if(44 == $cover){
@@ -40,6 +41,8 @@ if(0 == $cover || '2668249111_0000000002.jpg' == $cover){
 }
 //
 setcoverByid($cover,$val['id']);
+//echo $val['id'];exit;
+
 sleep(15);
 }
 //var_dump($list);exit;
@@ -79,14 +82,14 @@ function getCover($url){
     $url = $_root.$url;
   }
   $data['url'] = $url;
-  $html = getHtml($data);
+  $html = get_html($data);
   preg_match('#<div class="litimg fLeft">\s*<img alt="[^"]+" src="([^"]+)"[^>]*></div>#Uis',$html,$match);
   $cover = $match[1];
 //file_put_contents('cover_html.html',$html);
 //echo $url;var_dump($cover);exit;
   return $cover;
 }
-function getHtml(&$data){
+function get_html(&$data){
   $curl = curl_init();
   $url = $data['url'];
   unset($data['url']);

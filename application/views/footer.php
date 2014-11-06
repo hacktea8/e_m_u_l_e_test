@@ -3,16 +3,17 @@
 <div class="line_space"></div>
 <div style=" border: 1px solid #ccc; padding: 10px 14px;">
 <!--960X90_AD-->
-<?php if( $click_ad_dh>=7 && $click_ad_dh<=17 &&in_array($_a,array('lists','topic'))){?>
+<?php if(0&& $click_ad_dh>=7 && $click_ad_dh<=17 &&in_array($_a,array('lists','topic'))){?>
 <script type="text/javascript">BAIDU_CLB_fillSlot("904797");</script>
 <?php }?>
 </div>
 <div class="clear"></div>
 </div>
 <div class="mainDiv">
-<?php if(in_array($_a,array('index','lists','topic'))){?>
-<script type="text/javascript">BAIDU_CLB_fillSlot("902635");</script>
-<?php }?>
+<?php if( in_array($_a,array('index','lists','topic'))){?>
+<?php if(1){?><script src="http://finead.cn/page/?s=7542"></script><?php }else{?>
+<script src="http://f.jtxh.net/code/pop_cpf.asp?pid=237583" charset="gb2312"></script>
+<?php }}?>
 <div class="line_space"></div>
 </div>
 

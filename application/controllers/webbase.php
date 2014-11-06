@@ -2,7 +2,7 @@
 
 class Webbase extends CI_Controller {
   public $expirettl=array('5m'=>300,'15m'=>900,'30m'=>1800,'1h'=>3600,'3h'=>10800,'6h'=>21600,'9h'=>32400,'12h'=>43200,'1d'=>86400,'3d'=>253200,'5d'=>432000,'7d'=>604800);
-  public $showimgapi = 'http://img.hacktea8.com/showpic.php?key=';
+  public $showimgapi = 'http://i1.hacktea8.com/showpic.php?key=';
   protected $mem = '';
   protected $redis = '';
   public $viewData = array();
@@ -52,7 +52,7 @@ class Webbase extends CI_Controller {
                 'admin_email'=>$this->config->item('admin_email'),'errorimg'=>'/public/images/show404.jpg',
                 'img_url'=>$this->config->item('img_url'),'js_url'=>$this->config->item('js_url'),
                 'toptips'=>$this->config->item('toptips'),'web_title'=>$this->config->item('web_title')
-                ,'version'=>20140705,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
+                ,'version'=>20141031,'login_url'=>$this->config->item('login_url'),'uinfo'=>$this->userInfo
                 ,'_c'=>$this->_c,'_a'=>$this->_a,'current_url'=>$current_url
     ));
   }
