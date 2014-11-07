@@ -1,6 +1,6 @@
 function show404(img){
 var img=this;//event.srcElement;
-img.src='/public/images/show404.jpg';
+img.src=_errpic;
 //img.onerror=null; 控制不要一直跳动
 }
 var allow_action = new Array('index','lists','fav','topic','search');
@@ -10,7 +10,7 @@ if(allow_action.in_array(_action)){
   event : "sporty",
   effect : "fadeIn",
   //placeholder : "img/grey.gif",
-  placeholder : '<?php echo $errorimg;?>',
+  placeholder : _errpic,
   threshold : 60
  });
  });
@@ -38,7 +38,7 @@ function _Userlogin(){
   init();
 }
 function _loadIndex(){$.get("/index/index");}
-$(document).ready(function(){
+//$(document).ready(function(){
  if('index' == _action){
   window.setTimeout("_loadIndex()",5000);
  }
@@ -53,4 +53,4 @@ $(document).ready(function(){
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
  })();
-});
+//});

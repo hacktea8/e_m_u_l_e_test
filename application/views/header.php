@@ -30,6 +30,7 @@ var cdn_url = '<?php echo $cdn_url;?>';
 var img_url = '<?php echo $img_url;?>';
 var switchTo5x=true;
 var default_language = '<?php echo $language;?>';
+var _errpic = '<?php echo $img_url,'show_404.jpg';?>';
 </script>
 <?php if(in_array($_a,array('topic'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
