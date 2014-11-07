@@ -204,18 +204,6 @@ class Index extends Usrbase {
     $seo_description = mb_substr($seo_description,0,250);
     //$data['info']['downurl'] = str_replace('www.ed2kers.com',$this->viewData['domain'],$data['info']['downurl']);
     // not VIP Admin check verify
-/*
-    $emu_aid = isset($_COOKIE['hk8_verify_topic_dw'])?strcode($_COOKIE['hk8_verify_topic_dw'],false):'';
-    $emu_aid = explode("\t",$emu_aid);
-    $emu_aid = $emu_aid[0];
-    $verifycode = '';
-    if( !( 1 || $emu_aid == $data['info']['id'] || $this->userInfo['isvip'] || $this->userInfo['isadmin'])){
-       $data['info']['downurl'] = '';
-       $data['info']['vipdwurl'] = '';
-       $this->load->library('verify');
-       $verifycode = $this->verify->show();
-    }
-*/
     $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
     $right_hot = $this->mem->get('emu-right_hot'.$cid);
     $bottom_cold = $this->mem->get('emu-bottom_cold'.$cid);
@@ -237,19 +225,8 @@ class Index extends Usrbase {
     ,'_makehtml'=>$this->static_html
     ,'seo_description'=>$seo_description
     ));
-/*
-    if( !$this->static_html){
-     $ip = $this->input->ip_address();
-     $key = sprintf('emuhitslog:%s:%d',$ip,$aid);
- //var_dump($this->redis->exists($key));exit;
-     if(!$this->redis->exists($key)){
-       $this->redis->set($key, 1, $this->expirettl['1d']);
-     }
-    }
-*/
     $this->view('index_topic');
     if(  $this->static_html){
-return 1;
       $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
       $cache_dir = dirname($cache_file);
       makedir($cache_dir,0777);

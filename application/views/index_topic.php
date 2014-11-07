@@ -39,19 +39,12 @@
                     </li>
                 </ul>
             </div>
-<?php if (0){ ?>            
-	<div class="resInfoBox" id="membertable">
-	</div>
-<?php } ?>
 			        </div>
 <!-- .block1 -->
         <div id="showFolderBaseDoDiv" style="float: left;"></div>
         <div class="block2" style="float:left;">
             <div style="float:left;">
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
-<?php if(0){?>
-                    <a class="addFav" alt="收藏<?php echo $info['name'];?>资源" id="addFav"><img src="<?php echo $img_url,$isCollect?'del':'','favorite.gif';?>" id="addFavBtn" alt="收藏<?php echo $info['name'];?>资源" /></a>
-<?php }?>
 <iframe src="/index/check_collect/<?php echo $info['id'];?>" frameborder="0" scrolling="no"></iframe>
                     <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;z-index:3;" id="folderfavoritatips">
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
