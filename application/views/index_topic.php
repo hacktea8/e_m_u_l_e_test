@@ -10,16 +10,17 @@
     </div>
     </div>
     </div>
-     <div id="contentInfo">
+     <div id="contentInfo" class="content_Info">
         <h1 id="topicstitle"><?php echo $info['name'];?> 
- <?php if($uinfo['uid'] === $info['uid'] || $uinfo['isadmin']){echo "<a href='$editeUrl/$info[id]'>编辑</a>"; }?>
+<span id="edit_url">
+ <?php if( !$_makehtml && ($uinfo['uid'] === $info['uid'] || $uinfo['isadmin'])){echo "<a href='$editeUrl/$info[id]'>编辑</a>"; }?>
+</span>
 </h1>
-   <input value="" name="entryid" id="entryid" type="hidden">
-                 <div class="topicImg">
-     		            <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
-                <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" >
-              </a>
-        </div>
+    <div class="topicImg">
+     <a id="topicImgUrl" href="<?php echo $info['id'];?>" title="<?php echo $info['name'];?>">
+     <img alt="<?php echo $info['name'];?>" title="<?php echo $info['name'];?>" class="cover" src="<?php echo $showimgapi,$info['cover'];?>" >
+     </a>
+    </div>
         <div style="float:left;width:500px;overflow:hidden;">
         <div class="block1">
             <div class="block11" id="block11">
@@ -48,7 +49,10 @@
         <div class="block2" style="float:left;">
             <div style="float:left;">
                                 <div id="addFavModule" style="float:left;position:relative;width:125px;margin-left:5px">
+<?php if(0){?>
                     <a class="addFav" alt="收藏<?php echo $info['name'];?>资源" id="addFav"><img src="<?php echo $img_url,$isCollect?'del':'','favorite.gif';?>" id="addFavBtn" alt="收藏<?php echo $info['name'];?>资源" /></a>
+<?php }?>
+<iframe src="/index/check_collect/<?php echo $info['id'];?>" frameborder="0" scrolling="no"></iframe>
                     <div style="position: absolute; left: 133px; top: -17px; margin: 0px; border: 1px solid rgb(205, 180, 126); width: 310px; background: none repeat scroll 0% 0% rgb(255, 255, 205); height: 55px;z-index:3;" id="folderfavoritatips">
                         <div style="position: absolute; height: 30px; width: 12px; top: 18px;left:-12px; background: url(<?php echo $img_url;?>tipsleft.gif) no-repeat scroll 0% 0% transparent;">
                         </div>
@@ -268,8 +272,4 @@ foreach($right_hot as $row){
 </div> 
   </div><!-- end of navside -->
 </div><!-- end of page wrap-->
-<script type="text/javascript">
-var href = '';
-var uid = <?php echo $uinfo['uid']?0:1;?>;
-</script>
-<script type="text/javascript" src="<?php echo $js_url;?>index_topic.js?v=<?php echo $version;?>"></script>
+<script src="<?php echo $js_url;?>maindex_topic.js?v=<?php echo $version;?>"></script>

@@ -9,7 +9,18 @@ class Ajax extends Webbase {
    die(0);
   }
  }
-  
+ public function checkIsCollect($aid){
+  if( !$this->userInfo['uid']){
+   die('-1');
+  }
+  $aid = intval($aid);
+  if( !$aid){
+   die('0');
+  }
+  //$this->load->model('emulemodel');
+  $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$aid);
+  die("$isCollect");
+ }
  public function convert_url(){
   $url = $this->input->post('url');
   $json = array('flag'=>0);

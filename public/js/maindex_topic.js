@@ -8,9 +8,9 @@ function show_hide_tab(show,hide){
   $('#con_'+show).show();
 }
 function _loadTopic(){
-$.get("/ajaxapi/article_pv/<?php echo $aid;?>");
+$.get("/ajaxapi/article_pv/"+article_id);
 }
-$(document).ready(function(){
+//$(document).ready(function(){
  window.setTimeout("_loadTopic()",5000);
  $("#emu_comment p a").bind('mouseover',function(){
   href = $(this).attr('href');
@@ -24,14 +24,4 @@ $(document).ready(function(){
    $(this).attr('href','');
   }
  });
- $('#addFav').click(function(){
-  if(uid){alert('抱歉！您还未登录。请先登录!!');return false;}
-  $.get("/index/addCollect/"+uid, function(result){
-   if(result.status==1){
-    $('#addFavBtn').attr("src","<?php echo $img_url;?>delfavorite.gif");
-   }else{
-    $('#addFavBtn').attr("src","<?php echo $img_url;?>favorite.gif");
-   }
-  },'json');
- });
-});
+//});

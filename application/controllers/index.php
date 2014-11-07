@@ -84,14 +84,18 @@ class Index extends Usrbase {
     'page_string'=>$page_string,'infolist'=>$lists));
     $this->view('index_collect');
   }
-  public function addCollect($aid){
-    $data = array('status'=>0);
-    if($this->userInfo['uid']){
-      $f = $this->emulemodel->addUserCollect($this->userInfo['uid'],$aid);
-      $data['status'] = $f;
-    }
-    die(json_encode($data));
+ public function addCollect($aid = 0){
+  $aid = intval($aid);
+  $data = array('status'=>0);
+  if($aid){
+   if( !$this->userInfo['uid']){
+    $data['status'] = -1;
+   }
+   $f = $this->emulemodel->addUserCollect($this->userInfo['uid'],$aid);
+   $data['status'] = $f;
   }
+  die(json_encode($data));
+ }
   public function lists($cid,$order = 0,$page = 1){
     $page = intval($page);
     $cid = intval($cid);
@@ -212,7 +216,7 @@ class Index extends Usrbase {
        $verifycode = $this->verify->show();
     }
 */
-    $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
+    $isCollect = 0;//$this->emulemodel->getUserIscollect($this->userInfo['uid'],$data['info']['id']);
     $right_hot = $this->mem->get('emu-right_hot'.$cid);
     $bottom_cold = $this->mem->get('emu-bottom_cold'.$cid);
     if(!$right_hot){
@@ -230,7 +234,7 @@ class Index extends Usrbase {
     ,'seo_title'=>$title,'seo_keywords'=>$keywords,'cid'=>$cid,'cpid'=>$cpid
     ,'info'=>$data['info'],'postion'=>$data['postion'],'aid'=>$aid
     ,'right_hot'=>$right_hot,'bottom_cold'=>$bottom_cold
-    ,'_makehtml'=>''
+    ,'_makehtml'=>$this->static_html
     ,'seo_description'=>$seo_description
     ));
 /*
@@ -245,6 +249,7 @@ class Index extends Usrbase {
 */
     $this->view('index_topic');
     if(  $this->static_html){
+return 1;
       $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
       $cache_dir = dirname($cache_file);
       makedir($cache_dir,0777);
@@ -254,9 +259,16 @@ class Index extends Usrbase {
     
     }
   }
-  public function tpl(){
-    $this->load->view('index_tpl',$this->viewData);
+ public function check_collect($aid = 0,$title = ''){
+  $aid = intval($aid);
+  $title = urldecode($title);
+  $isCollect = 0;
+  if($this->userInfo['uid'] && $aid){
+   $isCollect = $this->emulemodel->getUserIscollect($this->userInfo['uid'],$aid);
   }
+  $this->assign(compact('title','aid','isCollect'));
+  $this->load->view('check_collect',$this->viewData);
+ }
   public function search($q='',$type = 0,$order = 0,$page = 1){
     $q = $q ? $q:$this->input->get('q');
     $q = urldecode($q);

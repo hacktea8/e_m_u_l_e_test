@@ -31,6 +31,12 @@ var img_url = '<?php echo $img_url;?>';
 var switchTo5x=true;
 var default_language = '<?php echo $language;?>';
 var _errpic = '<?php echo $img_url,'show_404.jpg';?>';
+<?php if('topic' == $_a){?>
+var static_html = '<?php echo $_makehtml;?>';
+var edit_url = '<?php echo "$editeUrl/$info[id]";?>';
+var is_collect = 0;
+var article_id = '<?php echo $info['id'];?>';
+<?php }?>
 </script>
 <?php if(in_array($_a,array('topic'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>ZeroClipboard.js?v=<?php echo $version;?>"></script>
