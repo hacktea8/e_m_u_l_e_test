@@ -226,7 +226,7 @@ class Index extends Usrbase {
     ,'seo_description'=>$seo_description
     ));
     $this->view('index_topic');
-    if(  $this->static_html){
+    if( !$this->robot && $this->static_html){
       $cache_file = CACHEDIR.($aid%10).'/'.$aid.'.html';
       $cache_dir = dirname($cache_file);
       makedir($cache_dir,0777);

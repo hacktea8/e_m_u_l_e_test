@@ -145,8 +145,6 @@ foreach($list['list'] as $k=>$row){
 <div class="mainDiv" id="advertisement_bottom">
 <div class="line_space"></div>
 <div style="width: 960px; height: 90px; border: 1px solid #ccc; padding: 10px 14px;">
-<!-- 广告位：www_emubt_index-top -->
-<script type="text/javascript">BAIDU_CLB_fillSlot("999477");</script>
 </div>
 <div class="clear"></div>
 <div class="mainDiv">

@@ -8,9 +8,10 @@
 </div>
 <div class="mainDiv">
 <?php if( in_array($_a,array('index','lists','topic'))){?>
-<?php if(1){?><script src="http://finead.cn/page/?s=7542"></script><?php }else{?>
-<script src="http://f.jtxh.net/code/pop_cpf.asp?pid=237583" charset="gb2312"></script>
-<?php }}?>
+<script type="text/javascript">
+//广告位：site_right_cpv
+BAIDU_CLB_fillSlot("1006689");</script>
+<?php }?>
 <div class="line_space"></div>
 </div>
 

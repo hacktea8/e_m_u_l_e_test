@@ -1,14 +1,13 @@
 User-agent: *
 Sitemap: http://www.emubt.com/google_sitemap.xml
-Disallow: /*index/addCollect/
-Disallow: /*index/login
-Disallow: /*index/loginout
-Disallow: /*index/isUserInfo
-Allow: /*index/
-Allow: /*.htm*
-Disallow: /*.php
-Disallow: /*.gif
-Disallow: /*.js
-Disallow: /*.css
+Disallow: */addCollect/
+Disallow: */login
+Disallow: */loginout
+Disallow: */isUserInfo
+Disallow: */check_collect/
+Disallow: */ajaxapi/
+Disallow: *.gif
+Disallow: *.js
+Disallow: *.css
 User-agent: Googlebot
 

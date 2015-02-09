@@ -131,7 +131,8 @@ alert('验证码输入有误!');
 ?>
 </div>
  <div class="iptcom">
-<script src="http://finead.cn/page/s.php?s=7340&w=728&h=90"></script>
+<!-- 广告位：www_emubt_article_content-top -->
+<script type="text/javascript">BAIDU_CLB_fillSlot("999478");</script>
  </div>
   <div onclick="_hmt.push(['_trackEvent', 'VIPdownload', 'click', '<?php echo $info['url'];?>'])"  style="border:1px solid #faccaa; background:#ffffce; text-align:center; clear:both; padding: 5px 10px; margin:5px 10px 5px 0; font-size:1.2em">
 VIP通道:<?php echo $info['vipdwurl'];?>

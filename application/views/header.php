@@ -2,12 +2,12 @@
 <html lang="zh-CN" xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta content="<?php echo $seo_keywords,',',$web_title;?><?php if($_a != 'topic'){?>,BT种子下载,电驴资源,eD2k,磁力链接,龙BT发布,BT之家<?php }?>" name="keywords">
+<meta content="<?php echo $seo_keywords,',',$web_title;?><?php if($_a != 'topic'){?>,人人射手网,BT种子下载,电驴资源,eD2k,磁力链接,龙BT发布,BT之家<?php }?>" name="keywords">
 <meta content="<?php echo $seo_description;?>" name="description">
 <?php if(isset($cid)){?>
 <link href="/api/feed/<?php echo $cid;?>" title="<?php echo $seo_title;?> - <?php echo $web_title;?>" type="application/rss+xml" rel="alternate">
 <?php }?>
-<title><?php echo $seo_title;?> - <?php echo $web_title;if(in_array($_a,array('index','lists'))){ echo '_BT种子下载|电驴资源|eD2k|磁力链接|龙BT发布|BT之家';}?></title>
+<title><?php echo $seo_title;?> - <?php echo $web_title;if(in_array($_a,array('index','lists'))){ echo '_BT种子下载|人人射手网|电驴资源|eD2k|磁力链接|龙BT发布|BT之家';}?></title>
 <link title="电驴资源" href="/api/opensearch" type="application/opensearchdescription+xml" rel="search">
 
 <link rel="stylesheet" href="<?php echo $css_url;?>global.css?v=<?php echo $version;?>" type="text/css">
@@ -16,7 +16,9 @@
 <script type="text/javascript" src="<?php echo $js_url;?>global.js?v=<?php echo $version;?>"></script>
 <?php if(in_array($_a,array('index','lists','topic','fav','search'))){ ?>
 <script type="text/javascript" src="<?php echo $js_url;?>jquery.lazyload.min.js?v=<?php echo $version;?>"></script>
-<?php } ?>
+<?php }if(in_array($_a,array('index','lists','topic','search'))){ ?>
+<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>
+<?php }?>
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

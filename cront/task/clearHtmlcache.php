@@ -1,8 +1,8 @@
 <?php
 
-$cacheDir = '';
+define('ROOTPATH', dirname(__FILE__).'/');
+$cacheDir = ROOTPATH.'../../application/cache/webhtmlcache';
 
-$cmd = 'rm -f %s/*.html';
 
 $dirArr = scandir($cacheDir);
 
@@ -14,8 +14,20 @@ foreach($dirArr as $vf){
  if( !is_dir($vp)){
   continue;
  }
- $order = sprintf($cmd, $vp);
- exec($order);
- echo "$order exec OK!\n";
+ echo "==== Clear cache $vp start ***** =====\n";
+ $subDir = scandir($vp);
+ foreach($subDir as $vsf){
+  if(in_array($vsf, array('.','..'))){
+   continue;
+  }
+  $vsp = $vp.'/'.$vsf;
+  if( is_dir($vsp)){
+   continue;
+  }
+  $ctime = filemtime($vsp);
+  if(time() - $ctime > 259200){
+   file_put_contents($vsp,'');
+  }
+ }
 }
 
